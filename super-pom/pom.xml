@@ -1,5 +1,9 @@
 <project>
   <modelVersion>4.0.0</modelVersion>
+  <groupId>com.plm</groupId>
+  <artifactId>superpom</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  <packaging>pom</packaging>
 
   <repositories>
     <repository>
@@ -28,24 +32,7 @@
     </pluginRepository>
   </pluginRepositories>
 
-  <build>
-    <directory>${project.basedir}/target</directory>
-    <outputDirectory>${project.build.directory}/classes</outputDirectory>
-    <finalName>${project.artifactId}-${project.version}</finalName>
-    <testOutputDirectory>${project.build.directory}/test-classes</testOutputDirectory>
-    <sourceDirectory>${project.basedir}/src/main/java</sourceDirectory>
-    <scriptSourceDirectory>src/main/scripts</scriptSourceDirectory>
-    <testSourceDirectory>${project.basedir}/src/test/java</testSourceDirectory>
-    <resources>
-      <resource>
-        <directory>${project.basedir}/src/main/resources</directory>
-      </resource>
-    </resources>
-    <testResources>
-      <testResource>
-        <directory>${project.basedir}/src/test/resources</directory>
-      </testResource>
-    </testResources>
+  <build>    
     <pluginManagement>
       <!-- NOTE: These plugins will be removed from future versions of the super POM -->
       <!-- They are kept for the moment as they are very unlikely to conflict with lifecycle mappings (MNG-4453) -->
@@ -67,12 +54,8 @@
           <version>2.0</version>
         </plugin>
       </plugins>
-    </pluginManagement>
+    </pluginManagement>   
   </build>
-
-  <reporting>
-    <outputDirectory>${project.build.directory}/site</outputDirectory>
-  </reporting>
 
   <profiles>
     <!-- NOTE: The release profile will be removed from future versions of the super POM -->
@@ -124,4 +107,9 @@
     </profile>
   </profiles>
 
+  <modules>
+  	<module>../tournamentCore</module>
+  	<module>../championshipCore</module>
+  	<module>../dao</module>
+  </modules>
 </project>
