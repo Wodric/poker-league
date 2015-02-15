@@ -5,6 +5,7 @@
     <groupId>com.plm</groupId>
     <artifactId>superpom</artifactId>
     <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../super-pom/pom.xml</relativePath>
   </parent>
   <artifactId>tournamentCore</artifactId>
   <packaging>jar</packaging>
