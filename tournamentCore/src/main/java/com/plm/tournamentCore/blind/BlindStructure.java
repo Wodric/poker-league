@@ -41,6 +41,11 @@ public class BlindStructure {
 	private static int MINIMUM_BLIND_DECIMAL_FOR_ANTE = 3;
 	
 	/**
+	 * Set duration to 0 when it's not set by user
+	 */
+	private static int NO_DURATION = 0;
+	
+	/**
 	 * Calculate the number of level needed to 
 	 * @param pTournamentDurationExpected 
 	 * @param pLevelDurations the duration of a level, consdier as constant
@@ -60,6 +65,17 @@ public class BlindStructure {
 		return pMaxPlayerNumber*pInitialStackSize;
 	}
 	
+	
+	/**
+	 * Define the last big blind at schedule tournament end
+	 * @param pTotalChips total number of chips in tournament
+	 * @param pWithAnte boolean to define if there is ante to set
+	 * @return a BlindLevel Object which contains small, big blind, ante and duration
+	 */
+	protected BlindLevel calculateBigBlindMax(int pTotalChips, boolean pWithAnte){
+		return this.calculateBigBlindMax(pTotalChips, pWithAnte, NO_DURATION);
+	}
+	
 
 	/**
 	 * Define the last big blind at schedule tournament end
@@ -68,7 +84,7 @@ public class BlindStructure {
 	 * @param pLevelDuration the duration of the levels in structure
 	 * @return a BlindLevel Object which contains small, big blind, ante and duration
 	 */
-	private BlindLevel calculateBigBlindMax(int pTotalChips, boolean pWithAnte, int pLevelDuration){
+	protected BlindLevel calculateBigBlindMax(int pTotalChips, boolean pWithAnte, int pLevelDuration){
 		int theoricalLevel = pTotalChips / BLIND_AT_TOURNAMENT_END;
 		int decimal = 0;
 		// get an authorized blind
