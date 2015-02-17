@@ -6,14 +6,22 @@ import javax.xml.parsers.FactoryConfigurationError;
 
 public class BlindStructure {
 	/**
+	 * to define if structure uses ante= true
+	 */
+	public static boolean WITH_ANTE = true; 
+	/**
+	 * to define if structure doesn't use ante = false
+	 */
+	public static boolean WITHOUT_ANTE = false; 
+	/**
 	 * This variable define the list of blind authorized
 	 */
-	public static final double[] BLIND_AUTHORIZED_MULTIPLE_TAB = new double[] {1,1.1,1.2,1.3,1.4,1.5,1.6,1.8,2,2.4,3,4,5,6,8};
+	public static final double[] BLIND_AUTHORIZED_MULTIPLE_TAB = new double[] {1,1.2,1.4,1.6,1.8,2,2.4,3,4,5,6,8};
 	
 	/**
 	 * This variable define the list of  authorized
 	 */
-	public static final double[] ANTE_AUTHORIZED_MULTIPLE_TAB = new double[] {1,1,1,1,2,2,2,2,2,3,3,4,5,6,8};
+	public static final double[] ANTE_AUTHORIZED_MULTIPLE_TAB = new double[] {1,1,1,2,2,2,3,3,4,5,6,8};
 	
 	/**
 	 * This variable define the average stack at the tournament end
@@ -63,19 +71,7 @@ public class BlindStructure {
 	 */
 	private int calculateTotalNumberOfChips(int pMaxPlayerNumber, int pInitialStackSize){
 		return pMaxPlayerNumber*pInitialStackSize;
-	}
-	
-	
-	/**
-	 * Define the last big blind at schedule tournament end
-	 * @param pTotalChips total number of chips in tournament
-	 * @param pWithAnte boolean to define if there is ante to set
-	 * @return a BlindLevel Object which contains small, big blind, ante and duration
-	 */
-	protected BlindLevel calculateBigBlindMax(int pTotalChips, boolean pWithAnte){
-		return this.calculateBigBlindMax(pTotalChips, pWithAnte, NO_DURATION);
-	}
-	
+	}	
 
 	/**
 	 * Define the last big blind at schedule tournament end
@@ -85,7 +81,8 @@ public class BlindStructure {
 	 * @return a BlindLevel Object which contains small, big blind, ante and duration
 	 */
 	protected BlindLevel calculateBigBlindMax(int pTotalChips, boolean pWithAnte, int pLevelDuration){
-		int theoricalLevel = pTotalChips / BLIND_AT_TOURNAMENT_END;
+		// cast to double necesarry s
+		double theoricalLevel = (double) pTotalChips / (double) BLIND_AT_TOURNAMENT_END;
 		int decimal = 0;
 		// get an authorized blind
 		while(theoricalLevel >= DECIMAL_FACTOR){
@@ -114,7 +111,7 @@ public class BlindStructure {
 		
 		int bigBlind = (int) (BLIND_AUTHORIZED_MULTIPLE_TAB[authorizedMultipleIterator] * Math.pow(DECIMAL_FACTOR, decimal));
 		int smallBlind = bigBlind / 2;
-		int ante = pWithAnte? calculateAnteFromBigBlind(BLIND_AUTHORIZED_MULTIPLE_TAB[authorizedMultipleIterator],DECIMAL_FACTOR) : 0;
+		int ante = pWithAnte? calculateAnteFromBigBlind(ANTE_AUTHORIZED_MULTIPLE_TAB[authorizedMultipleIterator],decimal) : 0;
 		
 		return new BlindLevel(pLevelDuration, smallBlind, bigBlind, ante);
 	}
