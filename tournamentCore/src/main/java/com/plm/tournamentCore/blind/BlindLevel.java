@@ -1,5 +1,12 @@
 package com.plm.tournamentCore.blind;
 
+/**
+ * A blind level, is a time in which the blind has a constant value. 
+ * Blind evolve between each level but not during. A level can have ante. 
+ * Ante is like a mandatory tax to pay each hand.
+ * @author alexandre
+ *
+ */
 public class BlindLevel {
 	/**
 	 * The duration of the blind level
@@ -42,6 +49,37 @@ public class BlindLevel {
 		this.bigBlind = bigBlind;
 		this.ante = ante;
 	}
+	
+	/**
+	 * set small and big blind
+	 */
+	public void setBlinds(int pSmallBlind, int pBigBlind){
+		this.smallBlind = pSmallBlind;
+		this.bigBlind = pBigBlind;
+	}
+	
+	/**
+	 * set big blind ad small blind = bb/2 and ante = 0
+	 */
+	public void setBlindsAutomatics(int pBigBlind){
+		this.setBlinds(pBigBlind/2,pBigBlind);
+	}
+	
+	/**
+	 * set small and big blind with ante
+	 */
+	public void setBlinds(int pSmallBlind, int pBigBlind, int pAnte){
+		this.setBlinds(pSmallBlind,pBigBlind);
+		this.ante = pAnte;
+	}
+	
+	/**
+	 * set big blind ad small blind = bb/2 and ante = 0
+	 */
+	public void setBlindsAutomatics(int pBigBlind,int pAnte){
+		this.setBlinds(pBigBlind/2,pBigBlind);
+		this.ante = 0;
+	}
 
 	public int getDuration() {
 		return duration;
@@ -73,24 +111,6 @@ public class BlindLevel {
 
 	public void setAnte(int ante) {
 		this.ante = ante;
-	}
-
-	/**
-	 * set small and big blind
-	 */
-	public void setBlinds(int pSmallBlind, int pBigBlind){
-		this.smallBlind = pSmallBlind;
-		this.bigBlind = pBigBlind;
-		this.ante = 0;
-	}
-	
-	/**
-	 * set small and big blind with ante
-	 */
-	public void setBlinds(int pSmallBlind, int pBigBlind, int pAnte){
-		this.smallBlind = pSmallBlind;
-		this.bigBlind = pBigBlind;
-		this.ante = pAnte;
 	}
 
 }
