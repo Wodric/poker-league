@@ -8,7 +8,7 @@ import java.util.List;
 /**
  * This object represent a chip set. In poker the chips is the money used to bet.
  * Chips set is chip of different value to avoid that player has too much chip and make bet/count/play easier.
- * @author Alexandre Lefèvre aka Wodric
+ * @author Alexandre Lefevre
  *
  */
 public class ChipsSet {

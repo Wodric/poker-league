@@ -2,7 +2,7 @@ package com.plm.tournamentCore.chip;
 
 /**
  * This object represent a chip. In poker the chips is the money used to bet.
- * @author Alexandre Lefèvre aka Wodric
+ * @author Alexandre Lefevre
  *
  */
 public class Chip implements Comparable<Chip>{
