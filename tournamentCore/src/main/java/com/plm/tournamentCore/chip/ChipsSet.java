@@ -57,7 +57,4 @@ public class ChipsSet {
 		Collections.sort(pChipsList);
 		this.chipsList = pChipsList;
 	}
-	
-	
-
 }

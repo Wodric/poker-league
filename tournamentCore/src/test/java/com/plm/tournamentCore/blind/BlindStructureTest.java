@@ -2,7 +2,12 @@ package com.plm.tournamentCore.blind;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.Test;
+
+import com.plm.tournamentCore.chip.Chip;
 
 public class BlindStructureTest {
 
@@ -123,6 +128,52 @@ public class BlindStructureTest {
 		assertEquals(0,maxBlindLevel.getAnte());
 	}
 	
+	@Test
+	public void validateNextLevelTest(){
+		short duration = 30;
+		BlindLevel levelToValidate = new BlindLevel(duration, 25, 50);
+
+		boolean isvalidate = new BlindStructure().validateOrModifyNextLevel(levelToValidate, new Chip(25));
+		assertEquals(true, isvalidate);
+		
+		levelToValidate = new BlindLevel(duration, 75, 150);
+
+		isvalidate = new BlindStructure().validateOrModifyNextLevel(levelToValidate, new Chip(25));
+		assertEquals(true, isvalidate);
+	}
+	
+	@Test
+	public void modifyNextLevelTest(){
+		short duration = 30;
+		BlindLevel levelToValidate = new BlindLevel(duration, 30, 60);
+		// without ante, minimum chip 25 and level 30/60
+		boolean isvalidate = new BlindStructure().validateOrModifyNextLevel(levelToValidate, new Chip(25));
+		assertEquals(false, isvalidate);
+		//level calculated must be 50/100 ante 0
+		assertEquals(100,levelToValidate.getBigBlind());
+		assertEquals(50,levelToValidate.getSmallBlind());
+		assertEquals(0,levelToValidate.getAnte());
+		assertEquals(duration,levelToValidate.getDuration());
+		
+		
+		levelToValidate = new BlindLevel(duration, 1000, 2000, 200);
+		// with ante, minimum chip 500 and level 1000/2000
+		isvalidate = new BlindStructure().validateOrModifyNextLevel(levelToValidate, new Chip(500));
+		assertEquals(false, isvalidate);
+		//level calculated must be 2500/5000 ante 500
+		assertEquals(5000,levelToValidate.getBigBlind());
+		assertEquals(2500,levelToValidate.getSmallBlind());
+		assertEquals(500,levelToValidate.getAnte());
+		assertEquals(duration,levelToValidate.getDuration());
+	}
+	
+	@Test (expected = IllegalArgumentException.class)
+	public void modifyNextLevelTestNoResultCompatible(){
+		short duration = 30;
+		BlindLevel levelToValidate = new BlindLevel((short)duration, 30, 60);
+		// no result possible throw IllegalArgumentException
+		new BlindStructure().validateOrModifyNextLevel(levelToValidate, new Chip(27));
+	}
 	
 
 }
