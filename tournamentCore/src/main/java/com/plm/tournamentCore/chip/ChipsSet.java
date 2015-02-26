@@ -35,9 +35,9 @@ public class ChipsSet {
 	public ChipsSet(ArrayList<Integer> pChipsValuesList) {
 		super();
 		Collections.sort(pChipsValuesList);
-		List<Chip> orderedChipList = new ArrayList<Chip>();
+		this.chipsList = new ArrayList<Chip>();
 		for(Integer aChipValue : pChipsValuesList){
-			orderedChipList.add(new Chip(aChipValue));
+			this.chipsList.add(new Chip(aChipValue));
 		}
 	}
 
