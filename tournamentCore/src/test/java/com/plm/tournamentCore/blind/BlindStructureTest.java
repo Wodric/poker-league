@@ -1,10 +1,14 @@
 package com.plm.tournamentCore.blind;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import java.util.ArrayList;
 
 import org.junit.Test;
 
 import com.plm.tournamentCore.chip.Chip;
+import com.plm.tournamentCore.chip.ChipsSet;
 
 public class BlindStructureTest {
 
@@ -170,6 +174,66 @@ public class BlindStructureTest {
 		BlindLevel levelToValidate = new BlindLevel((short)duration, 30, 60);
 		// no result possible throw IllegalArgumentException
 		new BlindStructure().validateOrModifyNextLevel(levelToValidate, new Chip(27));
+	}
+	
+	@Test
+	public void getNextLevelTest(){
+		short duration = 60;
+		int sb = 50;
+		int bb = 100;
+		
+		BlindStructure structure = new BlindStructure();
+		// result must be 100/200/0 60min
+		BlindLevel level = structure.getNextBlindLevel(new BlindLevel(duration, sb, bb), 2.0);
+		assertEquals(sb*2,level.getSmallBlind());
+		assertEquals(bb*2,level.getBigBlind());
+		assertEquals(duration,level.getDuration());
+		assertEquals(0,level.getAnte());
+		
+		// will be round at 100/200/0 60min
+		BlindLevel level2 = structure.getNextBlindLevel(new BlindLevel((short) 60, 50, 100), 1.99);
+		assertEquals(sb*2,level2.getSmallBlind());
+		assertEquals(bb*2,level2.getBigBlind());
+		assertEquals(duration,level2.getDuration());
+		assertEquals(0,level2.getAnte());
+		
+		// will be round at 1000/2000/200 60min
+		duration = 60;
+		sb = 500;
+		bb = 1000;
+		int ante = 100;
+		BlindLevel level3 = structure.getNextBlindLevel(new BlindLevel(duration, sb, bb, ante), 2.0);
+		assertEquals(sb*2,level3.getSmallBlind());
+		assertEquals(bb*2,level3.getBigBlind());
+		assertEquals(duration,level3.getDuration());
+		assertEquals(ante*2,level3.getAnte());
+	}
+	
+	
+	@Test
+	public void BlindStructureTestConstructor(){
+		int playerExpected = 1000;
+		int startingStack = 15000;
+		int totalTime = 1800;
+		int levelDuration = 60;
+		boolean withAnte = true;
+		BlindLevel startingLevel = new BlindLevel(levelDuration,25,50,0);
+		
+		ArrayList<Integer> listChipInteger = new ArrayList<Integer>();  
+		listChipInteger.add(25);
+		listChipInteger.add(100);
+		ChipsSet cs = new ChipsSet(listChipInteger);
+		
+		BlindStructure structure = new BlindStructure(playerExpected,startingStack,totalTime
+				,levelDuration,startingLevel,withAnte, cs);
+		
+		int NumberOfLevelExpected = totalTime / levelDuration;
+		assertEquals(NumberOfLevelExpected + BlindStructure.NUMBER_OF_ADDITIONAL_LEVEL, structure.getStructure().size());
+		
+		int getBBatExpectedEnd = structure.getStructure().get(NumberOfLevelExpected-1).getBigBlind();
+		int blindAtExpectedEnd = (playerExpected * startingStack)/ getBBatExpectedEnd;
+		// consider at expected end that there is between 45 et 75 blinds
+		assertTrue(blindAtExpectedEnd > 45 && blindAtExpectedEnd < 75);
 	}
 	
 

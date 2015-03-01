@@ -29,27 +29,43 @@ public class BlindLevel {
 	private int ante;
 	
 	/**
-	 * Create a blind level
-	 * @param duration level duration
-	 * @param smallBlind cost pay for small blind
-	 * @param bigBlind cost pay for  small blind
+	 * Create a blind level with ante = 0
+	 * @param pDuration level duration
+	 * @param pSmallBlind cost pay for small blind
+	 * @param pBigBlind cost pay for  big blind
 	 */
-	public BlindLevel(short duration, int smallBlind, int bigBlind) {
+	public BlindLevel(short pDuration, int pSmallBlind, int pBigBlind) {
 		super();
-		this.duration = duration;
-		this.smallBlind = smallBlind;
-		this.bigBlind = bigBlind;
+		this.duration = pDuration;
+		this.smallBlind = pSmallBlind;
+		this.bigBlind = pBigBlind;
 		this.ante = 0;
 	}
 	
-	public BlindLevel(int duration, int smallBlind, int bigBlind, int ante) {
+	/**
+	 *  Create a blind level
+	 * @param pDuration level duration
+	 * @param pSmallBlind cost pay for small blind
+	 * @param bigBlind cost pay for  big blind
+	 * @param pAnte ante cost
+	 */
+	public BlindLevel(int pDuration, int pSmallBlind, int pBigBlind, int pAnte) {
 		super();
-		this.duration = duration;
-		this.smallBlind = smallBlind;
-		this.bigBlind = bigBlind;
-		this.ante = ante;
+		this.duration = pDuration;
+		this.smallBlind = pSmallBlind;
+		this.bigBlind = pBigBlind;
+		this.ante = pAnte;
 	}
 	
+	/**
+	 * create a BlindLevel object. You need to set the blind and ante after initilize with this method.
+	 * @param pDuration The duration of the level
+	 */
+	public BlindLevel(int pDuration) {
+		super();
+		this.duration = pDuration;
+	}
+
 	/**
 	 * set small and big blind
 	 */

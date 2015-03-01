@@ -57,47 +57,120 @@ public class BlindStructure {
 	 */
 	public static final int BLIND_AT_TOURNAMENT_END = 60;
 	
-
-//	/**
-//	 * 
-//	 * @param pMaxPlayerNumber
-//	 * @param pInitialStackSize
-//	 * @param pTournamentDurationExpected
-//	 * @param pLevelDurations
-//	 * @param pMinimumBlind
-//	 * @param pWithAnte
-//	 */
-//	public BlindStructure(int pMaxPlayerNumber, int pInitialStackSize, int pTournamentDurationExpected, 
-//			int pLevelDurations, BlindLevel pMinimumBlind, boolean pWithAnte, ChipsSet pChipSet){
-//		int totalChip = calculateTotalNumberOfChips(pMaxPlayerNumber,pInitialStackSize);
-//		BlindLevel maxLevelExpected = calculateBigBlindMax(totalChip, WITH_ANTE,pLevelDurations);
-//		int totalNumberOfLevel = calculateNumberOfLevels(pTournamentDurationExpected,pLevelDurations);
-//		
-//		//
-//		/**
-//		 * ALGO : Calculer le totalNumberOfLevel,blindFactor et theoricFactorBetweenLevels
-//		 * A partir de ces éléments calculer le prochian niveau de blind théoric en arrondissant au supérieur
-//		 * Tant qu'il y a des modifications faites par la validation faire évoluer la structure sans redondance.
-//		 * Quand in n'y a plus de correction depuis un facteur de 10 au minimum mettre la répétition en route. 
-//		 * Finir par rapport au nombre de level plus en rajouter 4 après
-//		 */
-//		int blindFactor = maxLevelExpected.getBigBlind() / pMinimumBlind.getBigBlind(); 
-//		double theoricFactorBetweenLevels = Math.pow(blindFactor, 1/(double)totalNumberOfLevel);
-//		
-//		
-//		
-//		int decade = 0 ;
-//		while(blindFactor >= DECIMAL_FACTOR){
-//			decade ++;
-//			blindFactor = blindFactor/DECIMAL_FACTOR;
-//		}
-//
-//	
-//	}
+	/**
+	 * NUmber of level to add after the end of theorical level
+	 */
+	public static final int NUMBER_OF_ADDITIONAL_LEVEL = 5;
 	
+
 	public BlindStructure(){
 		super();
 	}
+	
+	/**
+	 * Build the structure from the information in parameter
+	 * @param pMaxPlayerNumber int The number of player expected 
+	 * @param pInitialStackSize int the initial size of player stack
+	 * @param pTournamentDurationExpected int the duration of the tournament you expect
+	 * @param pLevelDurations int duration of level
+	 * @param pMinimumBlind int the startup big blind. MUST BE A MULTIPLE OF SMALLEST CHIP
+	 * @param pWithAnte boolean allow ante in tournament if true
+	 * @param pChipSet the list of chip available in tournament
+	 */
+	public BlindStructure(int pMaxPlayerNumber, int pInitialStackSize, int pTournamentDurationExpected, 
+			int pLevelDurations, BlindLevel pMinimumBlind, boolean pWithAnte, ChipsSet pChipSet){
+		
+		int totalChip = calculateTotalNumberOfChips(pMaxPlayerNumber,pInitialStackSize);
+		BlindLevel maxLevelExpected = calculateBigBlindMax(totalChip, WITH_ANTE,pLevelDurations);
+		int totalNumberOfLevel = calculateNumberOfLevels(pTournamentDurationExpected,pLevelDurations);
+		
+		//set first level of structure
+		pMinimumBlind.setDuration(pLevelDurations);
+		totalNumberOfLevel --;
+		this.structure = new LinkedList<BlindLevel>();
+		this.structure.add(pMinimumBlind);
+		
+		int blindFactor = maxLevelExpected.getBigBlind() / pMinimumBlind.getBigBlind(); 
+		double theoricFactorBetweenLevels = Math.pow(blindFactor, 1/(double)totalNumberOfLevel);
+		
+		BlindLevel currentBlindLevel = pMinimumBlind;
+		BlindLevel lastBlindLevelModified = pMinimumBlind;
+		// build structure until we are sur to use at least the lowest chips
+		while( (currentBlindLevel.getBigBlind() / lastBlindLevelModified.getBigBlind()) < (DECIMAL_FACTOR / 2)){
+			BlindLevel nextBlindLevel= getNextBlindLevel(currentBlindLevel,theoricFactorBetweenLevels);
+			if(!validateOrModifyNextLevel(nextBlindLevel,pChipSet.getChipsList().get(0))){
+				lastBlindLevelModified = nextBlindLevel;
+			}
+			currentBlindLevel = nextBlindLevel;
+			this.structure.add(currentBlindLevel);
+			totalNumberOfLevel --;
+		}
+		
+		// recalculate  the factor after the first phase
+		blindFactor = maxLevelExpected.getBigBlind() / currentBlindLevel.getBigBlind(); 
+		// *0.93 factor to avoid that automatic round at superior blind accelerate the structure too much
+		theoricFactorBetweenLevels = Math.pow(blindFactor, 1/(double)totalNumberOfLevel)*0.93;
+
+		while( totalNumberOfLevel > (-NUMBER_OF_ADDITIONAL_LEVEL)){
+			BlindLevel nextBlindLevel= getNextBlindLevel(currentBlindLevel,theoricFactorBetweenLevels);
+			currentBlindLevel = nextBlindLevel;
+			this.structure.add(currentBlindLevel);
+			totalNumberOfLevel --;
+		}	
+	}
+	
+	/**
+	 * This method define the next level from current and theorical factor between levels.
+	 * It take level duration from level in parameter
+	 * @param pCurrentLevel the BlindLevel object of current level
+	 * @param pBlindFactorBetweenLevel  double the theorical factor between 2 levels
+	 * @return BlindLevel the next blind level
+	 */
+	protected BlindLevel getNextBlindLevel (BlindLevel pCurrentLevel, double pBlindFactorBetweenLevel){
+		int decade = 0 ;
+		double blindFactor = pCurrentLevel.getBigBlind();
+		while(blindFactor >= DECIMAL_FACTOR){
+			decade ++;
+			blindFactor = blindFactor/DECIMAL_FACTOR;
+		}
+		
+		// Can't jump 2 or more decade in each blind level
+		double theoricNewBlind = pBlindFactorBetweenLevel*blindFactor;
+		// verify if the factor don't change the blind of decade
+		if(theoricNewBlind >= DECIMAL_FACTOR){
+			decade ++;
+			theoricNewBlind = theoricNewBlind/DECIMAL_FACTOR;
+		}
+		
+		int iterator = 0;
+		boolean blindFound = false;
+
+		while(!blindFound){
+
+			if(iterator >= BLIND_AUTHORIZED_MULTIPLE_TAB.length){
+				// case  8 < theoricNewBlind < 10, round to superior decade 
+				blindFound = true;
+				decade ++;
+				iterator = 0;
+			}
+			else if(theoricNewBlind > BLIND_AUTHORIZED_MULTIPLE_TAB[iterator]){
+				iterator++;
+			}
+			else{
+				blindFound = true;
+			}
+			
+
+		}
+		
+		BlindLevel nextBlindLevel = new BlindLevel(pCurrentLevel.getDuration());
+		nextBlindLevel.setBlindsAutomatics((int) (BLIND_AUTHORIZED_MULTIPLE_TAB[iterator] * Math.pow(DECIMAL_FACTOR, decade)));
+		nextBlindLevel.setAnte(calculateAnteFromBigBlind(ANTE_AUTHORIZED_MULTIPLE_TAB[iterator],decade));
+		
+		return nextBlindLevel;
+	}
+	
+
 	
 	/**
 	 * Validate or modify the level 
