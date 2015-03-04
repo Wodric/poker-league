@@ -94,7 +94,7 @@ public class BlindLevel {
 	 */
 	public void setBlindsAutomatics(int pBigBlind,int pAnte){
 		this.setBlinds(pBigBlind/2,pBigBlind);
-		this.ante = 0;
+		this.ante = pAnte;
 	}
 
 	public int getDuration() {
