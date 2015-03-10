@@ -78,4 +78,13 @@
   	<module>../championshipCore</module>
   	<module>../dao</module>
   </modules>
+  
+  <profiles>
+  	<profile>
+      <id>dev</id>
+      <properties>
+        <tomcatPath>/opt/apache-tomcat-8.0.15/webapps/</tomcatPath>
+      </properties>
+  	</profile>
+  </profiles>
 </project>
