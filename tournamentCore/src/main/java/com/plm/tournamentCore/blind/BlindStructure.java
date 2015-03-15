@@ -21,6 +21,12 @@ public class BlindStructure {
 	private LinkedList<BlindLevel> structure;
 	
 	/**
+	 * boolean representing if the structure contains ante or not.
+	 * default value : false
+	 */
+	private boolean ante = false;
+	
+	/**
 	 * Factor to add or remove a decimal for a number
 	 */
 	public static int DECIMAL_FACTOR = 10;
@@ -83,6 +89,7 @@ public class BlindStructure {
 		int totalChip = calculateTotalNumberOfChips(pMaxPlayerNumber,pInitialStackSize);
 		BlindLevel maxLevelExpected = calculateBigBlindMax(totalChip, WITH_ANTE,pLevelDurations);
 		int totalNumberOfLevel = calculateNumberOfLevels(pTournamentDurationExpected,pLevelDurations);
+		this.setAnte(pWithAnte);
 		
 		//set first level of structure
 		pMinimumBlind.setDuration(pLevelDurations);
@@ -118,7 +125,8 @@ public class BlindStructure {
 			totalNumberOfLevel --;
 		}	
 	}
-	
+
+
 	/**
 	 * This method define the next level from current and theorical factor between levels.
 	 * It take level duration from level in parameter
@@ -335,6 +343,22 @@ public class BlindStructure {
 	 */
 	public LinkedList<BlindLevel> getStructure() {
 		return structure;
+	}
+	
+	/**
+	 * it return the parameters which define if the structure will contains ante
+	 * @return ante value of ante if true the structure can have ante
+	 */
+	public boolean isAnte() {
+		return ante;
+	}
+
+	/**
+	 * set the ante value
+	 * @param ante it set the ante value, if true the level in structure will have ante
+	 */
+	public void setAnte(boolean ante) {
+		this.ante = ante;
 	}
 
 }
