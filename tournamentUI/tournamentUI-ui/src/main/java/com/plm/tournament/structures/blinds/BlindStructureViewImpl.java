@@ -3,19 +3,30 @@ package com.plm.tournament.structures.blinds;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.CustomComponent;
+import com.vaadin.ui.Label;
+import com.vaadin.ui.Panel;
+import com.vaadin.ui.TextField;
 
 
 public class BlindStructureViewImpl extends CustomComponent 
 	implements BlindStructureView,ClickListener {
     
     /**
-	 * 
+	 * serialization UID
 	 */
 	private static final long serialVersionUID = -2638576327838174024L;
 	
+	public BlindStructureViewImpl() {
+		super();
+
+
+	}
+
+
 	/* Only the presenter registers one listener... */
     List<BlindStructureViewListener> listeners =
             new ArrayList<BlindStructureViewListener>();
@@ -30,6 +41,13 @@ public class BlindStructureViewImpl extends CustomComponent
             listener.buttonClick(event);	
 		}
 	}
+
+	@Override
+	public void enter(ViewChangeEvent event) {
+		
+	}
+	
+
 
 
 

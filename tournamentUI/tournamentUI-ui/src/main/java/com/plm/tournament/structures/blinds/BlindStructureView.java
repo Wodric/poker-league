@@ -1,8 +1,9 @@
 package com.plm.tournament.structures.blinds;
 
+import com.vaadin.navigator.View;
 import com.vaadin.ui.Button.ClickEvent;
 
-public interface BlindStructureView {
+public interface BlindStructureView extends View {
 	
 
     interface BlindStructureViewListener {

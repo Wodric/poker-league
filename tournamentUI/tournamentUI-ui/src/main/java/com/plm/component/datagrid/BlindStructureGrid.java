@@ -42,21 +42,7 @@ public class BlindStructureGrid extends Grid {
 
 	public BlindStructureGrid(BlindStructure pStructure){
 		// set column name and type
-		this.gridColumn.add(this.addColumn(COLUMN_TIME_NAME, Integer.class));
-		this.gridColumn.add(this.addColumn(COLUMN_SMALL_BLIND_NAME, Integer.class));
-		this.gridColumn.add(this.addColumn(COLUMN_BIG_BLIND_NAME, Integer.class));
-		if(pStructure.isAnte()){
-			this.gridColumn.add(this.addColumn(COLUM_ANTE_NAME, Integer.class));
-			this.setColumnOrder(COLUMN_TIME_NAME,COLUMN_SMALL_BLIND_NAME,COLUMN_BIG_BLIND_NAME,COLUM_ANTE_NAME);
-		}
-		else{
-			this.setColumnOrder(COLUMN_TIME_NAME,COLUMN_SMALL_BLIND_NAME,COLUMN_BIG_BLIND_NAME);
-		}
-		
-		for(Column aColumn : this.gridColumn){
-			aColumn = aColumn.setSortable(COLUMN_SORTABLE);
-		}
-		
+		this.addBlindStructureGridColumn(pStructure);
 		// feed the grid
 		feedBlindStructureGrid(pStructure);
 	}
@@ -81,6 +67,24 @@ public class BlindStructureGrid extends Grid {
 		}
 	}
 	
-	
-
+	/**
+	 * Add and parameterize the columns
+	 * @param pStructure structure of blind, needed to choose if the ante column is needed
+	 */
+	private void addBlindStructureGridColumn(BlindStructure pStructure){
+		this.gridColumn.add(this.addColumn(COLUMN_TIME_NAME, Integer.class));
+		this.gridColumn.add(this.addColumn(COLUMN_SMALL_BLIND_NAME, Integer.class));
+		this.gridColumn.add(this.addColumn(COLUMN_BIG_BLIND_NAME, Integer.class));
+		if(pStructure.isAnte()){
+			this.gridColumn.add(this.addColumn(COLUM_ANTE_NAME, Integer.class));
+			this.setColumnOrder(COLUMN_TIME_NAME,COLUMN_SMALL_BLIND_NAME,COLUMN_BIG_BLIND_NAME,COLUM_ANTE_NAME);
+		}
+		else{
+			this.setColumnOrder(COLUMN_TIME_NAME,COLUMN_SMALL_BLIND_NAME,COLUMN_BIG_BLIND_NAME);
+		}
+		
+		for(Column aColumn : this.gridColumn){
+			aColumn = aColumn.setSortable(COLUMN_SORTABLE);
+		}
+	}
 }
