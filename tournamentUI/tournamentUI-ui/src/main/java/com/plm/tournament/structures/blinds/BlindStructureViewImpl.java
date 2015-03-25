@@ -7,14 +7,11 @@ import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.CustomComponent;
-import com.vaadin.ui.Label;
-import com.vaadin.ui.Panel;
-import com.vaadin.ui.TextField;
 
 
 public class BlindStructureViewImpl extends CustomComponent 
 	implements BlindStructureView,ClickListener {
-    
+
     /**
 	 * serialization UID
 	 */

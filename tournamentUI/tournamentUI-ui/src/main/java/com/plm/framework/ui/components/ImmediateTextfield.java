@@ -26,6 +26,7 @@ public class ImmediateTextfield extends TextField {
     public ImmediateTextfield() {
         clear();
         setImmediate(IS_IMMEDIATE);
+        setNullRepresentation("");
     }
 
     /**
@@ -38,6 +39,7 @@ public class ImmediateTextfield extends TextField {
         this();
         setCaption(caption);
         setImmediate(IS_IMMEDIATE);
+        setNullRepresentation("");
     }
 
     /**
@@ -51,6 +53,7 @@ public class ImmediateTextfield extends TextField {
 	public ImmediateTextfield(Property dataSource) {
         setPropertyDataSource(dataSource);
         setImmediate(IS_IMMEDIATE);
+        setNullRepresentation("");
     }
 
     /**
@@ -67,6 +70,7 @@ public class ImmediateTextfield extends TextField {
         this(dataSource);
         setCaption(caption);
         setImmediate(IS_IMMEDIATE);
+        setNullRepresentation("");
     }
 
     /**
@@ -85,6 +89,7 @@ public class ImmediateTextfield extends TextField {
         setValue(value);
         setCaption(caption);
         setImmediate(IS_IMMEDIATE);
+        setNullRepresentation("");
     }
 
 }
