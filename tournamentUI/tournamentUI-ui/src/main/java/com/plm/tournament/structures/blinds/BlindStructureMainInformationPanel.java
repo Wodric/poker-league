@@ -1,13 +1,9 @@
 package com.plm.tournament.structures.blinds;
 
-import com.plm.framework.ui.components.ImmediateTextfield;
 import com.plm.framework.ui.mvp.BasePanel;
 import com.plm.tournamentCore.blind.BlindStructureParameters;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
-import com.vaadin.data.util.ObjectProperty;
-import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.FormLayout;
-import com.vaadin.ui.TextField;
 
 /**
  * Panel which contains the main element to define the structure
