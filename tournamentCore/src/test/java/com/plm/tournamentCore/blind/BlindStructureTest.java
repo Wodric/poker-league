@@ -7,6 +7,8 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
+import com.plm.tournamentCore.blind.BlindLevel;
+import com.plm.tournamentCore.blind.BlindStructure;
 import com.plm.tournamentCore.chip.Chip;
 import com.plm.tournamentCore.chip.ChipsSet;
 
