@@ -66,11 +66,17 @@ public class BlindStructureParameters implements Serializable{
      * Parameter name for level duration
      */
     public static String PARAMETER_NAME_LEVEL_DURATION = "levelDuration";
-	
+    
     /**
      *  the startup big blind. MUST BE A MULTIPLE OF SMALLEST CHIP
      */
-	private BlindLevel minimumBlind;
+    @Min(value=MIN_INITIAL_STACK_SIZE,message="Minimum small blind value between 1 and 25 000 000")
+    @Max(value=(MAX_INITIAL_STACK_SIZE/2),message="Minimum small blind value between 1 and 25 000 000")
+	private int minimumSmallBlindValue;
+    /**
+     * Parameter name for level duration
+     */
+    public static String PARAMETER_NAME_MINIMUM_SMALL_BLIND_VALUE = "minimumSmallBlindValue";
 	
 	/**
 	 *  allow ante in tournament if true
@@ -212,22 +218,6 @@ public class BlindStructureParameters implements Serializable{
 	 */
 	public void setLevelDuration(int pLevelDuration) {
 		this.levelDuration = pLevelDuration;
-	}
-	
-	/**
-	 * 
-	 * @return the minimum blind
-	 */
-	public BlindLevel getMinimumBlind() {
-		return minimumBlind;
-	}
-	
-	/**
-	 * 
-	 * @param pMinimumBlind set the new minimum blind
-	 */
-	public void setMinimumBlind(BlindLevel pMinimumBlind) {
-		this.minimumBlind = pMinimumBlind;
 	}
 	
 	/**

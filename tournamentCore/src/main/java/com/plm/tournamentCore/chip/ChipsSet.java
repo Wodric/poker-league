@@ -57,4 +57,25 @@ public class ChipsSet {
 		Collections.sort(pChipsList);
 		this.chipsList = pChipsList;
 	}
+	
+	/**
+	 * 
+	 */
+	@Override
+	public String toString(){
+		StringBuilder toStringBuilder = new StringBuilder(); 
+		if(chipsList != null && chipsList.size() != 0){
+			int index = 0;
+			for(Chip aChip: chipsList){
+				toStringBuilder.append(aChip.getValue());
+				if(index != (chipsList.size()-1)){
+					toStringBuilder.append("-");
+				}
+				index++;
+			}
+		}
+		return toStringBuilder.toString();
+		
+	}
+	
 }
