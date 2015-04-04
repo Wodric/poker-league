@@ -1,6 +1,8 @@
 package com.plm.tournamentCore.blind;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
@@ -70,10 +72,12 @@ public class BlindStructureParameters implements Serializable{
     /**
      *  the startup big blind. MUST BE A MULTIPLE OF SMALLEST CHIP
      */
-    @Min(value=MIN_INITIAL_STACK_SIZE,message="Minimum small blind value between 1 and 25 000 000")
-    @Max(value=(MAX_INITIAL_STACK_SIZE/2),message="Minimum small blind value between 1 and 25 000 000")
+    @Min(value=MIN_SMALL_BLIND_VALUE,message="Minimum small blind value between 1 and 5 000 000")
+    @Max(value=MAX_SMALL_BLIND_VALUE,message="Minimum small blind value between 1 and 5 000 000")
 	private int minimumSmallBlindValue;
-    /**
+
+
+	/**
      * Parameter name for level duration
      */
     public static String PARAMETER_NAME_MINIMUM_SMALL_BLIND_VALUE = "minimumSmallBlindValue";
@@ -91,6 +95,10 @@ public class BlindStructureParameters implements Serializable{
 	 * the list of chip available in tournament
 	 */
 	private ChipsSet chipSet;
+    /**
+     * Parameter name for with ante
+     */
+    public static String PARAMETER_NAME_CHIP_SET = "chipSet";
 	
 	/**
 	 * the default value of has ante
@@ -142,6 +150,20 @@ public class BlindStructureParameters implements Serializable{
 	public static final int MAX_INITIAL_STACK_SIZE = 50000000;
 	
 	/**
+	 * The default stack size to set in algorithm
+	 */
+	public static final int DEFAULT_SMALL_BLIND_VALUE = 25;
+	
+	/**
+	 * minimum small blind size 
+	 */
+	public static final int MIN_SMALL_BLIND_VALUE = 1;
+	
+	/**
+	 * Maximum  small blind size 
+	 */
+	public static final int MAX_SMALL_BLIND_VALUE = 5000000;
+	/**
 	 * The default number of player to set in algorithm
 	 */
 	public static final int DEFAULT_NUMBER_PLAYER = 8;
@@ -157,6 +179,11 @@ public class BlindStructureParameters implements Serializable{
 	public static final int MAX_NUMBER_PLAYER = 50000;
 	
 	/**
+	 * The default stack size to set in algorithm
+	 */
+	public static final ChipsSet DEFAULT_CHIPSET = initChipsSet();
+	
+	/**
 	 * 
 	 * @return the number of player number
 	 */
@@ -164,7 +191,14 @@ public class BlindStructureParameters implements Serializable{
 		return this.maxPlayerNumber;
 	}
     
-    /**
+    private static ChipsSet initChipsSet() {
+    	ArrayList<Integer> chipList = new ArrayList<Integer>();
+    	chipList.addAll(Arrays.asList(25,100,500,1000,5000,10000));
+    	
+		return new ChipsSet(chipList);
+	}
+
+	/**
      * 
      * @param pMaxPlayerNumber the new number of player to set
      */
@@ -252,5 +286,19 @@ public class BlindStructureParameters implements Serializable{
 		this.chipSet = pChipSet;
 	}
 	
-	
+	/**
+	 * 
+	 * @return the minimum small blind value
+	 */
+    public int getMinimumSmallBlindValue() {
+		return minimumSmallBlindValue;
+	}
+
+    /**
+     * 
+     * @param pMinimumSmallBlindValue set this value as minimum small blind, maximum small blind will be calculate chips
+     */
+	public void setMinimumSmallBlindValue(int pMinimumSmallBlindValue) {
+		this.minimumSmallBlindValue = pMinimumSmallBlindValue;
+	}
 }
