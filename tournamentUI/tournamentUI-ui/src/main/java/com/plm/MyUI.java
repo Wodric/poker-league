@@ -1,15 +1,10 @@
 package com.plm;
 
-import java.io.File;
-import java.util.ArrayList;
-
 import javax.servlet.annotation.WebServlet;
 
-import com.plm.component.datagrid.BlindStructureGrid;
+import com.plm.tournament.structures.blinds.BlindStructureChipsInformationPanel;
 import com.plm.tournament.structures.blinds.BlindStructureMainInformationPanel;
-import com.plm.tournamentCore.blind.BlindLevel;
-import com.plm.tournamentCore.blind.BlindStructure;
-import com.plm.tournamentCore.chip.ChipsSet;
+import com.plm.tournament.structures.blinds.BlindStructurePreviewPanel;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;
@@ -17,8 +12,6 @@ import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Component;
-import com.vaadin.ui.Label;
 import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 
@@ -40,6 +33,8 @@ public class MyUI extends UI {
         layout.setMargin(true);
         setContent(layout);
         BlindStructureMainInformationPanel panel = new BlindStructureMainInformationPanel();
+        BlindStructureChipsInformationPanel panel2 = new BlindStructureChipsInformationPanel();
+        BlindStructurePreviewPanel panel3 = new BlindStructurePreviewPanel();
         Button button = new Button("Click Me");
         button.addClickListener(new Button.ClickListener() {
             @Override
@@ -49,6 +44,8 @@ public class MyUI extends UI {
         });
         layout.addComponent(button);
         layout.addComponent(panel);
+        layout.addComponent(panel2);
+        layout.addComponent(panel3);
 
     }
 
