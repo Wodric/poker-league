@@ -5,6 +5,10 @@ import com.plm.framework.ui.mvp.BasePanel;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.VerticalLayout;
 
+/**
+ * Panel which show the preview of structure
+ * @author Alexandre Lefèvre "Wodric"
+ */
 public class BlindStructurePreviewPanel extends BasePanel {
 	
 	/**
@@ -29,6 +33,11 @@ public class BlindStructurePreviewPanel extends BasePanel {
 	public static String SAVE_STRUCTURE_LABEL = "Save";
 	
 	/**
+	 * Panel width
+	 */
+	public static float PANEL_WIDTH = (float) 44.0;
+	
+	/**
 	 * Panel to preview the structure
 	 */
 	public BlindStructurePreviewPanel() {
@@ -38,7 +47,10 @@ public class BlindStructurePreviewPanel extends BasePanel {
 		
 		mainLayout.addComponent(structureGrid);
 		mainLayout.addComponent(saveStructureBtn);
+		mainLayout.setMargin(true);
+		mainLayout.setSpacing(true);
 		
+		this.setWidth(PANEL_WIDTH, Unit.PERCENTAGE);
 		this.setContent(mainLayout);
 	}
 

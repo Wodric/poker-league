@@ -33,8 +33,16 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 	 */
 	private ComboBox chipsSetsComboBox;
 	
+	/**
+	 * Panel width
+	 */
+	public static float PANEL_WIDTH = (float) 28.0;
+	
 	
 
+	/**
+	 * 
+	 */
 	public BlindStructureChipsInformationPanel() {
 		super(CHIPS_INFORMATION_PANEL_CAPTION);
 		binder.setItemDataSource(createBeanWithDefaultValue());
@@ -47,9 +55,10 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 				("Initial stack size", BlindStructureParameters.PARAMETER_NAME_INITIAL_STACK_SIZE));
 		this.initChipSetSelector();
 		content.addComponent(this.chipsSetsComboBox);
+		content.setMargin(true);
+		content.setSpacing(true);
 
-		//this.setConversionTexteFieldBehavior();
-		this.setWidth((float) 40.0, Unit.PERCENTAGE);
+		this.setWidth(PANEL_WIDTH, Unit.PERCENTAGE);
 		this.setContent(content);
 	}
 	

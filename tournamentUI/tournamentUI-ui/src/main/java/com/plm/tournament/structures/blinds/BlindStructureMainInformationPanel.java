@@ -28,6 +28,11 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 	 * Constaint which defin the caption of panel
 	 */
 	private static final String MAIN_INFORMATION_PANEL_CAPTION = "Main information";
+	
+	/**
+	 * Panel width
+	 */
+	public static float PANEL_WIDTH = (float) 28.0;
 
 	/**
 	 * Return the panel already prepare
@@ -46,9 +51,11 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 				("Duration (min)", BlindStructureParameters.PARAMETER_NAME_TOURNAMENT_DURATION_EXPECTED));
 		content.addComponent(this.binder.buildAndBind
 				("Allow ante",  BlindStructureParameters.PARAMETER_NAME_WITH_ANTE));
+		content.setMargin(true);
+		content.setSpacing(true);
 
 		this.setConversionTexteFieldBehavior();
-		this.setWidth((float) 40.0, Unit.PERCENTAGE);
+		this.setWidth(PANEL_WIDTH, Unit.PERCENTAGE);
 		this.setContent(content);
 	}
 	/**
