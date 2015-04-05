@@ -19,8 +19,6 @@ public class BlindStructureViewImpl extends CustomComponent
 	
 	public BlindStructureViewImpl() {
 		super();
-
-
 	}
 
 

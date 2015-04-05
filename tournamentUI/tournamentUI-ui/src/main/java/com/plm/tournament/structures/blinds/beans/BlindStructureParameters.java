@@ -1,13 +1,12 @@
-package com.plm.tournamentCore.blind;
+package com.plm.tournament.structures.blinds.beans;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
+import com.plm.tournamentCore.blind.BlindLevel;
 import com.plm.tournamentCore.chip.ChipsSet;
 
 /**
@@ -150,7 +149,7 @@ public class BlindStructureParameters implements Serializable{
 	public static final int MAX_INITIAL_STACK_SIZE = 50000000;
 	
 	/**
-	 * The default stack size to set in algorithm
+	 * The default small blind value to set in algorithm
 	 */
 	public static final int DEFAULT_SMALL_BLIND_VALUE = 25;
 	
@@ -163,6 +162,13 @@ public class BlindStructureParameters implements Serializable{
 	 * Maximum  small blind size 
 	 */
 	public static final int MAX_SMALL_BLIND_VALUE = 5000000;
+	
+	/**
+	 * The default stack size to set in algorithm
+	 */
+	public static final BlindLevel DEFAULT_BLIND_LEVEL = new BlindLevel(
+			DEFAULT_LEVEL_DURATION, DEFAULT_SMALL_BLIND_VALUE, DEFAULT_SMALL_BLIND_VALUE*2);
+	
 	/**
 	 * The default number of player to set in algorithm
 	 */
@@ -181,7 +187,8 @@ public class BlindStructureParameters implements Serializable{
 	/**
 	 * The default stack size to set in algorithm
 	 */
-	public static final ChipsSet DEFAULT_CHIPSET = initChipsSet();
+	public static final ChipsSet DEFAULT_CHIPSET = 
+			ChipsSet.getDefaultChipsSets().get(ChipsSet.DEFAULT_CHIPS_SET_INDEX);
 	
 	/**
 	 * 
@@ -189,13 +196,6 @@ public class BlindStructureParameters implements Serializable{
 	 */
     public int getMaxPlayerNumber() {
 		return this.maxPlayerNumber;
-	}
-    
-    private static ChipsSet initChipsSet() {
-    	ArrayList<Integer> chipList = new ArrayList<Integer>();
-    	chipList.addAll(Arrays.asList(25,100,500,1000,5000,10000));
-    	
-		return new ChipsSet(chipList);
 	}
 
 	/**

@@ -34,7 +34,7 @@ public class BlindLevel {
 	 * @param pSmallBlind cost pay for small blind
 	 * @param pBigBlind cost pay for  big blind
 	 */
-	public BlindLevel(short pDuration, int pSmallBlind, int pBigBlind) {
+	public BlindLevel(int pDuration, int pSmallBlind, int pBigBlind) {
 		super();
 		this.duration = pDuration;
 		this.smallBlind = pSmallBlind;
