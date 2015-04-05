@@ -3,6 +3,7 @@ package com.plm.component.datagrid;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.plm.tournament.structures.blinds.beans.BlindStructureParameters;
 import com.plm.tournamentCore.blind.BlindLevel;
 import com.plm.tournamentCore.blind.BlindStructure;
 import com.vaadin.ui.Grid;
@@ -47,6 +48,21 @@ public class BlindStructureGrid extends Grid {
 		feedBlindStructureGrid(pStructure);
 	}
 	
+	public BlindStructureGrid() {
+		BlindStructure structure = new BlindStructure(
+				BlindStructureParameters.DEFAULT_NUMBER_PLAYER,
+				BlindStructureParameters.DEFAULT_INITIAL_STACK_SIZE,
+				BlindStructureParameters.DEFAULT_TOURNAMENT_DURATION,
+				BlindStructureParameters.DEFAULT_LEVEL_DURATION,
+				BlindStructureParameters.DEFAULT_BLIND_LEVEL,
+				BlindStructureParameters.DEFAULT_WITH_ANTE,
+				BlindStructureParameters.DEFAULT_CHIPSET);
+		// set column name and type
+		this.addBlindStructureGridColumn(structure);
+		// feed the grid
+		feedBlindStructureGrid(structure);
+	}
+
 	/**
 	 * Add row in grid from the BlindStructureObject
 	 * @param pStructure BlindStructure object, use the blind level cof this object to feed the grid

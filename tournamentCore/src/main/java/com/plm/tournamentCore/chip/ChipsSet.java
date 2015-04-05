@@ -17,6 +17,11 @@ public class ChipsSet {
 	 * The chipSet is a chip list ordered per chip value
 	 */
 	private List<Chip> chipsList;
+	
+	/**
+	 * the default chips set index from @link #getDefaultChipsSets() getDefaultChipsSets}
+	 */
+	public static int DEFAULT_CHIPS_SET_INDEX = 0;
 
 	/**
 	 * Create a chip set from the chip it will contains
@@ -113,9 +118,7 @@ public class ChipsSet {
 		chipsValue.add(100);
 		chipsValue.add(500);
 		ChipsSet chipsSet4 = new ChipsSet(chipsValue);
-		
-		
-		
+			
 		defaultSets.add(chipsSet1);
 		defaultSets.add(chipsSet2);
 		defaultSets.add(chipsSet3);
