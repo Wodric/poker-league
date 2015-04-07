@@ -38,7 +38,11 @@ public class BlindStructureMainPanel extends BasePanel {
         horizontalLayout.addComponent(chipsInformationPanel);
         horizontalLayout.addComponent(structurePreviewPanel);
         horizontalLayout.setMargin(true);
-        horizontalLayout.setSpacing(true);        
+        horizontalLayout.setSpacing(true); 
+        horizontalLayout.setSizeFull();
+        horizontalLayout.setExpandRatio(mainInformationPanel, BlindStructureMainInformationPanel.PANEL_WIDTH);
+        horizontalLayout.setExpandRatio(chipsInformationPanel, BlindStructureChipsInformationPanel.PANEL_WIDTH);
+        horizontalLayout.setExpandRatio(structurePreviewPanel, BlindStructurePreviewPanel.PANEL_WIDTH);
 		
         this.setWidth(PANEL_WIDTH, Unit.PERCENTAGE);
 		this.setContent(horizontalLayout);

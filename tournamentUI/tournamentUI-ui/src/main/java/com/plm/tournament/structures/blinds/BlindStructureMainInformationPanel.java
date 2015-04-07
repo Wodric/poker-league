@@ -55,7 +55,6 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 		content.setSpacing(true);
 
 		this.setConversionTexteFieldBehavior();
-		this.setWidth(PANEL_WIDTH, Unit.PERCENTAGE);
 		this.setContent(content);
 	}
 	/**

@@ -58,7 +58,6 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 		content.setMargin(true);
 		content.setSpacing(true);
 
-		this.setWidth(PANEL_WIDTH, Unit.PERCENTAGE);
 		this.setContent(content);
 	}
 	
