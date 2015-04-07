@@ -49,7 +49,6 @@ public class BlindStructurePreviewPanel extends BasePanel {
 		mainLayout.addComponent(saveStructureBtn);
 		mainLayout.setMargin(true);
 		mainLayout.setSpacing(true);
-		mainLayout.setExpandRatio(structureGrid, 100);
 		
 		this.setContent(mainLayout);
 	}
