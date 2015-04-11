@@ -51,12 +51,12 @@ public class BlindStructure {
 	/**
 	 * This variable define the list of blind authorized
 	 */
-	public static final double[] BLIND_AUTHORIZED_MULTIPLE_TAB = new double[] {1,1.2,1.4,1.6,1.8,2,2.4,3,4,5,6,8};
+	public static final double[] BLIND_AUTHORIZED_MULTIPLE_TAB = new double[] {1,1.2,1.4,1.5,1.6,1.8,2,2.4,3,4,5,6,8};
 	
 	/**
 	 * This variable define the list of  authorized
 	 */
-	public static final double[] ANTE_AUTHORIZED_MULTIPLE_TAB = new double[] {1,1,1,2,2,2,3,3,4,5,6,10};
+	public static final double[] ANTE_AUTHORIZED_MULTIPLE_TAB = new double[] {1,1,1,2,2,2,2,3,3,4,5,6,10};
 	
 	/**
 	 * This variable define the average stack at the tournament end
@@ -87,7 +87,7 @@ public class BlindStructure {
 			int pLevelDurations, BlindLevel pMinimumBlind, boolean pWithAnte, ChipsSet pChipSet){
 		
 		int totalChip = calculateTotalNumberOfChips(pMaxPlayerNumber,pInitialStackSize);
-		BlindLevel maxLevelExpected = calculateBigBlindMax(totalChip, WITH_ANTE,pLevelDurations);
+		BlindLevel maxLevelExpected = calculateBigBlindMax(totalChip, pWithAnte,pLevelDurations);
 		int totalNumberOfLevel = calculateNumberOfLevels(pTournamentDurationExpected,pLevelDurations);
 		this.setAnte(pWithAnte);
 		
@@ -98,7 +98,7 @@ public class BlindStructure {
 		this.structure.add(pMinimumBlind);
 		
 		int blindFactor = maxLevelExpected.getBigBlind() / pMinimumBlind.getBigBlind(); 
-		double theoricFactorBetweenLevels = Math.pow(blindFactor, 1/(double)totalNumberOfLevel);
+		double theoricFactorBetweenLevels = Math.pow(blindFactor, 1/(double)totalNumberOfLevel)*0.95;
 		
 		BlindLevel currentBlindLevel = pMinimumBlind;
 		BlindLevel lastBlindLevelModified = pMinimumBlind;
@@ -111,18 +111,28 @@ public class BlindStructure {
 			currentBlindLevel = nextBlindLevel;
 			this.structure.add(currentBlindLevel);
 			totalNumberOfLevel --;
+			// to avoid heavy drift in blind calculation it is re calculate every 5 levels
+			if(totalNumberOfLevel%5 == 0){
+				blindFactor = maxLevelExpected.getBigBlind() / currentBlindLevel.getBigBlind(); 
+				theoricFactorBetweenLevels = Math.pow(blindFactor, 1/(double)totalNumberOfLevel)*0.95;
+			}
 		}
 		
 		// recalculate  the factor after the first phase
 		blindFactor = maxLevelExpected.getBigBlind() / currentBlindLevel.getBigBlind(); 
 		// *0.93 factor to avoid that automatic round at superior blind accelerate the structure too much
-		theoricFactorBetweenLevels = Math.pow(blindFactor, 1/(double)totalNumberOfLevel)*0.93;
+		theoricFactorBetweenLevels = Math.pow(blindFactor, 1/(double)totalNumberOfLevel)*0.95;
 
 		while( totalNumberOfLevel > (-NUMBER_OF_ADDITIONAL_LEVEL)){
 			BlindLevel nextBlindLevel= getNextBlindLevel(currentBlindLevel,theoricFactorBetweenLevels);
 			currentBlindLevel = nextBlindLevel;
 			this.structure.add(currentBlindLevel);
 			totalNumberOfLevel --;
+			// to avoid heavy drift in blind calculation it is re calculate every 5 levels
+			if(totalNumberOfLevel%5 == 0 && totalNumberOfLevel > 4){
+				blindFactor = maxLevelExpected.getBigBlind() / currentBlindLevel.getBigBlind(); 
+				theoricFactorBetweenLevels = Math.pow(blindFactor, 1/(double)totalNumberOfLevel)*0.95;
+			}
 		}	
 	}
 

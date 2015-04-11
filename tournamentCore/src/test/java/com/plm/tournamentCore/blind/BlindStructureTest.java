@@ -229,10 +229,10 @@ public class BlindStructureTest {
 		BlindStructure structure = new BlindStructure(playerExpected,startingStack,totalTime
 				,levelDuration,startingLevel,withAnte, cs);
 		
-		int NumberOfLevelExpected = totalTime / levelDuration;
-		assertEquals(NumberOfLevelExpected + BlindStructure.NUMBER_OF_ADDITIONAL_LEVEL, structure.getStructure().size());
+		int numberOfLevelExpected = totalTime / levelDuration;
+		assertEquals(numberOfLevelExpected + BlindStructure.NUMBER_OF_ADDITIONAL_LEVEL, structure.getStructure().size());
 		
-		int getBBatExpectedEnd = structure.getStructure().get(NumberOfLevelExpected-1).getBigBlind();
+		int getBBatExpectedEnd = structure.getStructure().get(numberOfLevelExpected-1).getBigBlind();
 		int blindAtExpectedEnd = (playerExpected * startingStack)/ getBBatExpectedEnd;
 		// consider at expected end that there is between 45 et 75 blinds
 		assertTrue(blindAtExpectedEnd > 45 && blindAtExpectedEnd < 75);
