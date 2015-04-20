@@ -2,7 +2,9 @@ package com.plm.tournament.structures.blinds;
 
 
 import com.plm.framework.ui.mvp.BasePanel;
+import com.plm.framework.ui.mvp.BaseView;
 import com.plm.tournament.structures.blinds.beans.BlindStructureParameters;
+import com.plm.tournamentCore.blind.BlindStructure;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.ui.AbstractTextField;
 import com.vaadin.ui.FormLayout;
@@ -25,7 +27,7 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 	private static final long serialVersionUID = 6828111650513726232L;
 	
 	/**
-	 * Constaint which defin the caption of panel
+	 * Constaint which define the caption of panel
 	 */
 	private static final String MAIN_INFORMATION_PANEL_CAPTION = "Main information";
 	
@@ -33,14 +35,21 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 	 * Panel width
 	 */
 	public static float PANEL_WIDTH = (float) 28.0;
+	
+	/**
+	 * Component parent, used to get listener for exemple
+	 */
+	BaseView parentComponent;
 
 	/**
 	 * Return the panel already prepare
+	 * @param pParent 
 	 */
-	public BlindStructureMainInformationPanel() {
+	public BlindStructureMainInformationPanel(BaseView pParentView) {
 		super(MAIN_INFORMATION_PANEL_CAPTION);
-		binder.setItemDataSource(createBeanWithDefaultValue());
+		this.parentComponent = pParentView;
 		
+		binder.setItemDataSource(createBeanWithDefaultValue());
 
 		FormLayout content = new FormLayout();	
 		content.addComponent(this.binder.buildAndBind
@@ -65,19 +74,19 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 		AbstractTextField maxPlayer = (AbstractTextField) binder.getField
 				(BlindStructureParameters.PARAMETER_NAME_MAX_PLAYER_NUMBER);
 		maxPlayer.setNullRepresentation(
-				String.valueOf(BlindStructureParameters.DEFAULT_NUMBER_PLAYER));
+				String.valueOf(BlindStructure.DEFAULT_NUMBER_PLAYER));
 		maxPlayer.setConversionError("Value must be a number between 2 and 50 000");
 
 		AbstractTextField levelDuration = (AbstractTextField) binder.getField
 				(BlindStructureParameters.PARAMETER_NAME_LEVEL_DURATION);
 		levelDuration.setNullRepresentation(
-				String.valueOf(BlindStructureParameters.DEFAULT_LEVEL_DURATION));
+				String.valueOf(BlindStructure.DEFAULT_LEVEL_DURATION));
 		levelDuration.setConversionError("Value must be a number between 10 and 300");
 		
 		AbstractTextField tournamentDuration = (AbstractTextField) binder.getField
 				(BlindStructureParameters.PARAMETER_NAME_TOURNAMENT_DURATION_EXPECTED);
 		tournamentDuration.setNullRepresentation(
-				String.valueOf(BlindStructureParameters.DEFAULT_TOURNAMENT_DURATION));
+				String.valueOf(BlindStructure.DEFAULT_TOURNAMENT_DURATION));
 		tournamentDuration.setConversionError("Value must be a number between 30 and 60 000");
 	}
 	
@@ -87,15 +96,13 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 	private BlindStructureParameters createBeanWithDefaultValue(){
 		BlindStructureParameters structureParameters = new BlindStructureParameters();
 		structureParameters.setLevelDuration(
-				BlindStructureParameters.DEFAULT_LEVEL_DURATION);
+				BlindStructure.DEFAULT_LEVEL_DURATION);
 		structureParameters.setTournamentDurationExpected(
-				BlindStructureParameters.DEFAULT_TOURNAMENT_DURATION);
+				BlindStructure.DEFAULT_TOURNAMENT_DURATION);
 		structureParameters.setMaxPlayerNumber(
-				BlindStructureParameters.DEFAULT_NUMBER_PLAYER);
+				BlindStructure.DEFAULT_NUMBER_PLAYER);
 		structureParameters.setWithAnte(
-				BlindStructureParameters.DEFAULT_WITH_ANTE);
+				BlindStructure.DEFAULT_WITH_ANTE);
 		return structureParameters;
 	}
-
-
 }

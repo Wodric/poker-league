@@ -68,6 +68,97 @@ public class BlindStructure {
 	 */
 	public static final int NUMBER_OF_ADDITIONAL_LEVEL = 5;
 	
+	/**
+	 * the default value of has ante
+	 */
+	public static final boolean DEFAULT_WITH_ANTE = false;
+	/**
+	 * The default tournament level to set in algorithm
+	 */
+	public static final int DEFAULT_LEVEL_DURATION = 20;
+	
+	/**
+	 * Minimum level duration in minutes
+	 */
+	public static final int MIN_LEVEL_DURATION = 5;
+	
+	/**
+	 * Maximum level duration in minutes
+	 */
+	public static final int MAX_LEVEL_DURATION = 600;
+	
+	/**
+	 * The default tournament duration to set in algorithm
+	 */
+	public static final int DEFAULT_TOURNAMENT_DURATION = 240;
+	
+	/**
+	 * Minimum tournament duration in minutes
+	 */
+	public static final int MIN_TOURNAMENT_DURATION = 30;
+	
+	/**
+	 * Maximum tournament duration in minutes
+	 */
+	public static final int MAX_TOURNAMENT_DURATION = 60000;
+	
+	/**
+	 * The defaul stack size to set in algorithm
+	 */
+	public static final int DEFAULT_INITIAL_STACK_SIZE = 15000;
+	
+	/**
+	 * Minimum stack size
+	 */
+	public static final int MIN_INITIAL_STACK_SIZE = 1;
+	
+	/**
+	 * Maximum stack size
+	 */
+	public static final int MAX_INITIAL_STACK_SIZE = 50000000;
+	
+	/**
+	 * The default small blind value to set in algorithm
+	 */
+	public static final int DEFAULT_SMALL_BLIND_VALUE = 25;
+	
+	/**
+	 * minimum small blind size 
+	 */
+	public static final int MIN_SMALL_BLIND_VALUE = 1;
+	
+	/**
+	 * Maximum  small blind size 
+	 */
+	public static final int MAX_SMALL_BLIND_VALUE = 5000000;
+	
+	/**
+	 * The default stack size to set in algorithm
+	 */
+	public static final BlindLevel DEFAULT_BLIND_LEVEL = new BlindLevel(
+			DEFAULT_LEVEL_DURATION, DEFAULT_SMALL_BLIND_VALUE, DEFAULT_SMALL_BLIND_VALUE*2);
+	
+	/**
+	 * The default number of player to set in algorithm
+	 */
+	public static final int DEFAULT_NUMBER_PLAYER = 8;
+	
+	/**
+	 * Minimum player allowed
+	 */
+	public static final int MIN_NUMBER_PLAYER = 2;
+	
+	/**
+	 * Maximum player allowed
+	 */
+	public static final int MAX_NUMBER_PLAYER = 50000;
+	
+	/**
+	 * The default stack size to set in algorithm
+	 */
+	public static final ChipsSet DEFAULT_CHIPSET = 
+			ChipsSet.getDefaultChipsSets().get(ChipsSet.DEFAULT_CHIPS_SET_INDEX);
+	
 
 	public BlindStructure(){
 		super();
@@ -338,6 +429,21 @@ public class BlindStructure {
 		else{
 			return 0; // if blind are small there is no blind
 		}
+	}
+	
+	/**
+	 * return a blind structure build with the default settings 
+	 * @return blind structure object
+	 */
+	public static BlindStructure getDefaultBlindStructure(){
+		return new BlindStructure(
+				BlindStructure.DEFAULT_NUMBER_PLAYER,
+				BlindStructure.DEFAULT_INITIAL_STACK_SIZE,
+				BlindStructure.DEFAULT_TOURNAMENT_DURATION,
+				BlindStructure.DEFAULT_LEVEL_DURATION,
+				BlindStructure.DEFAULT_BLIND_LEVEL,
+				BlindStructure.DEFAULT_WITH_ANTE,
+				BlindStructure.DEFAULT_CHIPSET);
 	}
 
 	/**

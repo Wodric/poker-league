@@ -3,7 +3,6 @@ package com.plm.component.datagrid;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.plm.tournament.structures.blinds.beans.BlindStructureParameters;
 import com.plm.tournamentCore.blind.BlindLevel;
 import com.plm.tournamentCore.blind.BlindStructure;
 import com.vaadin.ui.Grid;
@@ -35,11 +34,13 @@ public class BlindStructureGrid extends Grid {
 	public static String COLUM_ANTE_NAME = "Ante";
 	
 	/**
-	 * Default behavour of column to sortable
+	 * Default behaviour of column to sortable
 	 */
 	private static boolean COLUMN_SORTABLE = false;
 	
-	private List<Column> gridColumn = new ArrayList<Column>();;
+	private List<Column> gridColumn = new ArrayList<Column>();
+	
+	private BlindStructure structure;
 
 	public BlindStructureGrid(BlindStructure pStructure){
 		// set column name and type
@@ -49,14 +50,7 @@ public class BlindStructureGrid extends Grid {
 	}
 	
 	public BlindStructureGrid() {
-		BlindStructure structure = new BlindStructure(
-				BlindStructureParameters.DEFAULT_NUMBER_PLAYER,
-				BlindStructureParameters.DEFAULT_INITIAL_STACK_SIZE,
-				BlindStructureParameters.DEFAULT_TOURNAMENT_DURATION,
-				BlindStructureParameters.DEFAULT_LEVEL_DURATION,
-				BlindStructureParameters.DEFAULT_BLIND_LEVEL,
-				BlindStructureParameters.DEFAULT_WITH_ANTE,
-				BlindStructureParameters.DEFAULT_CHIPSET);
+		this.structure = BlindStructure.getDefaultBlindStructure();
 		// set column name and type
 		this.addBlindStructureGridColumn(structure);
 		// feed the grid
@@ -103,4 +97,13 @@ public class BlindStructureGrid extends Grid {
 			aColumn = aColumn.setSortable(COLUMN_SORTABLE);
 		}
 	}
+	
+	/**
+	 * Get the blind structure object display in grid
+	 * @return the blind structure object display in grid of this panel
+	 */
+	public BlindStructure getStructure() {
+		return this.structure;
+	}
+
 }

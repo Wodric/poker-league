@@ -2,6 +2,8 @@ package com.plm.tournament.structures.blinds;
 
 import com.plm.component.datagrid.BlindStructureGrid;
 import com.plm.framework.ui.mvp.BasePanel;
+import com.plm.framework.ui.mvp.BaseView;
+import com.plm.tournamentCore.blind.BlindStructure;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.VerticalLayout;
 
@@ -9,7 +11,7 @@ import com.vaadin.ui.VerticalLayout;
  * Panel which show the preview of structure
  * @author Alexandre Lefèvre "Wodric"
  */
-public class BlindStructurePreviewPanel extends BasePanel {
+public class BlindStructurePreviewPanel extends BasePanel{
 	
 	/**
 	 * serialisation UID
@@ -25,7 +27,7 @@ public class BlindStructurePreviewPanel extends BasePanel {
 	/**
 	 * Button to save the structure for the user
 	 */
-	private Button saveStructureBtn = new Button(SAVE_STRUCTURE_LABEL);
+	private Button saveStructureBtn;
 	
 	/**
 	 * the label for saveStructureBtn
@@ -38,19 +40,48 @@ public class BlindStructurePreviewPanel extends BasePanel {
 	public static float PANEL_WIDTH = (float) 44.0;
 	
 	/**
-	 * Panel to preview the structure
+	 * 
 	 */
-	public BlindStructurePreviewPanel() {
+	BlindStructureGrid structureGrid;
+	
+	/**
+	 * Layout to display
+	 */
+	VerticalLayout mainLayout = new VerticalLayout();
+	
+	/**
+	 * Component parent, used to get listener for exemple
+	 */
+	BaseView parentComponent;
+
+	/**
+	 * Panel to preview the structure
+	 * @param parentComponent2 the parent component
+	 */
+	public BlindStructurePreviewPanel(BaseView pParentView) {
 		super(STRUCTURE_PREVIEW_PANEL_CAPTION);
-		BlindStructureGrid structureGrid = new BlindStructureGrid();
-		VerticalLayout mainLayout = new VerticalLayout();
+		this.parentComponent = pParentView;
 		
-		mainLayout.addComponent(structureGrid);
-		mainLayout.addComponent(saveStructureBtn);
-		mainLayout.setMargin(true);
-		mainLayout.setSpacing(true);
+		//init classe member
+		this.saveStructureBtn = new Button(SAVE_STRUCTURE_LABEL, pParentView);
+		this.structureGrid = new BlindStructureGrid();
+
+		
+		// init layout
+		this.mainLayout.addComponent(this.structureGrid);
+		this.mainLayout.addComponent(this.saveStructureBtn);
+		this.mainLayout.setMargin(true);
+		this.mainLayout.setSpacing(true);
 		
 		this.setContent(mainLayout);
+	}
+	
+	/**
+	 * Get the blind structure object display in grid
+	 * @return the blind structure object display in grid of this panel
+	 */
+	public BlindStructure getStructure() {
+		return this.structureGrid.getStructure();
 	}
 
 }

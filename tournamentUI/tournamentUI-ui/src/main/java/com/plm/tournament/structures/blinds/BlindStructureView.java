@@ -1,15 +1,18 @@
 package com.plm.tournament.structures.blinds;
 
-import com.vaadin.navigator.View;
+import com.plm.framework.ui.mvp.BaseView;
 import com.vaadin.ui.Button.ClickEvent;
+import com.vaadin.ui.Field.ValueChangeEvent;
 
-public interface BlindStructureView extends View {
+public interface BlindStructureView extends BaseView {
 	
+    public static final String BLIND_STRCUTURE_VIEW = "BLIND_STRCUTURE_VIEW";
+    
+    interface BlindStructureViewListener{
 
-    interface BlindStructureViewListener {
-    	void buttonClick(ClickEvent event);
+		void buttonClick(ClickEvent event);
+		void changeValue(ValueChangeEvent event);
     }
 
-    public void addListener(BlindStructureViewListener listener);
-
+	void addListener(BlindStructureViewListener listener);
 }

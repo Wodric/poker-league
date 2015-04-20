@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.plm.framework.ui.mvp.BasePanel;
+import com.plm.framework.ui.mvp.BaseView;
 import com.plm.tournament.structures.blinds.beans.BlindStructureParameters;
+import com.plm.tournamentCore.blind.BlindStructure;
 import com.plm.tournamentCore.chip.ChipsSet;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.ui.ComboBox;
@@ -38,15 +40,20 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 	 */
 	public static float PANEL_WIDTH = (float) 28.0;
 	
-	
+	/**
+	 * Component parent, used to get listener for exemple
+	 */
+	BaseView parentComponent;
 
 	/**
-	 * 
+	 * constructor for panel
+	 * @param pParent 
 	 */
-	public BlindStructureChipsInformationPanel() {
+	public BlindStructureChipsInformationPanel(BaseView pParent) {
 		super(CHIPS_INFORMATION_PANEL_CAPTION);
-		binder.setItemDataSource(createBeanWithDefaultValue());
+		this.parentComponent = pParent;
 		
+		binder.setItemDataSource(createBeanWithDefaultValue());
 
 		FormLayout content = new FormLayout();
 		content.addComponent(this.binder.buildAndBind
@@ -67,9 +74,9 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 	private BlindStructureParameters createBeanWithDefaultValue(){
 		BlindStructureParameters structureParameters = new BlindStructureParameters();
 		structureParameters.setMinimumSmallBlindValue(
-				BlindStructureParameters.DEFAULT_SMALL_BLIND_VALUE);
+				BlindStructure.DEFAULT_SMALL_BLIND_VALUE);
 		structureParameters.setInitialStackSize(
-				BlindStructureParameters.DEFAULT_INITIAL_STACK_SIZE);
+				BlindStructure.DEFAULT_INITIAL_STACK_SIZE);
 		return structureParameters;
 	}
 	
@@ -87,10 +94,9 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 		this.chipsSetsComboBox.setNullSelectionAllowed(false);
 		this.chipsSetsComboBox.setNullSelectionItemId(
 				defaultChipsSetToString.get(ChipsSet.DEFAULT_CHIPS_SET_INDEX));
+		
 		//binding
 		binder.bind(this.chipsSetsComboBox, BlindStructureParameters.PARAMETER_NAME_CHIP_SET);
 		
 	}
-	
-
 }

@@ -2,10 +2,14 @@ package com.plm;
 
 import javax.servlet.annotation.WebServlet;
 
-import com.plm.tournament.structures.blinds.BlindStructureMainPanel;
+import com.plm.tournament.structures.blinds.BlindStructurePresenter;
+import com.plm.tournament.structures.blinds.BlindStructureView;
+import com.plm.tournament.structures.blinds.BlindStructureViewImpl;
+import com.plm.tournamentCore.blind.BlindStructure;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;
+import com.vaadin.navigator.Navigator;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.ui.UI;
@@ -22,14 +26,21 @@ public class MyUI extends UI {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-
+	
+    Navigator navigator;
+    
 	@Override
     protected void init(VaadinRequest vaadinRequest) {
-        final VerticalLayout layout = new VerticalLayout();
-        layout.setMargin(true);
-        setContent(layout);
-        BlindStructureMainPanel panel = new BlindStructureMainPanel();
-        layout.addComponent(panel);
+        this.getPage().setTitle("Navigation Example");
+        
+        BlindStructureViewImpl createStructureView = new BlindStructureViewImpl();
+        BlindStructure structureModel = createStructureView.getStructureToDisplayFromModel();
+        
+        // Create a navigator to control the views
+        navigator = new Navigator(this, this);
+        navigator.addView("" /*BlindStructureView.BLIND_STRCUTURE_VIEW*/, createStructureView);
+        
+        BlindStructurePresenter structurePresenter = new BlindStructurePresenter(structureModel,createStructureView);
 
     }
 

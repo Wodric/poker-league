@@ -6,7 +6,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-import com.plm.tournamentCore.blind.BlindLevel;
+import com.plm.tournamentCore.blind.BlindStructure;
 import com.plm.tournamentCore.chip.ChipsSet;
 
 /**
@@ -23,8 +23,8 @@ public class BlindStructureParameters implements Serializable{
 	/**
 	 *  The number of player expected with constrains validation
 	 */
-    @Max(value=MAX_NUMBER_PLAYER, message="Tournament must have between 2 and 50 000 players")
-    @Min(value=MIN_NUMBER_PLAYER, message="Tournament must have between 2 and 50 000 players")
+    @Max(value=BlindStructure.MAX_NUMBER_PLAYER, message="Tournament must have between 2 and 50 000 players")
+    @Min(value=BlindStructure.MIN_NUMBER_PLAYER, message="Tournament must have between 2 and 50 000 players")
     @NotNull(message="Can't be empty,set a numeric value")
 	private int maxPlayerNumber;
     /**
@@ -35,8 +35,8 @@ public class BlindStructureParameters implements Serializable{
 	/**
 	 *  the initial size of player stack with constrains validation
 	 */
-    @Max(value=MAX_INITIAL_STACK_SIZE, message="Stack size must be between 1 and 50 000 000 chips")
-    @Min(value=MIN_INITIAL_STACK_SIZE, message="Stack size must be between 1 and 50 000 000 chips")
+    @Max(value=BlindStructure.MAX_INITIAL_STACK_SIZE, message="Stack size must be between 1 and 50 000 000 chips")
+    @Min(value=BlindStructure.MIN_INITIAL_STACK_SIZE, message="Stack size must be between 1 and 50 000 000 chips")
     @NotNull(message="Can't be empty,set a numeric value")
     private int initialStackSize;
     /**
@@ -47,8 +47,8 @@ public class BlindStructureParameters implements Serializable{
     /**
      *  the duration of the tournament you expect with constrains validation
      */
-    @Max(value=MAX_TOURNAMENT_DURATION, message="Tournament duration must last between 30 and 60 000 minutes")
-    @Min(value=MIN_TOURNAMENT_DURATION, message="Tournament duration must last between 30 and 60 000 minutes")
+    @Max(value=BlindStructure.MAX_TOURNAMENT_DURATION, message="Tournament duration must last between 30 and 60 000 minutes")
+    @Min(value=BlindStructure.MIN_TOURNAMENT_DURATION, message="Tournament duration must last between 30 and 60 000 minutes")
     @NotNull(message="Can't be empty,set a numeric value")
     private int tournamentDurationExpected;
     /**
@@ -59,8 +59,8 @@ public class BlindStructureParameters implements Serializable{
     /**
      * duration of level with constrains validation
      */
-    @Max(value=MAX_LEVEL_DURATION, message="Level duration must last between 5 and 600 minutes")
-    @Min(value=MIN_LEVEL_DURATION, message="Level duration must last between 5 and 600 minutes")
+    @Max(value=BlindStructure.MAX_LEVEL_DURATION, message="Level duration must last between 5 and 600 minutes")
+    @Min(value=BlindStructure.MIN_LEVEL_DURATION, message="Level duration must last between 5 and 600 minutes")
     @NotNull(message="Can't be empty,set a numeric value")
     private int levelDuration;
     /**
@@ -71,8 +71,8 @@ public class BlindStructureParameters implements Serializable{
     /**
      *  the startup big blind. MUST BE A MULTIPLE OF SMALLEST CHIP
      */
-    @Min(value=MIN_SMALL_BLIND_VALUE,message="Minimum small blind value between 1 and 5 000 000")
-    @Max(value=MAX_SMALL_BLIND_VALUE,message="Minimum small blind value between 1 and 5 000 000")
+    @Min(value=BlindStructure.MIN_SMALL_BLIND_VALUE,message="Minimum small blind value between 1 and 5 000 000")
+    @Max(value=BlindStructure.MAX_SMALL_BLIND_VALUE,message="Minimum small blind value between 1 and 5 000 000")
 	private int minimumSmallBlindValue;
 
 
@@ -99,96 +99,7 @@ public class BlindStructureParameters implements Serializable{
      */
     public static String PARAMETER_NAME_CHIP_SET = "chipSet";
 	
-	/**
-	 * the default value of has ante
-	 */
-	public static final boolean DEFAULT_WITH_ANTE = false;
-	/**
-	 * The default tournament level to set in algorithm
-	 */
-	public static final int DEFAULT_LEVEL_DURATION = 20;
 	
-	/**
-	 * Minimum level duration in minutes
-	 */
-	public static final int MIN_LEVEL_DURATION = 5;
-	
-	/**
-	 * Maximum level duration in minutes
-	 */
-	public static final int MAX_LEVEL_DURATION = 600;
-	
-	/**
-	 * The default tournament duration to set in algorithm
-	 */
-	public static final int DEFAULT_TOURNAMENT_DURATION = 240;
-	
-	/**
-	 * Minimum tournament duration in minutes
-	 */
-	public static final int MIN_TOURNAMENT_DURATION = 30;
-	
-	/**
-	 * Maximum tournament duration in minutes
-	 */
-	public static final int MAX_TOURNAMENT_DURATION = 60000;
-	
-	/**
-	 * The defaul stack size to set in algorithm
-	 */
-	public static final int DEFAULT_INITIAL_STACK_SIZE = 15000;
-	
-	/**
-	 * Minimum stack size
-	 */
-	public static final int MIN_INITIAL_STACK_SIZE = 1;
-	
-	/**
-	 * Maximum stack size
-	 */
-	public static final int MAX_INITIAL_STACK_SIZE = 50000000;
-	
-	/**
-	 * The default small blind value to set in algorithm
-	 */
-	public static final int DEFAULT_SMALL_BLIND_VALUE = 25;
-	
-	/**
-	 * minimum small blind size 
-	 */
-	public static final int MIN_SMALL_BLIND_VALUE = 1;
-	
-	/**
-	 * Maximum  small blind size 
-	 */
-	public static final int MAX_SMALL_BLIND_VALUE = 5000000;
-	
-	/**
-	 * The default stack size to set in algorithm
-	 */
-	public static final BlindLevel DEFAULT_BLIND_LEVEL = new BlindLevel(
-			DEFAULT_LEVEL_DURATION, DEFAULT_SMALL_BLIND_VALUE, DEFAULT_SMALL_BLIND_VALUE*2);
-	
-	/**
-	 * The default number of player to set in algorithm
-	 */
-	public static final int DEFAULT_NUMBER_PLAYER = 8;
-	
-	/**
-	 * Minimum player allowed
-	 */
-	public static final int MIN_NUMBER_PLAYER = 2;
-	
-	/**
-	 * Maximum player allowed
-	 */
-	public static final int MAX_NUMBER_PLAYER = 50000;
-	
-	/**
-	 * The default stack size to set in algorithm
-	 */
-	public static final ChipsSet DEFAULT_CHIPSET = 
-			ChipsSet.getDefaultChipsSets().get(ChipsSet.DEFAULT_CHIPS_SET_INDEX);
 	
 	/**
 	 * 
