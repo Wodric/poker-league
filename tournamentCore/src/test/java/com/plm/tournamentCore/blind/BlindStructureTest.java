@@ -213,7 +213,7 @@ public class BlindStructureTest {
 	
 	
 	@Test
-	public void BlindStructureTestConstructor(){
+	public void blindStructureTestConstructor(){
 		int playerExpected = 1000;
 		int startingStack = 15000;
 		int totalTime = 1800;
