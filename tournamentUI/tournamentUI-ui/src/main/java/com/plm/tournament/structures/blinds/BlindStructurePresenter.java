@@ -30,16 +30,24 @@ public class BlindStructurePresenter implements
 
 
 	@Override
-	public void buttonClick(ClickEvent event) {
+	/**
+	 * manage the click event and set action to user click on button
+	 * @paramter pEvent the event to manage
+	 */
+	public void buttonClick(ClickEvent pEvent) {
 		// TODO Auto-generated method stub
-		System.out.println(event.getSource().toString());
-		System.out.println("trololo");
+		System.out.println(pEvent.getSource().toString());
+		System.out.println("Nothing on click");
 	}
 
 
 	@Override
+	/**
+	 * manage the ValueChangeEvent and set action to user click on button
+	 * @paramter pEvent the event to manage
+	 */
 	public void changeValue(ValueChangeEvent event) {
-		System.out.println("NOthing");
+		System.out.println("Nothing on change value");
 		
 	}
 }

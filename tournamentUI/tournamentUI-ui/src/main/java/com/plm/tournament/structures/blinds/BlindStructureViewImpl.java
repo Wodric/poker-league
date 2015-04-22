@@ -13,7 +13,12 @@ import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Layout;
 
-
+/**
+ * View implementation of the Blind structure creation view. 
+ * It class compose the UI and diffuse the Event to presenter
+ * @author Alexandre Lefèvre "Wodric"
+ *
+ */
 public class BlindStructureViewImpl extends CustomComponent 
 	implements BlindStructureView,ClickListener {
 
@@ -43,16 +48,24 @@ public class BlindStructureViewImpl extends CustomComponent
     }
 
 	@Override
-	public void buttonClick(ClickEvent event) {
+	/**
+	 * Diffuse button click event to presenter
+	 * @parameter pEvent Click event to diffuse to presenter
+	 */
+	public void buttonClick(ClickEvent pEvent) {
 		for (BlindStructureViewListener listener: listeners){
-            listener.buttonClick(event);	
+            listener.buttonClick(pEvent);	
 		}
 	}
 	
 	@Override
-	public void valueChange(ValueChangeEvent event) {
+	/**
+	 * Diffuse value change event to presenter
+	 * @parameter pEvent value change t to diffuse to presenter
+	 */
+	public void valueChange(ValueChangeEvent pEvent) {
 		for (BlindStructureViewListener listener: listeners){
-            ((ValueChangeListener) listener).valueChange(event);	
+            ((ValueChangeListener) listener).valueChange(pEvent);	
 		}
 	}
 	
@@ -65,6 +78,9 @@ public class BlindStructureViewImpl extends CustomComponent
 	}
 
 	@Override
+	/**
+	 * Method execute when application enter in this view
+	 */
 	public void enter(ViewChangeEvent event) {
 		this.panel =  new BlindStructureMainPanel(this);
 		Layout layout = new HorizontalLayout(this.panel);
