@@ -4,7 +4,7 @@ package com.plm.tournament.structures.blinds;
 import com.plm.framework.ui.mvp.BasePanel;
 import com.plm.framework.ui.mvp.BaseView;
 import com.plm.tournament.structures.blinds.beans.BlindStructureParameters;
-import com.plm.tournamentCore.blind.BlindStructure;
+import com.plm.tournamentCore.blind.BlindConstants;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.ui.AbstractTextField;
 import com.vaadin.ui.FormLayout;
@@ -74,19 +74,19 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 		AbstractTextField maxPlayer = (AbstractTextField) binder.getField
 				(BlindStructureParameters.PARAMETER_NAME_MAX_PLAYER_NUMBER);
 		maxPlayer.setNullRepresentation(
-				String.valueOf(BlindStructure.DEFAULT_NUMBER_PLAYER));
+				String.valueOf(BlindConstants.DEFAULT_NUMBER_PLAYER));
 		maxPlayer.setConversionError("Value must be a number between 2 and 50 000");
 
 		AbstractTextField levelDuration = (AbstractTextField) binder.getField
 				(BlindStructureParameters.PARAMETER_NAME_LEVEL_DURATION);
 		levelDuration.setNullRepresentation(
-				String.valueOf(BlindStructure.DEFAULT_LEVEL_DURATION));
+				String.valueOf(BlindConstants.DEFAULT_LEVEL_DURATION));
 		levelDuration.setConversionError("Value must be a number between 10 and 300");
 		
 		AbstractTextField tournamentDuration = (AbstractTextField) binder.getField
 				(BlindStructureParameters.PARAMETER_NAME_TOURNAMENT_DURATION_EXPECTED);
 		tournamentDuration.setNullRepresentation(
-				String.valueOf(BlindStructure.DEFAULT_TOURNAMENT_DURATION));
+				String.valueOf(BlindConstants.DEFAULT_TOURNAMENT_DURATION));
 		tournamentDuration.setConversionError("Value must be a number between 30 and 60 000");
 	}
 	
@@ -96,13 +96,13 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 	private BlindStructureParameters createBeanWithDefaultValue(){
 		BlindStructureParameters structureParameters = new BlindStructureParameters();
 		structureParameters.setLevelDuration(
-				BlindStructure.DEFAULT_LEVEL_DURATION);
+				BlindConstants.DEFAULT_LEVEL_DURATION);
 		structureParameters.setTournamentDurationExpected(
-				BlindStructure.DEFAULT_TOURNAMENT_DURATION);
+				BlindConstants.DEFAULT_TOURNAMENT_DURATION);
 		structureParameters.setMaxPlayerNumber(
-				BlindStructure.DEFAULT_NUMBER_PLAYER);
+				BlindConstants.DEFAULT_NUMBER_PLAYER);
 		structureParameters.setWithAnte(
-				BlindStructure.DEFAULT_WITH_ANTE);
+				BlindConstants.DEFAULT_WITH_ANTE);
 		return structureParameters;
 	}
 }

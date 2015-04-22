@@ -13,7 +13,7 @@ import com.plm.tournamentCore.chip.ChipsSet;
 public class ChipsSetTest {
 	
 	@Test	
-	public void ChipsSetConstrcutorIntegerTest() {
+	public void chipsSetConstrcutorIntegerTest() {
 		int lowestValue = 10;
 		int middleValue = 25;
 		int highValue = 100;
@@ -32,7 +32,7 @@ public class ChipsSetTest {
 	}
 	
 	@Test	
-	public void ChipsSetConstructorChipTest() {
+	public void chipsSetConstructorChipTest() {
 		int lowestValue = 10;
 		int middleValue = 25;
 		int highValue = 100;
@@ -51,7 +51,7 @@ public class ChipsSetTest {
 	}
 	
 	@Test	
-	public void ChipsSetSetChipsSetTest() {
+	public void chipsSetSetChipsSetTest() {
 		int lowestValue = 10;
 		int middleValue = 25;
 		int highValue = 100;
@@ -77,7 +77,7 @@ public class ChipsSetTest {
 	}
 	
 	@Test (expected = NullPointerException.class)
-	public void ChipsSetConstructorWithNullListTest() {
+	public void chipsSetConstructorWithNullListTest() {
 		int lowestValue = 10;
 		int middleValue = 25;
 		int highValue = 100;
@@ -134,5 +134,4 @@ public class ChipsSetTest {
 		toStringExpected = "";
 		assertEquals(toStringExpected, chipsSet.toString());
 	}
-
 }

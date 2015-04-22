@@ -6,7 +6,7 @@ import java.util.List;
 import com.plm.framework.ui.mvp.BasePanel;
 import com.plm.framework.ui.mvp.BaseView;
 import com.plm.tournament.structures.blinds.beans.BlindStructureParameters;
-import com.plm.tournamentCore.blind.BlindStructure;
+import com.plm.tournamentCore.blind.BlindConstants;
 import com.plm.tournamentCore.chip.ChipsSet;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.ui.ComboBox;
@@ -74,9 +74,9 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 	private BlindStructureParameters createBeanWithDefaultValue(){
 		BlindStructureParameters structureParameters = new BlindStructureParameters();
 		structureParameters.setMinimumSmallBlindValue(
-				BlindStructure.DEFAULT_SMALL_BLIND_VALUE);
+				BlindConstants.DEFAULT_SMALL_BLIND_VALUE);
 		structureParameters.setInitialStackSize(
-				BlindStructure.DEFAULT_INITIAL_STACK_SIZE);
+				BlindConstants.DEFAULT_INITIAL_STACK_SIZE);
 		return structureParameters;
 	}
 	

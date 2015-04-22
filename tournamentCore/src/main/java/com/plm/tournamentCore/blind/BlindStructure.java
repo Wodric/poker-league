@@ -26,139 +26,6 @@ public class BlindStructure {
 	 */
 	private boolean ante = false;
 	
-	/**
-	 * Factor to add or remove a decimal for a number
-	 */
-	public static int DECIMAL_FACTOR = 10;
-	
-	/**
-	 * The minimum value for big blind with ante
-	 */
-	public static int MINIMUM_BLIND_DECIMAL_FOR_ANTE = 3;
-	
-	/**
-	 * Set duration to 0 when it's not set by user
-	 */
-	public static int NO_DURATION = 0;
-	/**
-	 * to define if structure uses ante= true
-	 */
-	public static boolean WITH_ANTE = true; 
-	/**
-	 * to define if structure doesn't use ante = false
-	 */
-	public static boolean WITHOUT_ANTE = false; 
-	/**
-	 * This variable define the list of blind authorized
-	 */
-	public static final double[] BLIND_AUTHORIZED_MULTIPLE_TAB = new double[] {1,1.2,1.4,1.5,1.6,1.8,2,2.4,3,4,5,6,8};
-	
-	/**
-	 * This variable define the list of  authorized
-	 */
-	public static final double[] ANTE_AUTHORIZED_MULTIPLE_TAB = new double[] {1,1,1,2,2,2,2,3,3,4,5,6,10};
-	
-	/**
-	 * This variable define the average stack at the tournament end
-	 */
-	public static final int BLIND_AT_TOURNAMENT_END = 60;
-	
-	/**
-	 * NUmber of level to add after the end of theorical level
-	 */
-	public static final int NUMBER_OF_ADDITIONAL_LEVEL = 5;
-	
-	/**
-	 * the default value of has ante
-	 */
-	public static final boolean DEFAULT_WITH_ANTE = false;
-	/**
-	 * The default tournament level to set in algorithm
-	 */
-	public static final int DEFAULT_LEVEL_DURATION = 20;
-	
-	/**
-	 * Minimum level duration in minutes
-	 */
-	public static final int MIN_LEVEL_DURATION = 5;
-	
-	/**
-	 * Maximum level duration in minutes
-	 */
-	public static final int MAX_LEVEL_DURATION = 600;
-	
-	/**
-	 * The default tournament duration to set in algorithm
-	 */
-	public static final int DEFAULT_TOURNAMENT_DURATION = 240;
-	
-	/**
-	 * Minimum tournament duration in minutes
-	 */
-	public static final int MIN_TOURNAMENT_DURATION = 30;
-	
-	/**
-	 * Maximum tournament duration in minutes
-	 */
-	public static final int MAX_TOURNAMENT_DURATION = 60000;
-	
-	/**
-	 * The defaul stack size to set in algorithm
-	 */
-	public static final int DEFAULT_INITIAL_STACK_SIZE = 15000;
-	
-	/**
-	 * Minimum stack size
-	 */
-	public static final int MIN_INITIAL_STACK_SIZE = 1;
-	
-	/**
-	 * Maximum stack size
-	 */
-	public static final int MAX_INITIAL_STACK_SIZE = 50000000;
-	
-	/**
-	 * The default small blind value to set in algorithm
-	 */
-	public static final int DEFAULT_SMALL_BLIND_VALUE = 25;
-	
-	/**
-	 * minimum small blind size 
-	 */
-	public static final int MIN_SMALL_BLIND_VALUE = 1;
-	
-	/**
-	 * Maximum  small blind size 
-	 */
-	public static final int MAX_SMALL_BLIND_VALUE = 5000000;
-	
-	/**
-	 * The default stack size to set in algorithm
-	 */
-	public static final BlindLevel DEFAULT_BLIND_LEVEL = new BlindLevel(
-			DEFAULT_LEVEL_DURATION, DEFAULT_SMALL_BLIND_VALUE, DEFAULT_SMALL_BLIND_VALUE*2);
-	
-	/**
-	 * The default number of player to set in algorithm
-	 */
-	public static final int DEFAULT_NUMBER_PLAYER = 8;
-	
-	/**
-	 * Minimum player allowed
-	 */
-	public static final int MIN_NUMBER_PLAYER = 2;
-	
-	/**
-	 * Maximum player allowed
-	 */
-	public static final int MAX_NUMBER_PLAYER = 50000;
-	
-	/**
-	 * The default stack size to set in algorithm
-	 */
-	public static final ChipsSet DEFAULT_CHIPSET = 
-			ChipsSet.getDefaultChipsSets().get(ChipsSet.DEFAULT_CHIPS_SET_INDEX);
-	
 
 	public BlindStructure(){
 		super();
@@ -194,7 +61,7 @@ public class BlindStructure {
 		BlindLevel currentBlindLevel = pMinimumBlind;
 		BlindLevel lastBlindLevelModified = pMinimumBlind;
 		// build structure until we are sur to use at least the lowest chips
-		while( (currentBlindLevel.getBigBlind() / lastBlindLevelModified.getBigBlind()) < (DECIMAL_FACTOR / 2)){
+		while( (currentBlindLevel.getBigBlind() / lastBlindLevelModified.getBigBlind()) < (BlindConstants.DECIMAL_FACTOR / 2)){
 			BlindLevel nextBlindLevel= getNextBlindLevel(currentBlindLevel,theoricFactorBetweenLevels);
 			if(!validateOrModifyNextLevel(nextBlindLevel,pChipSet.getChipsList().get(0))){
 				lastBlindLevelModified = nextBlindLevel;
@@ -214,7 +81,7 @@ public class BlindStructure {
 		// *0.93 factor to avoid that automatic round at superior blind accelerate the structure too much
 		theoricFactorBetweenLevels = Math.pow(blindFactor, 1/(double)totalNumberOfLevel)*0.95;
 
-		while( totalNumberOfLevel > (-NUMBER_OF_ADDITIONAL_LEVEL)){
+		while( totalNumberOfLevel > (-BlindConstants.NUMBER_OF_ADDITIONAL_LEVEL)){
 			BlindLevel nextBlindLevel= getNextBlindLevel(currentBlindLevel,theoricFactorBetweenLevels);
 			currentBlindLevel = nextBlindLevel;
 			this.structure.add(currentBlindLevel);
@@ -238,17 +105,17 @@ public class BlindStructure {
 	protected BlindLevel getNextBlindLevel (BlindLevel pCurrentLevel, double pBlindFactorBetweenLevel){
 		int decade = 0 ;
 		double blindFactor = pCurrentLevel.getBigBlind();
-		while(blindFactor >= DECIMAL_FACTOR){
+		while(blindFactor >= BlindConstants.DECIMAL_FACTOR){
 			decade ++;
-			blindFactor = blindFactor/DECIMAL_FACTOR;
+			blindFactor = blindFactor/BlindConstants.DECIMAL_FACTOR;
 		}
 		
 		// Can't jump 2 or more decade in each blind level
 		double theoricNewBlind = pBlindFactorBetweenLevel*blindFactor;
 		// verify if the factor don't change the blind of decade
-		if(theoricNewBlind >= DECIMAL_FACTOR){
+		if(theoricNewBlind >= BlindConstants.DECIMAL_FACTOR){
 			decade ++;
-			theoricNewBlind = theoricNewBlind/DECIMAL_FACTOR;
+			theoricNewBlind = theoricNewBlind/BlindConstants.DECIMAL_FACTOR;
 		}
 		
 		int iterator = 0;
@@ -256,13 +123,13 @@ public class BlindStructure {
 
 		while(!blindFound){
 
-			if(iterator >= BLIND_AUTHORIZED_MULTIPLE_TAB.length){
+			if(iterator >= BlindConstants.BLIND_AUTHORIZED_MULTIPLE_TAB.length){
 				// case  8 < theoricNewBlind < 10, round to superior decade 
 				blindFound = true;
 				decade ++;
 				iterator = 0;
 			}
-			else if(theoricNewBlind > BLIND_AUTHORIZED_MULTIPLE_TAB[iterator]){
+			else if(theoricNewBlind > BlindConstants.BLIND_AUTHORIZED_MULTIPLE_TAB[iterator]){
 				iterator++;
 			}
 			else{
@@ -273,8 +140,9 @@ public class BlindStructure {
 		}
 		
 		BlindLevel nextBlindLevel = new BlindLevel(pCurrentLevel.getDuration());
-		nextBlindLevel.setBlindsAutomatics((int) (BLIND_AUTHORIZED_MULTIPLE_TAB[iterator] * Math.pow(DECIMAL_FACTOR, decade)));
-		nextBlindLevel.setAnte(calculateAnteFromBigBlind(ANTE_AUTHORIZED_MULTIPLE_TAB[iterator],decade));
+		nextBlindLevel.setBlindsAutomatics((int) (BlindConstants.BLIND_AUTHORIZED_MULTIPLE_TAB[iterator] 
+				* Math.pow(BlindConstants.DECIMAL_FACTOR, decade)));
+		nextBlindLevel.setAnte(calculateAnteFromBigBlind(BlindConstants.ANTE_AUTHORIZED_MULTIPLE_TAB[iterator],decade));
 		
 		return nextBlindLevel;
 	}
@@ -289,9 +157,11 @@ public class BlindStructure {
 	 * @throws IllegalArgumentException in case it don't found multiple in a decade
 	 * @return true if the level is validate, false otherwise. 
 	 */
-	protected boolean validateOrModifyNextLevel(BlindLevel pLevel, Chip pLowestChips) throws IllegalArgumentException{
+	protected boolean validateOrModifyNextLevel(BlindLevel pLevel, Chip pLowestChips) 
+			throws IllegalArgumentException{
 		// verify if the small blind is a multiple of lowest chip
-		if( (pLevel.getSmallBlind() % pLowestChips.getValue()) == 0 && (pLevel.getAnte() % pLowestChips.getValue() == 0)){
+		if( (pLevel.getSmallBlind() % pLowestChips.getValue()) == 0 
+				&& (pLevel.getAnte() % pLowestChips.getValue() == 0)){
 			return true;
 		}
 		else{
@@ -299,15 +169,15 @@ public class BlindStructure {
 			double theoricalLevel = pLevel.getBigBlind();
 			int decimal = 0;
 			// get an authorized blind
-			while(theoricalLevel >= DECIMAL_FACTOR){
+			while(theoricalLevel >= BlindConstants.DECIMAL_FACTOR){
 				decimal ++;
-				theoricalLevel = theoricalLevel/DECIMAL_FACTOR;
+				theoricalLevel = theoricalLevel/BlindConstants.DECIMAL_FACTOR;
 			}
 			
 			// get the multiple of the blind 
 			int idMultiple = 0;
-			while( theoricalLevel != BLIND_AUTHORIZED_MULTIPLE_TAB[idMultiple] 
-					&& idMultiple<BLIND_AUTHORIZED_MULTIPLE_TAB.length ){
+			while( theoricalLevel != BlindConstants.BLIND_AUTHORIZED_MULTIPLE_TAB[idMultiple] 
+					&& idMultiple<BlindConstants.BLIND_AUTHORIZED_MULTIPLE_TAB.length ){
 				idMultiple ++;
 			}
 			
@@ -316,15 +186,17 @@ public class BlindStructure {
 			int iterator = 1;
 			int currentMultipleId = idMultiple;
 			int currentDecimal = decimal;
-			while(iterator<BLIND_AUTHORIZED_MULTIPLE_TAB.length && !newMultipleFound){
+			while(iterator<BlindConstants.BLIND_AUTHORIZED_MULTIPLE_TAB.length && !newMultipleFound){
 				// if we arrive at the end of the authorized blind multiple need to start again with increased decimal
-				currentMultipleId = ( iterator + idMultiple )  % BLIND_AUTHORIZED_MULTIPLE_TAB.length;
-				currentDecimal = ( iterator + idMultiple ) >= BLIND_AUTHORIZED_MULTIPLE_TAB.length ? 
+				currentMultipleId = ( iterator + idMultiple )  % BlindConstants.BLIND_AUTHORIZED_MULTIPLE_TAB.length;
+				currentDecimal = ( iterator + idMultiple ) >= BlindConstants.BLIND_AUTHORIZED_MULTIPLE_TAB.length ? 
 						decimal+1 : decimal;
-				double smallBlindToTest = BLIND_AUTHORIZED_MULTIPLE_TAB[currentMultipleId] * Math.pow(DECIMAL_FACTOR,currentDecimal);
+				double smallBlindToTest = BlindConstants.BLIND_AUTHORIZED_MULTIPLE_TAB[currentMultipleId] 
+						* Math.pow(BlindConstants.DECIMAL_FACTOR,currentDecimal);
 				double anteToTest=0;
-				if(currentDecimal >= MINIMUM_BLIND_DECIMAL_FOR_ANTE){
-					anteToTest = BLIND_AUTHORIZED_MULTIPLE_TAB[currentMultipleId] * Math.pow(DECIMAL_FACTOR,currentDecimal-1);
+				if(currentDecimal >= BlindConstants.MINIMUM_BLIND_DECIMAL_FOR_ANTE){
+					anteToTest = BlindConstants.BLIND_AUTHORIZED_MULTIPLE_TAB[currentMultipleId] 
+							* Math.pow(BlindConstants.DECIMAL_FACTOR,currentDecimal-1);
 				}
 
 				
@@ -341,13 +213,15 @@ public class BlindStructure {
 			}
 			 
 			// Consider that if it make all the turn of possible blind structure, lowest chip value is inadequate
-			if(iterator >= BLIND_AUTHORIZED_MULTIPLE_TAB.length){
-				throw new IllegalArgumentException("Can't find blind level multiple on the lowest chip value :" + pLowestChips.getValue() );
+			if(iterator >= BlindConstants.BLIND_AUTHORIZED_MULTIPLE_TAB.length){
+				throw new IllegalArgumentException("Can't find blind level multiple on the lowest chip value :" 
+						+ pLowestChips.getValue() );
 			}
 			
-			pLevel.setBlindsAutomatics((int) (BLIND_AUTHORIZED_MULTIPLE_TAB[currentMultipleId] * Math.pow(DECIMAL_FACTOR, currentDecimal)));
+			pLevel.setBlindsAutomatics((int) (BlindConstants.BLIND_AUTHORIZED_MULTIPLE_TAB[currentMultipleId] 
+					* Math.pow(BlindConstants.DECIMAL_FACTOR, currentDecimal)));
 			pLevel.setAnte(pLevel.getAnte() != 0? 
-					calculateAnteFromBigBlind(ANTE_AUTHORIZED_MULTIPLE_TAB[currentMultipleId],currentDecimal) : 0);
+					calculateAnteFromBigBlind(BlindConstants.ANTE_AUTHORIZED_MULTIPLE_TAB[currentMultipleId],currentDecimal) : 0);
 			
 			return false;
 			
@@ -382,19 +256,20 @@ public class BlindStructure {
 	 */
 	protected BlindLevel calculateBigBlindMax(int pTotalChips, boolean pWithAnte, int pLevelDuration){
 		// cast to double necesarry s
-		double theoricalLevel = (double) pTotalChips / (double) BLIND_AT_TOURNAMENT_END;
+		double theoricalLevel = (double) pTotalChips / (double) BlindConstants.BLIND_AT_TOURNAMENT_END;
 		int decimal = 0;
 		// get an authorized blind
-		while(theoricalLevel >= DECIMAL_FACTOR){
+		while(theoricalLevel >= BlindConstants.DECIMAL_FACTOR){
 			decimal ++;
-			theoricalLevel = theoricalLevel/DECIMAL_FACTOR;
+			theoricalLevel = theoricalLevel/BlindConstants.DECIMAL_FACTOR;
 		}
 		
 		boolean isAuthorizedMultibleFound = false;
 		int authorizedMultipleIterator = 1; // theorical level must be 1 <= x <= 9.99
 		
-		while( !isAuthorizedMultibleFound && (authorizedMultipleIterator < BLIND_AUTHORIZED_MULTIPLE_TAB.length) ){
-			if(theoricalLevel <= BLIND_AUTHORIZED_MULTIPLE_TAB[authorizedMultipleIterator]){
+		while( !isAuthorizedMultibleFound 
+				&& (authorizedMultipleIterator < BlindConstants.BLIND_AUTHORIZED_MULTIPLE_TAB.length) ){
+			if(theoricalLevel <= BlindConstants.BLIND_AUTHORIZED_MULTIPLE_TAB[authorizedMultipleIterator]){
 				isAuthorizedMultibleFound = true;
 			}
 			else{
@@ -404,14 +279,16 @@ public class BlindStructure {
 		
 		// if we don't find a multiple in list 8 < theoricalLevel < 9.99  
 		// round to first authorized multiple to next decade 
-		if(authorizedMultipleIterator >=  BLIND_AUTHORIZED_MULTIPLE_TAB.length){
+		if(authorizedMultipleIterator >=  BlindConstants.BLIND_AUTHORIZED_MULTIPLE_TAB.length){
 			authorizedMultipleIterator = 0;
 			decimal ++;
 		}
 		
-		int bigBlind = (int) (BLIND_AUTHORIZED_MULTIPLE_TAB[authorizedMultipleIterator] * Math.pow(DECIMAL_FACTOR, decimal));
+		int bigBlind = (int) (BlindConstants.BLIND_AUTHORIZED_MULTIPLE_TAB[authorizedMultipleIterator] 
+				* Math.pow(BlindConstants.DECIMAL_FACTOR, decimal));
 		int smallBlind = bigBlind / 2;
-		int ante = pWithAnte? calculateAnteFromBigBlind(ANTE_AUTHORIZED_MULTIPLE_TAB[authorizedMultipleIterator],decimal) : 0;
+		int ante = pWithAnte? calculateAnteFromBigBlind(
+				BlindConstants.ANTE_AUTHORIZED_MULTIPLE_TAB[authorizedMultipleIterator],decimal) : 0;
 		
 		return new BlindLevel(pLevelDuration, smallBlind, bigBlind, ante);
 	}
@@ -423,8 +300,8 @@ public class BlindStructure {
 	 * @return the ante size corresponding to the big blind. If pBlindDecimal < 3 return 0
 	 */
 	private int calculateAnteFromBigBlind(double pBlindMultiple, int pBlindDecimal){
-		if(pBlindDecimal >= MINIMUM_BLIND_DECIMAL_FOR_ANTE){
-			return (int) (pBlindMultiple * Math.pow(DECIMAL_FACTOR, (pBlindDecimal - 1)));
+		if(pBlindDecimal >= BlindConstants.MINIMUM_BLIND_DECIMAL_FOR_ANTE){
+			return (int) (pBlindMultiple * Math.pow(BlindConstants.DECIMAL_FACTOR, (pBlindDecimal - 1)));
 		}
 		else{
 			return 0; // if blind are small there is no blind
@@ -437,13 +314,13 @@ public class BlindStructure {
 	 */
 	public static BlindStructure getDefaultBlindStructure(){
 		return new BlindStructure(
-				BlindStructure.DEFAULT_NUMBER_PLAYER,
-				BlindStructure.DEFAULT_INITIAL_STACK_SIZE,
-				BlindStructure.DEFAULT_TOURNAMENT_DURATION,
-				BlindStructure.DEFAULT_LEVEL_DURATION,
-				BlindStructure.DEFAULT_BLIND_LEVEL,
-				BlindStructure.DEFAULT_WITH_ANTE,
-				BlindStructure.DEFAULT_CHIPSET);
+				BlindConstants.DEFAULT_NUMBER_PLAYER,
+				BlindConstants.DEFAULT_INITIAL_STACK_SIZE,
+				BlindConstants.DEFAULT_TOURNAMENT_DURATION,
+				BlindConstants.DEFAULT_LEVEL_DURATION,
+				BlindConstants.DEFAULT_BLIND_LEVEL,
+				BlindConstants.DEFAULT_WITH_ANTE,
+				BlindConstants.DEFAULT_CHIPSET);
 	}
 
 	/**

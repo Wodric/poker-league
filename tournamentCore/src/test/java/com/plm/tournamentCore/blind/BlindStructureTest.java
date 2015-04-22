@@ -20,7 +20,7 @@ public class BlindStructureTest {
 		int chipsNumber = 600;
 		// Test superior limit, blind level must be round to next decade
 		// ante disable (0) 
-		BlindLevel maxBlindLevel = structure.calculateBigBlindMax(chipsNumber-1, BlindStructure.WITHOUT_ANTE, 0); 
+		BlindLevel maxBlindLevel = structure.calculateBigBlindMax(chipsNumber-1, BlindConstants.WITHOUT_ANTE, 0); 
 		// round to superior
 		assertEquals(chipsNumber/60, maxBlindLevel.getBigBlind());
 		assertEquals(chipsNumber/120, maxBlindLevel.getSmallBlind());
@@ -34,7 +34,7 @@ public class BlindStructureTest {
 		int chipsNumber = 1200;
 		// Test blind level calculation, must be round to next level
 		// ante disable (0) 
-		BlindLevel maxBlindLevel = structure.calculateBigBlindMax(chipsNumber-1, BlindStructure.WITHOUT_ANTE, 0); 
+		BlindLevel maxBlindLevel = structure.calculateBigBlindMax(chipsNumber-1, BlindConstants.WITHOUT_ANTE, 0); 
 		assertEquals(chipsNumber/60, maxBlindLevel.getBigBlind());
 		assertEquals(chipsNumber/120, maxBlindLevel.getSmallBlind());
 		//no ante expected
@@ -47,7 +47,7 @@ public class BlindStructureTest {
 		int chipsNumber = 1200;
 		// Test blind level calculation, must be round to next level even if 1 chips more than limit
 		// ante disable (0) 
-		BlindLevel maxBlindLevel = structure.calculateBigBlindMax(chipsNumber+1, BlindStructure.WITHOUT_ANTE, 0); 
+		BlindLevel maxBlindLevel = structure.calculateBigBlindMax(chipsNumber+1, BlindConstants.WITHOUT_ANTE, 0); 
 		// Round to next level of 10/20 => 12/24
 		assertEquals(24, maxBlindLevel.getBigBlind());
 		assertEquals(12, maxBlindLevel.getSmallBlind());
@@ -61,7 +61,7 @@ public class BlindStructureTest {
 		int chipsNumber = 1200;
 		// Test blind level calculation, must me exact
 		// ante disable (0) 
-		BlindLevel maxBlindLevel = structure.calculateBigBlindMax(chipsNumber, BlindStructure.WITHOUT_ANTE, 0); 
+		BlindLevel maxBlindLevel = structure.calculateBigBlindMax(chipsNumber, BlindConstants.WITHOUT_ANTE, 0); 
 		assertEquals(chipsNumber/60, maxBlindLevel.getBigBlind());
 		assertEquals(chipsNumber/120, maxBlindLevel.getSmallBlind());
 		//no ante expected
@@ -74,7 +74,7 @@ public class BlindStructureTest {
 		int chipsNumber = 60000;
 		// Test blind level calculation
 		// ante enable (BB/10) 
-		BlindLevel maxBlindLevel = structure.calculateBigBlindMax(chipsNumber-1, BlindStructure.WITH_ANTE, 0); 
+		BlindLevel maxBlindLevel = structure.calculateBigBlindMax(chipsNumber-1, BlindConstants.WITH_ANTE, 0); 
 		// round to superrior
 		assertEquals(chipsNumber/60, maxBlindLevel.getBigBlind());
 		assertEquals(chipsNumber/120, maxBlindLevel.getSmallBlind());
@@ -87,7 +87,7 @@ public class BlindStructureTest {
 		int chipsNumber = 120000;
 		// Test blind level calculation
 		// ante enable (BB/10) 
-		BlindLevel maxBlindLevel = structure.calculateBigBlindMax(chipsNumber-1, BlindStructure.WITH_ANTE, 0); 
+		BlindLevel maxBlindLevel = structure.calculateBigBlindMax(chipsNumber-1, BlindConstants.WITH_ANTE, 0); 
 		assertEquals(chipsNumber/60, maxBlindLevel.getBigBlind());
 		assertEquals(chipsNumber/120, maxBlindLevel.getSmallBlind());
 		assertEquals(chipsNumber/600,maxBlindLevel.getAnte());
@@ -99,7 +99,7 @@ public class BlindStructureTest {
 		int chipsNumber = 120000;
 		// Test blind level calculation
 		// ante enable (BB/10) 
-		BlindLevel maxBlindLevel = structure.calculateBigBlindMax(chipsNumber+1, BlindStructure.WITH_ANTE, 0); 
+		BlindLevel maxBlindLevel = structure.calculateBigBlindMax(chipsNumber+1, BlindConstants.WITH_ANTE, 0); 
 		// Round to next level of 10/20/2 => 12/24/3
 		assertEquals(2400, maxBlindLevel.getBigBlind());
 		assertEquals(1200, maxBlindLevel.getSmallBlind());
@@ -112,7 +112,7 @@ public class BlindStructureTest {
 		int chipsNumber = 120000;
 		// Test blind level calculation
 		// ante enable (BB/10) 
-		BlindLevel maxBlindLevel = structure.calculateBigBlindMax(chipsNumber, BlindStructure.WITH_ANTE, 0); 
+		BlindLevel maxBlindLevel = structure.calculateBigBlindMax(chipsNumber, BlindConstants.WITH_ANTE, 0); 
 		assertEquals(chipsNumber/60, maxBlindLevel.getBigBlind());
 		assertEquals(chipsNumber/120, maxBlindLevel.getSmallBlind());
 		assertEquals(chipsNumber/600,maxBlindLevel.getAnte());
@@ -124,7 +124,7 @@ public class BlindStructureTest {
 		int chipsNumber = 12000;
 		// Test blind level calculation
 		// ante enable (BB/10) ,  big blind must be at 1000
-		BlindLevel maxBlindLevel = structure.calculateBigBlindMax(chipsNumber, BlindStructure.WITH_ANTE, 0); 
+		BlindLevel maxBlindLevel = structure.calculateBigBlindMax(chipsNumber, BlindConstants.WITH_ANTE, 0); 
 		assertEquals(chipsNumber/60, maxBlindLevel.getBigBlind());
 		assertEquals(chipsNumber/120, maxBlindLevel.getSmallBlind());
 		// Blind not high enough to set ante
@@ -213,7 +213,7 @@ public class BlindStructureTest {
 	
 	
 	@Test
-	public void BlindStructureTestConstructor(){
+	public void blindStructureTestConstructor(){
 		int playerExpected = 1000;
 		int startingStack = 15000;
 		int totalTime = 1800;
@@ -230,7 +230,7 @@ public class BlindStructureTest {
 				,levelDuration,startingLevel,withAnte, cs);
 		
 		int numberOfLevelExpected = totalTime / levelDuration;
-		assertEquals(numberOfLevelExpected + BlindStructure.NUMBER_OF_ADDITIONAL_LEVEL, structure.getStructure().size());
+		assertEquals(numberOfLevelExpected + BlindConstants.NUMBER_OF_ADDITIONAL_LEVEL, structure.getStructure().size());
 		
 		int getBBatExpectedEnd = structure.getStructure().get(numberOfLevelExpected-1).getBigBlind();
 		int blindAtExpectedEnd = (playerExpected * startingStack)/ getBBatExpectedEnd;

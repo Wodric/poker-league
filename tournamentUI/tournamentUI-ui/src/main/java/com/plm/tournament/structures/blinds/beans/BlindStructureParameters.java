@@ -6,7 +6,7 @@ import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
-import com.plm.tournamentCore.blind.BlindStructure;
+import com.plm.tournamentCore.blind.BlindConstants;
 import com.plm.tournamentCore.chip.ChipsSet;
 
 /**
@@ -23,8 +23,8 @@ public class BlindStructureParameters implements Serializable{
 	/**
 	 *  The number of player expected with constrains validation
 	 */
-    @Max(value=BlindStructure.MAX_NUMBER_PLAYER, message="Tournament must have between 2 and 50 000 players")
-    @Min(value=BlindStructure.MIN_NUMBER_PLAYER, message="Tournament must have between 2 and 50 000 players")
+    @Max(value=BlindConstants.MAX_NUMBER_PLAYER, message="Tournament must have between 2 and 50 000 players")
+    @Min(value=BlindConstants.MIN_NUMBER_PLAYER, message="Tournament must have between 2 and 50 000 players")
     @NotNull(message="Can't be empty,set a numeric value")
 	private int maxPlayerNumber;
     /**
@@ -35,8 +35,8 @@ public class BlindStructureParameters implements Serializable{
 	/**
 	 *  the initial size of player stack with constrains validation
 	 */
-    @Max(value=BlindStructure.MAX_INITIAL_STACK_SIZE, message="Stack size must be between 1 and 50 000 000 chips")
-    @Min(value=BlindStructure.MIN_INITIAL_STACK_SIZE, message="Stack size must be between 1 and 50 000 000 chips")
+    @Max(value=BlindConstants.MAX_INITIAL_STACK_SIZE, message="Stack size must be between 1 and 50 000 000 chips")
+    @Min(value=BlindConstants.MIN_INITIAL_STACK_SIZE, message="Stack size must be between 1 and 50 000 000 chips")
     @NotNull(message="Can't be empty,set a numeric value")
     private int initialStackSize;
     /**
@@ -47,8 +47,8 @@ public class BlindStructureParameters implements Serializable{
     /**
      *  the duration of the tournament you expect with constrains validation
      */
-    @Max(value=BlindStructure.MAX_TOURNAMENT_DURATION, message="Tournament duration must last between 30 and 60 000 minutes")
-    @Min(value=BlindStructure.MIN_TOURNAMENT_DURATION, message="Tournament duration must last between 30 and 60 000 minutes")
+    @Max(value=BlindConstants.MAX_TOURNAMENT_DURATION, message="Tournament duration must last between 30 and 60 000 minutes")
+    @Min(value=BlindConstants.MIN_TOURNAMENT_DURATION, message="Tournament duration must last between 30 and 60 000 minutes")
     @NotNull(message="Can't be empty,set a numeric value")
     private int tournamentDurationExpected;
     /**
@@ -59,8 +59,8 @@ public class BlindStructureParameters implements Serializable{
     /**
      * duration of level with constrains validation
      */
-    @Max(value=BlindStructure.MAX_LEVEL_DURATION, message="Level duration must last between 5 and 600 minutes")
-    @Min(value=BlindStructure.MIN_LEVEL_DURATION, message="Level duration must last between 5 and 600 minutes")
+    @Max(value=BlindConstants.MAX_LEVEL_DURATION, message="Level duration must last between 5 and 600 minutes")
+    @Min(value=BlindConstants.MIN_LEVEL_DURATION, message="Level duration must last between 5 and 600 minutes")
     @NotNull(message="Can't be empty,set a numeric value")
     private int levelDuration;
     /**
@@ -71,8 +71,8 @@ public class BlindStructureParameters implements Serializable{
     /**
      *  the startup big blind. MUST BE A MULTIPLE OF SMALLEST CHIP
      */
-    @Min(value=BlindStructure.MIN_SMALL_BLIND_VALUE,message="Minimum small blind value between 1 and 5 000 000")
-    @Max(value=BlindStructure.MAX_SMALL_BLIND_VALUE,message="Minimum small blind value between 1 and 5 000 000")
+    @Min(value=BlindConstants.MIN_SMALL_BLIND_VALUE,message="Minimum small blind value between 1 and 5 000 000")
+    @Max(value=BlindConstants.MAX_SMALL_BLIND_VALUE,message="Minimum small blind value between 1 and 5 000 000")
 	private int minimumSmallBlindValue;
 
 
