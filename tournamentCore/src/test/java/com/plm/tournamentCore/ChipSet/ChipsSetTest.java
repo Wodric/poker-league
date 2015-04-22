@@ -134,4 +134,27 @@ public class ChipsSetTest {
 		toStringExpected = "";
 		assertEquals(toStringExpected, chipsSet.toString());
 	}
+	
+	@Test
+	public void setChipSetFromIntegerArrayListTest(){
+		ArrayList<Integer> listChipValue = new ArrayList<Integer>();
+		Integer lowestValue = 10;
+		Integer middleValue = 25;
+		Integer highValue = 100;
+		
+		ChipsSet aSet = new ChipsSet(listChipValue);
+		assertEquals(listChipValue.size(),aSet.getChipsList().size());
+		
+		listChipValue.add(highValue);
+		listChipValue.add(lowestValue);
+		listChipValue.add(middleValue);
+		
+		aSet.setChipsListIntegers(listChipValue);
+		assertEquals(listChipValue.size(),aSet.getChipsList().size());
+		
+		assertEquals(lowestValue,(Integer) aSet.getChipsList().get(0).getValue());
+		assertEquals(middleValue,(Integer) aSet.getChipsList().get(1).getValue());
+		assertEquals(highValue,(Integer) aSet.getChipsList().get(2).getValue());
+	}
+	
 }
