@@ -42,17 +42,17 @@ public class BlindStructurePreviewPanel extends BasePanel{
 	/**
 	 * 
 	 */
-	BlindStructureGrid structureGrid;
+	private BlindStructureGrid structureGrid;
 	
 	/**
 	 * Layout to display
 	 */
-	VerticalLayout mainLayout = new VerticalLayout();
+	private VerticalLayout mainLayout = new VerticalLayout();
 	
 	/**
 	 * Component parent, used to get listener for exemple
 	 */
-	BaseView parentComponent;
+	private BaseView parentView;
 
 	/**
 	 * Panel to preview the structure
@@ -60,10 +60,10 @@ public class BlindStructurePreviewPanel extends BasePanel{
 	 */
 	public BlindStructurePreviewPanel(BaseView pParentView) {
 		super(STRUCTURE_PREVIEW_PANEL_CAPTION);
-		this.parentComponent = pParentView;
+		this.parentView = pParentView;
 		
 		//init classe member
-		this.saveStructureBtn = new Button(UPDATE_STRUCTURE_LABEL, pParentView);
+		this.saveStructureBtn = new Button(UPDATE_STRUCTURE_LABEL, this.parentView);
 		this.structureGrid = new BlindStructureGrid();
 
 		
