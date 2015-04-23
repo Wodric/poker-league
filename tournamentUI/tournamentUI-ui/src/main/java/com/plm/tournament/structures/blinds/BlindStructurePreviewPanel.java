@@ -32,7 +32,7 @@ public class BlindStructurePreviewPanel extends BasePanel{
 	/**
 	 * the label for saveStructureBtn
 	 */
-	public static String SAVE_STRUCTURE_LABEL = "Save";
+	public static String UPDATE_STRUCTURE_LABEL = "Update";
 	
 	/**
 	 * Panel width
@@ -63,7 +63,7 @@ public class BlindStructurePreviewPanel extends BasePanel{
 		this.parentComponent = pParentView;
 		
 		//init classe member
-		this.saveStructureBtn = new Button(SAVE_STRUCTURE_LABEL, pParentView);
+		this.saveStructureBtn = new Button(UPDATE_STRUCTURE_LABEL, pParentView);
 		this.structureGrid = new BlindStructureGrid();
 
 		
