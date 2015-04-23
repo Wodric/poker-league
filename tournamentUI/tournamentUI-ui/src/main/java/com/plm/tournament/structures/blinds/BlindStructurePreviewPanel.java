@@ -3,7 +3,6 @@ package com.plm.tournament.structures.blinds;
 import com.plm.component.datagrid.BlindStructureGrid;
 import com.plm.framework.ui.mvp.BasePanel;
 import com.plm.framework.ui.mvp.BaseView;
-import com.plm.tournamentCore.blind.BlindStructure;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.VerticalLayout;
 
@@ -27,7 +26,7 @@ public class BlindStructurePreviewPanel extends BasePanel{
 	/**
 	 * Button to save the structure for the user
 	 */
-	private Button saveStructureBtn;
+	private Button updateStructureBtn;
 	
 	/**
 	 * the label for saveStructureBtn
@@ -63,13 +62,13 @@ public class BlindStructurePreviewPanel extends BasePanel{
 		this.parentView = pParentView;
 		
 		//init classe member
-		this.saveStructureBtn = new Button(UPDATE_STRUCTURE_LABEL, this.parentView);
+		this.updateStructureBtn = new Button(UPDATE_STRUCTURE_LABEL, this.parentView);
 		this.structureGrid = new BlindStructureGrid();
 
 		
 		// init layout
 		this.mainLayout.addComponent(this.structureGrid);
-		this.mainLayout.addComponent(this.saveStructureBtn);
+		this.mainLayout.addComponent(this.updateStructureBtn);
 		this.mainLayout.setMargin(true);
 		this.mainLayout.setSpacing(true);
 		
@@ -77,11 +76,19 @@ public class BlindStructurePreviewPanel extends BasePanel{
 	}
 	
 	/**
-	 * Get the blind structure object display in grid
-	 * @return the blind structure object display in grid of this panel
+	 * get button from the button. This button should update the grid
+	 * @return the update button of the grid
 	 */
-	public BlindStructure getStructure() {
-		return this.structureGrid.getStructure();
+	public Button getUpdateStructureBtn() {
+		return updateStructureBtn;
+	}
+
+	/**
+	 * get the grid which contains the structure
+	 * @return the structure grid
+	 */
+	public BlindStructureGrid getStructureGrid() {
+		return structureGrid;
 	}
 
 }

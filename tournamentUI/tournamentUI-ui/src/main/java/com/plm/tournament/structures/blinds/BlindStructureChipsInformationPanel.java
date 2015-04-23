@@ -11,6 +11,7 @@ import com.plm.tournamentCore.chip.ChipsSet;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.FormLayout;
+import com.vaadin.ui.TextField;
 
 public class BlindStructureChipsInformationPanel extends BasePanel{
 	
@@ -99,4 +100,31 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 		binder.bind(this.chipsSetsComboBox, BlindStructureParameters.PARAMETER_NAME_CHIP_SET);
 		
 	}
+	
+	/**
+	 * get the small blind field it is a Text field from binder
+	 * @return the text field for small blind
+	 */
+	public TextField getMinimumSmallBlindField(){
+		return (TextField) binder.getField
+				(BlindStructureParameters.PARAMETER_NAME_MINIMUM_SMALL_BLIND_VALUE);
+	}
+	
+	/**
+	 * get the Initial stack field it is a Text field from binder
+	 * @return the text field for initial stack 
+	 */
+	public TextField getInitialStackField(){
+		return (TextField) binder.getField
+				(BlindStructureParameters.PARAMETER_NAME_INITIAL_STACK_SIZE);
+	}
+	
+	/**
+	 * get ChipSet combo box it is a Text field
+	 * @return the combobox for ChipSet
+	 */
+	public ComboBox getChipSetComboBox(){
+		return this.getChipSetComboBox();
+	}
+
 }

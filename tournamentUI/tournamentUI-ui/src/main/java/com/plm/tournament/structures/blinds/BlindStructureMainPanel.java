@@ -2,7 +2,6 @@ package com.plm.tournament.structures.blinds;
 
 import com.plm.framework.ui.mvp.BasePanel;
 import com.plm.framework.ui.mvp.BaseView;
-import com.plm.tournamentCore.blind.BlindStructure;
 import com.vaadin.ui.HorizontalLayout;
 
 /**
@@ -77,10 +76,26 @@ public class BlindStructureMainPanel extends BasePanel {
 	}
 	
 	/**
-	 * Return the Model (blind structure) will be display in UI
-	 * @return the blind structure object to display
+	 * get the main panel information. It permit to get the elment of UI
+	 * @return mainInformationPanel panel
 	 */
-	public BlindStructure getStructureToDisplay(){
-		return this.structurePreviewPanel.getStructure();
+	public BlindStructureMainInformationPanel getMainInformationPanel() {
+		return this.mainInformationPanel;
+	}
+
+	/**
+	 * get the chips panel information. It permit to get the elment of UI
+	 * @return chipsInformationPanel panel
+	 */
+	public BlindStructureChipsInformationPanel getChipsInformationPanel() {
+		return this.chipsInformationPanel;
+	}
+
+	/**
+	 * get the structure preview panel. It permit to get the elment of UI
+	 * @return structurePreviewPanel panel
+	 */
+	public BlindStructurePreviewPanel getStructurePreviewPanel() {
+		return this.structurePreviewPanel;
 	}
 }

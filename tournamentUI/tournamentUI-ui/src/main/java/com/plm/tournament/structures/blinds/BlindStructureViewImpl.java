@@ -30,7 +30,7 @@ public class BlindStructureViewImpl extends CustomComponent
 	/**
 	 * Main panel that compose the BlindStructure
 	 */
-	private BlindStructureMainPanel panel;
+	private BlindStructureMainPanel mainPanel;
 	
 
 	/* Only the presenter registers one listener... */
@@ -38,8 +38,8 @@ public class BlindStructureViewImpl extends CustomComponent
             new ArrayList<BlindStructureViewListener>();
 	
 	public BlindStructureViewImpl() {
-		this.panel = new BlindStructureMainPanel(this);
-		this.panel.setSizeFull();
+		this.mainPanel = new BlindStructureMainPanel(this);
+		this.mainPanel.setSizeFull();
 	}
 
 	@Override
@@ -74,7 +74,7 @@ public class BlindStructureViewImpl extends CustomComponent
 	 * @return the blind structure object to display
 	 */
 	public BlindStructure getStructureToDisplayFromModel(){
-		return this.panel.getStructureToDisplay();
+		return this.mainPanel.getStructurePreviewPanel().getStructureGrid().getStructure();
 	}
 
 	@Override
@@ -82,8 +82,16 @@ public class BlindStructureViewImpl extends CustomComponent
 	 * Method execute when application enter in this view
 	 */
 	public void enter(ViewChangeEvent event) {
-		this.panel =  new BlindStructureMainPanel(this);
-		Layout layout = new HorizontalLayout(this.panel);
+		this.mainPanel =  new BlindStructureMainPanel(this);
+		Layout layout = new HorizontalLayout(this.mainPanel);
 		this.setCompositionRoot(layout);		
+	}
+	
+	/**
+	 * get main panel that compose the view
+	 * @return the main panel
+	 */
+	public BlindStructureMainPanel getPanel() {
+		return this.mainPanel;
 	}
 }

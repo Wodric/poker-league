@@ -7,7 +7,9 @@ import com.plm.tournament.structures.blinds.beans.BlindStructureParameters;
 import com.plm.tournamentCore.blind.BlindConstants;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.ui.AbstractTextField;
+import com.vaadin.ui.CheckBox;
 import com.vaadin.ui.FormLayout;
+import com.vaadin.ui.TextField;
 
 /**
  * Panel which contains the main element to define the structure
@@ -104,5 +106,41 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 		structureParameters.setWithAnte(
 				BlindConstants.DEFAULT_WITH_ANTE);
 		return structureParameters;
+	}
+	
+	/**
+	 * get the Max player field it is a Text field from binder
+	 * @return the text field for max player
+	 */
+	public TextField getMaxPlayerField(){
+		return (TextField) binder.getField
+				(BlindStructureParameters.PARAMETER_NAME_MAX_PLAYER_NUMBER);
+	}
+	
+	/**
+	 * get the Level duration field it is a Text field from binder
+	 * @return the text field for level duration
+	 */
+	public TextField getLevelDurationField(){
+		return (TextField) binder.getField
+				(BlindStructureParameters.PARAMETER_NAME_LEVEL_DURATION);
+	}
+	
+	/**
+	 * get the tournament duration field it is a Text field from binder
+	 * @return the text field for tournament duration
+	 */
+	public TextField getTournamentDurationField(){
+		return (TextField) binder.getField
+				(BlindStructureParameters.PARAMETER_NAME_TOURNAMENT_DURATION_EXPECTED);
+	}
+	
+	/**
+	 * get the Allow ante / with ante field it is a checkbox from binder
+	 * @return the checkbox for Allow ante / with ante 
+	 */
+	public CheckBox getAllowAnteField(){
+		return (CheckBox) binder.getField
+				(BlindStructureParameters.PARAMETER_NAME_WITH_ANTE);
 	}
 }
