@@ -118,12 +118,28 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 	}
 	
 	/**
+	 * get the Max player field value. return it as Integer
+	 * @return return the integer value in max player field
+	 */
+	public Integer getMaxPlayerFieldValue(){
+		return Integer.valueOf(this.getMaxPlayerField().getValue());
+	}
+	
+	/**
 	 * get the Level duration field it is a Text field from binder
 	 * @return the text field for level duration
 	 */
 	public TextField getLevelDurationField(){
 		return (TextField) binder.getField
 				(BlindStructureParameters.PARAMETER_NAME_LEVEL_DURATION);
+	}
+	
+	/**
+	 * get the level duration field value. return it as Integer
+	 * @return return the integer value in level duration field
+	 */
+	public Integer getLevelDurationFieldValue(){
+		return Integer.valueOf(this.getLevelDurationField().getValue());
 	}
 	
 	/**
@@ -136,11 +152,27 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 	}
 	
 	/**
+	 * get the tournament duration field value. return it as integer
+	 * @return return the integer value in tournament duration field
+	 */
+	public TextField getTournamentDurationFieldValue(){
+		return this.getTournamentDurationField();
+	}
+	
+	/**
 	 * get the Allow ante / with ante field it is a checkbox from binder
 	 * @return the checkbox for Allow ante / with ante 
 	 */
 	public CheckBox getAllowAnteField(){
 		return (CheckBox) binder.getField
 				(BlindStructureParameters.PARAMETER_NAME_WITH_ANTE);
+	}
+	
+	/**
+	 * get the Allow ante / with ante field value return it as boolean
+	 * @return the checkbox for Allow ante / with ante value
+	 */
+	public Boolean getAllowAnteFieldValue(){
+		return this.getAllowAnteField().getValue();
 	}
 }

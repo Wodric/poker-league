@@ -3,6 +3,7 @@ package com.plm.tournament.structures.blinds;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.plm.framework.ui.components.ImmediateTextfield;
 import com.plm.framework.ui.mvp.BasePanel;
 import com.plm.framework.ui.mvp.BaseView;
 import com.plm.tournament.structures.blinds.beans.BlindStructureParameters;
@@ -106,8 +107,16 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 	 * @return the text field for small blind
 	 */
 	public TextField getMinimumSmallBlindField(){
-		return (TextField) binder.getField
+		return (ImmediateTextfield) binder.getField
 				(BlindStructureParameters.PARAMETER_NAME_MINIMUM_SMALL_BLIND_VALUE);
+	}
+	
+	/**
+	 * get the small blind field value
+	 * @return value of small blind on field
+	 */
+	public int getMinimumSmallBlindFieldValue(){
+		return Integer.valueOf(this.getMinimumSmallBlindField().getValue());
 	}
 	
 	/**
@@ -115,9 +124,18 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 	 * @return the text field for initial stack 
 	 */
 	public TextField getInitialStackField(){
-		return (TextField) binder.getField
+		return (ImmediateTextfield) binder.getField
 				(BlindStructureParameters.PARAMETER_NAME_INITIAL_STACK_SIZE);
 	}
+	
+	/**
+	 * get the Initial stack field value. Return it as Integer
+	 * @return the value of the Initial stack field as interger 
+	 */
+	public Integer getInitialStackFieldValue(){
+		return  Integer.valueOf(this.getInitialStackField().getValue());
+	}
+	
 	
 	/**
 	 * get ChipSet combo box it is a Text field
@@ -126,5 +144,17 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 	public ComboBox getChipSetComboBox(){
 		return this.getChipSetComboBox();
 	}
+	
+	/**
+	 * get ChipSet combo box value return as string
+	 * @return the value of the combo box as string
+	 */
+	public String getChipSetComboBoxValue(){
+		return String.valueOf(this.getChipSetComboBox().getValue());
+	}
+	
+	
+	
+
 
 }
