@@ -1,8 +1,10 @@
 package com.plm.tournamentCore.chip;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 /**
@@ -40,10 +42,24 @@ public class ChipsSet {
 	public ChipsSet(ArrayList<Integer> pChipsValuesList) {
 		super();
 		Collections.sort(pChipsValuesList);
-		this.chipsList = new ArrayList<Chip>();
-		for(Integer aChipValue : pChipsValuesList){
-			this.chipsList.add(new Chip(aChipValue));
-		}
+		// Convert values to Chip and convert then to List
+		this.chipsList = (List<Chip>) pChipsValuesList.stream()
+				.map(chipValue -> new Chip(chipValue))
+				.collect(Collectors.toList());
+	}
+	
+	/**
+	 * Create a chip set from a string like "value1-value2-value3" for exemple "25-100-500"
+	 * The liste need to be already ordered smaller to bigger
+	 * @param pChipsValuesListString String containing the list of chip value 
+	 * like "value1-value2-value3" for exemple "25-100-500"
+	 */
+	public ChipsSet(String pChipsValuesListString) {
+		super();
+		this.chipsList = Arrays.stream(pChipsValuesListString.split("-"))
+			.map(chip -> chip.trim())
+			.map(chipValue -> new Chip(chipValue))
+			.collect(Collectors.toList());
 	}
 
 	/**
@@ -58,21 +74,22 @@ public class ChipsSet {
 	 * New chips set values
 	 * @param chipsList new chip
 	 */
-	public void setChipsList(List<Chip> pChipsList) {
+	public ChipsSet setChipsList(List<Chip> pChipsList) {
 		Collections.sort(pChipsList);
 		this.chipsList = pChipsList;
+		return this;
 	}
 	
 	/**
 	 * New chips set values
 	 * @param chipsList new chip
 	 */
-	public void setChipsListIntegers(List<Integer> pChipsValuesList) {
+	public ChipsSet setChipsListIntegers(List<Integer> pChipsValuesList) {
 		Collections.sort(pChipsValuesList);
-		this.chipsList = new ArrayList<Chip>();
-		for(Integer aChipValue : pChipsValuesList){
-			this.chipsList.add(new Chip(aChipValue));
-		}
+		this.chipsList = (List<Chip>) pChipsValuesList.stream()
+				.map(chipValue -> new Chip(chipValue))
+				.collect(Collectors.toList());
+		return this;
 	}
 	
 	/**
@@ -146,6 +163,15 @@ public class ChipsSet {
 			}
 		}
 		return toStringBuilder.toString();
+	}
+	
+	@Override
+	public boolean equals(Object aChipSet){
+		if( this == aChipSet) return true;
+		if ( !(aChipSet instanceof ChipsSet) ) return false;
+		ChipsSet chipSet = (ChipsSet) aChipSet;
+		if(chipSet.getChipsList().equals(this.chipsList)) return true;
+		return false;
 	}
 	
 }

@@ -1,9 +1,12 @@
 package com.plm.tournamentCore.ChipSet;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.junit.Test;
 
@@ -155,6 +158,81 @@ public class ChipsSetTest {
 		assertEquals(lowestValue,(Integer) aSet.getChipsList().get(0).getValue());
 		assertEquals(middleValue,(Integer) aSet.getChipsList().get(1).getValue());
 		assertEquals(highValue,(Integer) aSet.getChipsList().get(2).getValue());
+	}
+	
+	@Test
+	public void chipsSetConstructorStringTest(){
+		List<ChipsSet> defaultsOnes = ChipsSet.getDefaultChipsSets();
+		List<String> defaultsOnesStrings = defaultsOnes.stream()
+				.map(one -> one.toString())
+				.collect(Collectors.toList());
+		
+		int i = 0;
+		// verify that each of default chipset are equals to itself using string constructor and to string method
+		for(String oneString : defaultsOnesStrings){
+			assertTrue(defaultsOnes.get(i).equals(new ChipsSet(oneString)));
+			i++;
+		}
+		
+		ArrayList<Integer> listChipValue = new ArrayList<Integer>();
+		Integer lowestValue = 10;
+		Integer middleValue = 27;
+		Integer highValue = 100;
+		
+		listChipValue.add(highValue);
+		listChipValue.add(lowestValue);
+		listChipValue.add(middleValue);
+		ChipsSet aSet = new ChipsSet(listChipValue);
+		aSet.setChipsListIntegers(listChipValue);
+		// Verify it work with spaces
+		assertEquals(aSet, new ChipsSet("10-27-100"));
+		assertEquals(aSet, new ChipsSet("10 - 27 - 100"));		
+	}
+	
+	@Test (expected = NumberFormatException.class)
+	public void chipsSetConstructorStringTestException(){
+		ArrayList<Integer> listChipValue = new ArrayList<Integer>();
+		Integer lowestValue = 10;
+		Integer middleValue = 27;
+		Integer highValue = 100;
+		
+		listChipValue.add(highValue);
+		listChipValue.add(lowestValue);
+		listChipValue.add(middleValue);
+		ChipsSet aSet = new ChipsSet(listChipValue);
+		aSet.setChipsListIntegers(listChipValue);
+		// Verify it work with spaces
+
+		assertEquals(aSet, new ChipsSet("10 - test - 100"));		
+	}
+	
+	@Test
+	public void chipsSetEqualsTest(){
+		List<ChipsSet> defaultsOnes = ChipsSet.getDefaultChipsSets();
+		// verify equals to himself
+		assertTrue(defaultsOnes.get(0).equals(defaultsOnes.get(0)));
+		
+		// verify equals to copy of himself
+		ArrayList<Chip> listChip = new ArrayList<Chip>();
+		listChip.addAll(defaultsOnes.get(0).getChipsList());
+		ChipsSet copy = new ChipsSet(listChip);
+		assertTrue(defaultsOnes.get(0).equals(copy));
+		
+		// verify no chip equals
+		ArrayList<Integer> listChipValue = new ArrayList<Integer>();
+		Integer lowestValue = 10;
+		Integer middleValue = 27;
+		Integer highValue = 100;
+		
+		listChipValue.add(highValue);
+		listChipValue.add(lowestValue);
+		listChipValue.add(middleValue);
+		ChipsSet aSet = new ChipsSet(listChipValue);
+		aSet.setChipsListIntegers(listChipValue);
+		
+		assertFalse(defaultsOnes.get(0).equals(aSet));
+		// erify not equals to other object
+		assertFalse(defaultsOnes.get(0).equals(""));	
 	}
 	
 }

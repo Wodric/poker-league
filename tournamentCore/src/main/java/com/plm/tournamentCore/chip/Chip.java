@@ -63,4 +63,13 @@ public class Chip implements Comparable<Chip>{
 			return -1; 
 		}
 	}
+	
+	@Override
+	public boolean equals(Object aChip){
+		if( this == aChip) return true;
+		if ( !(aChip instanceof Chip) ) return false;
+		Chip chipSet = (Chip) aChip;
+		if(this.value == chipSet.getValue()) return true;
+		return false;
+	}
 }
