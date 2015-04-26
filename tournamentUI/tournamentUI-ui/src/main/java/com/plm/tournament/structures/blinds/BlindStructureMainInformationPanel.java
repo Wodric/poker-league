@@ -121,8 +121,8 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 	 * get the Max player field value. return it as Integer
 	 * @return return the integer value in max player field
 	 */
-	public Integer getMaxPlayerFieldValue(){
-		return Integer.valueOf(this.getMaxPlayerField().getValue());
+	public int getMaxPlayerFieldValue(){
+		return Integer.valueOf(this.getMaxPlayerField().getValue()).intValue();
 	}
 	
 	/**
@@ -138,8 +138,8 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 	 * get the level duration field value. return it as Integer
 	 * @return return the integer value in level duration field
 	 */
-	public Integer getLevelDurationFieldValue(){
-		return Integer.valueOf(this.getLevelDurationField().getValue());
+	public int getLevelDurationFieldValue(){
+		return Integer.valueOf(this.getLevelDurationField().getValue()).intValue();
 	}
 	
 	/**
@@ -155,8 +155,8 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 	 * get the tournament duration field value. return it as integer
 	 * @return return the integer value in tournament duration field
 	 */
-	public TextField getTournamentDurationFieldValue(){
-		return this.getTournamentDurationField();
+	public int getTournamentDurationFieldValue(){
+		return Integer.valueOf(this.getTournamentDurationField().getValue()).intValue();
 	}
 	
 	/**

@@ -116,7 +116,7 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 	 * @return value of small blind on field
 	 */
 	public int getMinimumSmallBlindFieldValue(){
-		return Integer.valueOf(this.getMinimumSmallBlindField().getValue());
+		return Integer.valueOf(this.getMinimumSmallBlindField().getValue()).intValue();
 	}
 	
 	/**
@@ -132,8 +132,8 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 	 * get the Initial stack field value. Return it as Integer
 	 * @return the value of the Initial stack field as interger 
 	 */
-	public Integer getInitialStackFieldValue(){
-		return  Integer.valueOf(this.getInitialStackField().getValue());
+	public int getInitialStackFieldValue(){
+		return  Integer.valueOf(this.getInitialStackField().getValue()).intValue();
 	}
 	
 	
@@ -152,9 +152,4 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 	public String getChipSetComboBoxValue(){
 		return String.valueOf(this.getChipSetComboBox().getValue());
 	}
-	
-	
-	
-
-
 }
