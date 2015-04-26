@@ -113,8 +113,9 @@ public class BlindStructureParameters implements Serializable{
      * 
      * @param pMaxPlayerNumber the new number of player to set
      */
-	public void setMaxPlayerNumber(int pMaxPlayerNumber) {
+	public BlindStructureParameters setMaxPlayerNumber(int pMaxPlayerNumber) {
 		this.maxPlayerNumber = pMaxPlayerNumber;
+		return this;
 	}
 	
 	/**
@@ -129,8 +130,9 @@ public class BlindStructureParameters implements Serializable{
 	 * 
 	 * @param pInitialStackSize the new stack size
 	 */
-	public void setInitialStackSize(int pInitialStackSize) {
+	public BlindStructureParameters setInitialStackSize(int pInitialStackSize) {
 		this.initialStackSize = pInitialStackSize;
+		return this;
 	}
 	
 	/**
@@ -145,8 +147,9 @@ public class BlindStructureParameters implements Serializable{
 	 * 
 	 * @param pTournamentDurationExpected set the new tournament duration
 	 */
-	public void setTournamentDurationExpected(int pTournamentDurationExpected) {
+	public BlindStructureParameters setTournamentDurationExpected(int pTournamentDurationExpected) {
 		this.tournamentDurationExpected = pTournamentDurationExpected;
+		return this;
 	}
 	
 	/**
@@ -161,8 +164,9 @@ public class BlindStructureParameters implements Serializable{
 	 * 
 	 * @param pLevelDurations set the new level durations
 	 */
-	public void setLevelDuration(int pLevelDuration) {
+	public BlindStructureParameters setLevelDuration(int pLevelDuration) {
 		this.levelDuration = pLevelDuration;
+		return this;
 	}
 	
 	/**
@@ -177,8 +181,9 @@ public class BlindStructureParameters implements Serializable{
 	 * 
 	 * @param pWithAnte the true if you want to have ante on structure
 	 */
-	public void setWithAnte(boolean pWithAnte) {
+	public BlindStructureParameters setWithAnte(boolean pWithAnte) {
 		this.withAnte = pWithAnte;
+		return this;
 	}
 	
 	/**
@@ -193,8 +198,9 @@ public class BlindStructureParameters implements Serializable{
 	 * 
 	 * @param pChipSet set the new chip set
 	 */
-	public void setChipSet(ChipsSet pChipSet) {
+	public BlindStructureParameters setChipSet(ChipsSet pChipSet) {
 		this.chipSet = pChipSet;
+		return this;
 	}
 	
 	/**
@@ -209,7 +215,8 @@ public class BlindStructureParameters implements Serializable{
      * 
      * @param pMinimumSmallBlindValue set this value as minimum small blind, maximum small blind will be calculate chips
      */
-	public void setMinimumSmallBlindValue(int pMinimumSmallBlindValue) {
+	public BlindStructureParameters setMinimumSmallBlindValue(int pMinimumSmallBlindValue) {
 		this.minimumSmallBlindValue = pMinimumSmallBlindValue;
+		return this;
 	}
 }

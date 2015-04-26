@@ -22,6 +22,15 @@ public class Chip implements Comparable<Chip>{
 	}
 	
 	/**
+	 * COnstructor with chip value as parameter. 
+	 * @param pValue the value to set to the chip as String
+	 */
+	public Chip(String pValue) {
+		super();
+		this.value = Integer.valueOf(pValue);
+	}
+	
+	/**
 	 * Return the value of the chip
 	 * @return integer corresponding to the value of the chip
 	 */
@@ -33,8 +42,9 @@ public class Chip implements Comparable<Chip>{
 	 * Set the value or replace the value of the chip
 	 * @param pValue integer representing the value of the chip
 	 */
-	public void setValue(int pValue) {
+	public Chip setValue(int pValue) {
 		this.value = pValue;
+		return this;
 	}
 
 	/**

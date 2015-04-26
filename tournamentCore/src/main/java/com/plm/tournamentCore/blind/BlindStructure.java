@@ -350,8 +350,9 @@ public class BlindStructure {
 	 * set the ante value
 	 * @param ante it set the ante value, if true the level in structure will have ante
 	 */
-	public void setAnte(boolean ante) {
+	public BlindStructure setAnte(boolean ante) {
 		this.ante = ante;
+		return this;
 	}
 
 }

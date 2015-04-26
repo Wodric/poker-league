@@ -69,64 +69,72 @@ public class BlindLevel {
 	/**
 	 * set small and big blind
 	 */
-	public void setBlinds(int pSmallBlind, int pBigBlind){
+	public BlindLevel setBlinds(int pSmallBlind, int pBigBlind){
 		this.smallBlind = pSmallBlind;
 		this.bigBlind = pBigBlind;
+		return this;
 	}
 	
 	/**
 	 * set big blind ad small blind = bb/2 and ante = 0
 	 */
-	public void setBlindsAutomatics(int pBigBlind){
+	public BlindLevel setBlindsAutomatics(int pBigBlind){
 		this.setBlinds(pBigBlind/2,pBigBlind);
+		return this;
 	}
 	
 	/**
 	 * set small and big blind with ante
 	 */
-	public void setBlinds(int pSmallBlind, int pBigBlind, int pAnte){
+	public BlindLevel setBlinds(int pSmallBlind, int pBigBlind, int pAnte){
 		this.setBlinds(pSmallBlind,pBigBlind);
 		this.ante = pAnte;
+		return this;
 	}
 	
 	/**
 	 * set big blind ad small blind = bb/2 and ante = 0
 	 */
-	public void setBlindsAutomatics(int pBigBlind,int pAnte){
+	public BlindLevel setBlindsAutomatics(int pBigBlind,int pAnte){
 		this.setBlinds(pBigBlind/2,pBigBlind);
 		this.ante = pAnte;
+		return this;
 	}
 
 	public int getDuration() {
 		return duration;
 	}
 
-	public void setDuration(int pDuration) {
+	public BlindLevel setDuration(int pDuration) {
 		this.duration = pDuration;
+		return this;
 	}
 
 	public int getSmallBlind() {
 		return smallBlind;
 	}
 
-	public void setSmallBlind(int smallBlind) {
+	public BlindLevel setSmallBlind(int smallBlind) {
 		this.smallBlind = smallBlind;
+		return this;
 	}
 
 	public int getBigBlind() {
 		return bigBlind;
 	}
 
-	public void setBigBlind(int bigBlind) {
+	public BlindLevel setBigBlind(int bigBlind) {
 		this.bigBlind = bigBlind;
+		return this;
 	}
 
 	public int getAnte() {
 		return ante;
 	}
 
-	public void setAnte(int ante) {
+	public BlindLevel setAnte(int ante) {
 		this.ante = ante;
+		return this;
 	}
 
 }
