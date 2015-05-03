@@ -9,6 +9,6 @@ import com.vaadin.ui.Button.ClickListener;
  * @author Alexandre Lefèvre "Wodric"
  *
  */
-public interface BaseView extends View, ClickListener, ValueChangeListener {
+public interface BaseView extends View, ClickListener, ValueChangeListener{
 
 }

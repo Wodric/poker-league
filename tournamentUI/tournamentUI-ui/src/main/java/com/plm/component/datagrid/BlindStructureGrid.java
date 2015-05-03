@@ -42,19 +42,21 @@ public class BlindStructureGrid extends Grid {
 	
 	private BlindStructure structure;
 
-	public BlindStructureGrid(BlindStructure pStructure){
+	public BlindStructureGrid(BlindStructure pStructure, boolean isEditable){
 		// set column name and type
 		this.addBlindStructureGridColumn(pStructure);
 		// feed the grid
 		feedBlindStructureGrid(pStructure);
+		this.setEditorEnabled(isEditable);
 	}
 	
-	public BlindStructureGrid() {
+	public BlindStructureGrid(boolean isEditable) {
 		this.structure = BlindStructure.getDefaultBlindStructure();
 		// set column name and type
 		this.addBlindStructureGridColumn(structure);
 		// feed the grid
 		feedBlindStructureGrid(structure);
+		this.setEditorEnabled(isEditable);
 	}
 
 	/**

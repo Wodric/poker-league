@@ -26,12 +26,13 @@ public class BlindStructurePreviewPanel extends BasePanel{
 	/**
 	 * Button to save the structure for the user
 	 */
-	private Button updateStructureBtn;
+	private Button saveStructureBtn;
 	
 	/**
 	 * the label for saveStructureBtn
 	 */
-	public static String UPDATE_STRUCTURE_LABEL = "Update";
+	public static String SAVE_STRUCTURE_LABEL = "Save";
+	
 	
 	/**
 	 * Panel width
@@ -57,18 +58,18 @@ public class BlindStructurePreviewPanel extends BasePanel{
 	 * Panel to preview the structure
 	 * @param parentComponent2 the parent component
 	 */
-	public BlindStructurePreviewPanel(BaseView pParentView) {
+	public BlindStructurePreviewPanel(BaseView pParentView, boolean pIsEditable) {
 		super(STRUCTURE_PREVIEW_PANEL_CAPTION);
 		this.parentView = pParentView;
 		
 		//init classe member
-		this.updateStructureBtn = new Button(UPDATE_STRUCTURE_LABEL, this.parentView);
-		this.structureGrid = new BlindStructureGrid();
+		this.saveStructureBtn = new Button(SAVE_STRUCTURE_LABEL, this.parentView);
+		this.structureGrid = new BlindStructureGrid(pIsEditable);
 
 		
 		// init layout
 		this.mainLayout.addComponent(this.structureGrid);
-		this.mainLayout.addComponent(this.updateStructureBtn);
+		this.mainLayout.addComponent(this.saveStructureBtn);
 		this.mainLayout.setMargin(true);
 		this.mainLayout.setSpacing(true);
 		
@@ -77,10 +78,10 @@ public class BlindStructurePreviewPanel extends BasePanel{
 	
 	/**
 	 * get button from the button. This button should update the grid
-	 * @return the update button of the grid
+	 * @return the save button of the grid
 	 */
-	public Button getUpdateStructureBtn() {
-		return updateStructureBtn;
+	public Button getSaveStructureBtn() {
+		return this.saveStructureBtn;
 	}
 
 	/**
@@ -90,5 +91,4 @@ public class BlindStructurePreviewPanel extends BasePanel{
 	public BlindStructureGrid getStructureGrid() {
 		return structureGrid;
 	}
-
 }

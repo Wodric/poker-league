@@ -1,8 +1,8 @@
 package com.plm.tournament.structures.blinds;
 
 import com.plm.tournamentCore.blind.BlindStructure;
+import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Field.ValueChangeEvent;
 /**
  * The presenter in MVP is a middle-man that handles all user interaction logic, but in an implementation-independent way, 
  * so that it doesn't actually know anything about Vaadin. 
@@ -12,7 +12,7 @@ import com.vaadin.ui.Field.ValueChangeEvent;
 public class BlindStructurePresenter implements 
 	BlindStructureView.BlindStructureViewListener{
 	BlindStructure structure;
-	BlindStructureView structureView;
+	BlindStructureViewImpl structureView;
 
 	/**
 	 * Constructor to link all part of UI and MVP partern
@@ -20,7 +20,7 @@ public class BlindStructurePresenter implements
 	 * @param pStructureView
 	 */
     public BlindStructurePresenter(BlindStructure pStructure,
-    		BlindStructureView  pStructureView) {
+    		BlindStructureViewImpl  pStructureView) {
         this.structure = pStructure;
         this.structureView  = pStructureView;
         
@@ -35,18 +35,35 @@ public class BlindStructurePresenter implements
 	 * @paramter pEvent the event to manage
 	 */
 	public void buttonClick(ClickEvent pEvent) {
-		// TODO Auto-generated method stub
-		System.out.println(pEvent.getSource().toString());
-		System.out.println("Nothing on click");
+		if(pEvent.getSource().equals(this.structureView.
+				getStructurePreviewPanel().getSaveStructureBtn())){
+			// will save the 
+			System.out.println("Save action not define");
+			
+		}
 	}
-
 
 	@Override
 	/**
 	 * manage the ValueChangeEvent and set action to user click on button
 	 * @paramter pEvent the event to manage
 	 */
-	public void changeValue(ValueChangeEvent event) {
+	public void valueChange(ValueChangeEvent pEvent) {
+		BlindStructureMainInformationPanel mainInformationPanel = this.structureView
+				.getMainInformationPanel();
+		BlindStructureChipsInformationPanel chipsInformationPanel = this.structureView
+				.getChipsInformationPanel();
+		BlindStructurePreviewPanel structurePreviewPanel = this.structureView.getStructurePreviewPanel();
+		if(pEvent.getProperty().equals(mainInformationPanel.getAllowAnteField())){
+
+			if(mainInformationPanel.getAllowAnteFieldValue()){
+				structurePreviewPanel.getStructureGrid().addColumn("Ante", Integer.class);
+			}
+			else{
+				structurePreviewPanel.getStructureGrid().removeColumn("Ante");
+			}
+			System.out.println("coucou");
+		}
 		System.out.println("Nothing on change value");
 		
 	}

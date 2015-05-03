@@ -50,7 +50,7 @@ public class ChipsSet {
 	
 	/**
 	 * Create a chip set from a string like "value1-value2-value3" for exemple "25-100-500"
-	 * The liste need to be already ordered smaller to bigger
+	 * The list need to be already ordered smaller to bigger
 	 * @param pChipsValuesListString String containing the list of chip value 
 	 * like "value1-value2-value3" for exemple "25-100-500"
 	 */
@@ -136,15 +136,23 @@ public class ChipsSet {
 		chipsValue.add(500);
 		ChipsSet chipsSet4 = new ChipsSet(chipsValue);
 			
-		defaultSets.add(chipsSet1);
-		defaultSets.add(chipsSet2);
-		defaultSets.add(chipsSet3);
 		defaultSets.add(chipsSet4);
+		defaultSets.add(chipsSet3);
+		defaultSets.add(chipsSet2);
+		defaultSets.add(chipsSet1);
 		
 		return defaultSets;
 	}
 	
-	
+	/**
+	 * Get the default chip sets from database return as list of string (using toString)
+	 * @return these default chips set as String
+	 */
+	public static List<String> getDefaultChipsSetsAsString(){
+		return ChipsSet.getDefaultChipsSets().stream()
+				.map(aSet -> aSet.toString())
+				.collect(Collectors.toList());
+	}
 	
 	/**
 	 * 

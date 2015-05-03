@@ -3,13 +3,13 @@ package com.plm.tournament.structures.blinds;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.plm.framework.ui.components.ImmediateTextfield;
 import com.plm.framework.ui.mvp.BasePanel;
 import com.plm.framework.ui.mvp.BaseView;
 import com.plm.tournament.structures.blinds.beans.BlindStructureParameters;
 import com.plm.tournamentCore.blind.BlindConstants;
 import com.plm.tournamentCore.chip.ChipsSet;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
+import com.vaadin.ui.AbstractTextField;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.TextField;
@@ -55,7 +55,7 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 		super(CHIPS_INFORMATION_PANEL_CAPTION);
 		this.parentComponent = pParent;
 		
-		binder.setItemDataSource(createBeanWithDefaultValue());
+		binder.setItemDataSource(this.createBeanWithDefaultValue());
 
 		FormLayout content = new FormLayout();
 		content.addComponent(this.binder.buildAndBind
@@ -63,6 +63,7 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 		content.addComponent(this.binder.buildAndBind
 				("Initial stack size", BlindStructureParameters.PARAMETER_NAME_INITIAL_STACK_SIZE));
 		this.initChipSetSelector();
+		this.setDefaultFieldBehavior();
 		content.addComponent(this.chipsSetsComboBox);
 		content.setMargin(true);
 		content.setSpacing(true);
@@ -83,23 +84,47 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 	}
 	
 	/**
+	 * Set the conversion error message on fields
+	 */
+	private void setDefaultFieldBehavior(){
+
+		AbstractTextField smallBlind = (AbstractTextField) binder.getField
+				(BlindStructureParameters.PARAMETER_NAME_MINIMUM_SMALL_BLIND_VALUE);
+		smallBlind.setNullRepresentation(
+				String.valueOf(BlindConstants.DEFAULT_SMALL_BLIND_VALUE));
+		smallBlind.setConversionError("Value must be a number between 1 and 5 000 000");
+		smallBlind.addValueChangeListener(this.parentComponent);
+
+		AbstractTextField initialStack = (AbstractTextField) binder.getField
+				(BlindStructureParameters.PARAMETER_NAME_INITIAL_STACK_SIZE);
+		initialStack.setNullRepresentation(
+				String.valueOf(BlindConstants.DEFAULT_INITIAL_STACK_SIZE));
+		initialStack.setConversionError("Value must be a number between 10 and 50 000 000");
+		initialStack.addValueChangeListener(this.parentComponent);
+
+		this.chipsSetsComboBox.addValueChangeListener(this.parentComponent);
+	}
+	
+	/**
 	 * initialize the chipset selector with default value in database
 	 */
 	private void initChipSetSelector(){
 		List<ChipsSet> defaultChipsSets = ChipsSet.getDefaultChipsSets();
 		List<String> defaultChipsSetToString = new ArrayList<String>();
+		
 		for(ChipsSet aSet : defaultChipsSets){
 			defaultChipsSetToString.add(aSet.toString());
 		}
-		this.chipsSetsComboBox = new ComboBox("Chips set", defaultChipsSetToString);
+
+		this.chipsSetsComboBox = new ComboBox("Chips set");
+		
+		for(String chipSet : defaultChipsSetToString){
+			this.chipsSetsComboBox.addItem(chipSet);
+		}
 		// set default value to the first item of default
 		this.chipsSetsComboBox.setNullSelectionAllowed(false);
-		this.chipsSetsComboBox.setNullSelectionItemId(
-				defaultChipsSetToString.get(ChipsSet.DEFAULT_CHIPS_SET_INDEX));
-		
-		//binding
-		binder.bind(this.chipsSetsComboBox, BlindStructureParameters.PARAMETER_NAME_CHIP_SET);
-		
+		this.chipsSetsComboBox.select(
+						defaultChipsSetToString.get(ChipsSet.DEFAULT_CHIPS_SET_INDEX));	
 	}
 	
 	/**
@@ -107,7 +132,7 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 	 * @return the text field for small blind
 	 */
 	public TextField getMinimumSmallBlindField(){
-		return (ImmediateTextfield) binder.getField
+		return (TextField) binder.getField
 				(BlindStructureParameters.PARAMETER_NAME_MINIMUM_SMALL_BLIND_VALUE);
 	}
 	
@@ -116,7 +141,8 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 	 * @return value of small blind on field
 	 */
 	public int getMinimumSmallBlindFieldValue(){
-		return Integer.valueOf(this.getMinimumSmallBlindField().getValue()).intValue();
+		String valueWithoutSpace =  this.getMinimumSmallBlindField().getValue().replaceAll("\\p{javaSpaceChar}","");
+		return Integer.valueOf(valueWithoutSpace).intValue();
 	}
 	
 	/**
@@ -124,7 +150,7 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 	 * @return the text field for initial stack 
 	 */
 	public TextField getInitialStackField(){
-		return (ImmediateTextfield) binder.getField
+		return (TextField) binder.getField
 				(BlindStructureParameters.PARAMETER_NAME_INITIAL_STACK_SIZE);
 	}
 	
@@ -133,7 +159,8 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 	 * @return the value of the Initial stack field as interger 
 	 */
 	public int getInitialStackFieldValue(){
-		return  Integer.valueOf(this.getInitialStackField().getValue()).intValue();
+		String valueWithoutSpace =  this.getInitialStackField().getValue().replaceAll("\\p{javaSpaceChar}","");
+		return  Integer.valueOf(valueWithoutSpace).intValue();
 	}
 	
 	
@@ -142,7 +169,7 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 	 * @return the combobox for ChipSet
 	 */
 	public ComboBox getChipSetComboBox(){
-		return this.getChipSetComboBox();
+		return this.chipsSetsComboBox;
 	}
 	
 	/**

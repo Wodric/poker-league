@@ -5,10 +5,8 @@ import java.util.List;
 
 import com.plm.tournamentCore.blind.BlindStructure;
 import com.vaadin.data.Property.ValueChangeEvent;
-import com.vaadin.data.Property.ValueChangeListener;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.CustomComponent;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Layout;
@@ -20,7 +18,7 @@ import com.vaadin.ui.Layout;
  *
  */
 public class BlindStructureViewImpl extends CustomComponent 
-	implements BlindStructureView,ClickListener {
+	implements BlindStructureView,BlindStructureView.BlindStructureViewListener {
 
     /**
 	 * serialization UID
@@ -58,17 +56,6 @@ public class BlindStructureViewImpl extends CustomComponent
 		}
 	}
 	
-	@Override
-	/**
-	 * Diffuse value change event to presenter
-	 * @parameter pEvent value change t to diffuse to presenter
-	 */
-	public void valueChange(ValueChangeEvent pEvent) {
-		for (BlindStructureViewListener listener: listeners){
-            ((ValueChangeListener) listener).valueChange(pEvent);	
-		}
-	}
-	
 	/**
 	 * Return the Model (blind structure) will be display in UI
 	 * @return the blind structure object to display
@@ -93,5 +80,37 @@ public class BlindStructureViewImpl extends CustomComponent
 	 */
 	public BlindStructureMainPanel getPanel() {
 		return this.mainPanel;
+	}
+	
+	/**
+	 * get chip information panel that compose the view
+	 * @return the chips information panel
+	 */
+	public BlindStructureChipsInformationPanel getChipsInformationPanel() {
+		return this.mainPanel.getChipsInformationPanel();
+	}
+	
+	/**
+	 * get main information panel that compose the view
+	 * @return the main information panel
+	 */
+	public BlindStructureMainInformationPanel getMainInformationPanel() {
+		return this.mainPanel.getMainInformationPanel();
+	}
+	
+	
+	/**
+	 * get structure preview panel that compose the view
+	 * @return the structure preview panel
+	 */
+	public BlindStructurePreviewPanel getStructurePreviewPanel() {
+		return this.mainPanel.getStructurePreviewPanel();
+	}
+
+	@Override
+	public void valueChange(ValueChangeEvent pEvent) {
+		for (BlindStructureViewListener listener: listeners){
+            listener.valueChange(pEvent);
+		}
 	}
 }

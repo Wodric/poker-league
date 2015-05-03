@@ -51,6 +51,30 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 		super(MAIN_INFORMATION_PANEL_CAPTION);
 		this.parentComponent = pParentView;
 		
+		this.binder.setItemDataSource(createBeanWithDefaultValue());
+		
+		FormLayout content = new FormLayout();	
+		content.addComponent(this.binder.buildAndBind
+				("Number of player", BlindStructureParameters.PARAMETER_NAME_MAX_PLAYER_NUMBER));
+		content.addComponent(this.binder.buildAndBind
+				("Time per level", BlindStructureParameters.PARAMETER_NAME_LEVEL_DURATION));
+		content.addComponent(this.binder.buildAndBind
+				("Duration (min)", BlindStructureParameters.PARAMETER_NAME_TOURNAMENT_DURATION_EXPECTED));
+		content.addComponent(this.binder.buildAndBind
+				("Allow ante",  BlindStructureParameters.PARAMETER_NAME_WITH_ANTE));
+		content.setMargin(true);
+		content.setSpacing(true);
+
+		this.setDefaultFieldBehavior();
+		this.setContent(content);
+	}
+	
+	
+	
+	
+	
+	public BlindStructureMainInformationPanel() {
+		super(MAIN_INFORMATION_PANEL_CAPTION);
 		binder.setItemDataSource(createBeanWithDefaultValue());
 
 		FormLayout content = new FormLayout();	
@@ -65,31 +89,39 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 		content.setMargin(true);
 		content.setSpacing(true);
 
-		this.setConversionTexteFieldBehavior();
+		this.setDefaultFieldBehavior();
 		this.setContent(content);
 	}
+
 	/**
 	 * Set the conversion error message on fields
 	 */
-	private void setConversionTexteFieldBehavior(){
-		
+	private void setDefaultFieldBehavior(){
+
 		AbstractTextField maxPlayer = (AbstractTextField) binder.getField
 				(BlindStructureParameters.PARAMETER_NAME_MAX_PLAYER_NUMBER);
 		maxPlayer.setNullRepresentation(
 				String.valueOf(BlindConstants.DEFAULT_NUMBER_PLAYER));
 		maxPlayer.setConversionError("Value must be a number between 2 and 50 000");
+		maxPlayer.addValueChangeListener(this.parentComponent);
 
 		AbstractTextField levelDuration = (AbstractTextField) binder.getField
 				(BlindStructureParameters.PARAMETER_NAME_LEVEL_DURATION);
 		levelDuration.setNullRepresentation(
 				String.valueOf(BlindConstants.DEFAULT_LEVEL_DURATION));
 		levelDuration.setConversionError("Value must be a number between 10 and 300");
+		levelDuration.addValueChangeListener(this.parentComponent);
 		
 		AbstractTextField tournamentDuration = (AbstractTextField) binder.getField
 				(BlindStructureParameters.PARAMETER_NAME_TOURNAMENT_DURATION_EXPECTED);
 		tournamentDuration.setNullRepresentation(
 				String.valueOf(BlindConstants.DEFAULT_TOURNAMENT_DURATION));
 		tournamentDuration.setConversionError("Value must be a number between 30 and 60 000");
+		tournamentDuration.addValueChangeListener(this.parentComponent);
+		
+		CheckBox withAnte = (CheckBox) binder.getField
+				(BlindStructureParameters.PARAMETER_NAME_WITH_ANTE);
+		withAnte.addValueChangeListener(this.parentComponent);
 	}
 	
 	/**
@@ -122,7 +154,8 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 	 * @return return the integer value in max player field
 	 */
 	public int getMaxPlayerFieldValue(){
-		return Integer.valueOf(this.getMaxPlayerField().getValue()).intValue();
+		String valueWithoutSpace =  this.getMaxPlayerField().getValue().replaceAll("\\p{javaSpaceChar}","");
+		return Integer.valueOf(valueWithoutSpace).intValue();
 	}
 	
 	/**
@@ -139,7 +172,8 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 	 * @return return the integer value in level duration field
 	 */
 	public int getLevelDurationFieldValue(){
-		return Integer.valueOf(this.getLevelDurationField().getValue()).intValue();
+		String valueWithoutSpace =  this.getLevelDurationField().getValue().replaceAll("\\p{javaSpaceChar}","");
+		return Integer.valueOf(valueWithoutSpace).intValue();
 	}
 	
 	/**
@@ -156,7 +190,8 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 	 * @return return the integer value in tournament duration field
 	 */
 	public int getTournamentDurationFieldValue(){
-		return Integer.valueOf(this.getTournamentDurationField().getValue()).intValue();
+		String valueWithoutSpace =  this.getTournamentDurationField().getValue().replaceAll("\\p{javaSpaceChar}","");
+		return Integer.valueOf(valueWithoutSpace).intValue();
 	}
 	
 	/**

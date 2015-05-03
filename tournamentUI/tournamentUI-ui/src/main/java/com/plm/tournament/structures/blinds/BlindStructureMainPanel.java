@@ -22,7 +22,12 @@ public class BlindStructureMainPanel extends BasePanel {
 	/**
 	 * Panel width
 	 */
-	public static float PANEL_WIDTH = (float) 90.0;
+	public static final boolean IS_STRUCTURE_EDITABLE = true;
+	
+	/**
+	 * Panel width
+	 */
+	public static final float PANEL_WIDTH = (float) 90.0;
 	
 	/**
 	 * Panel with main information to calculate the structure to create
@@ -58,7 +63,7 @@ public class BlindStructureMainPanel extends BasePanel {
 		
 		this.mainInformationPanel = new BlindStructureMainInformationPanel(parentComponent);
 	    this.chipsInformationPanel = new BlindStructureChipsInformationPanel(parentComponent);
-	    this.structurePreviewPanel = new BlindStructurePreviewPanel(parentComponent);
+	    this.structurePreviewPanel = new BlindStructurePreviewPanel(parentComponent,IS_STRUCTURE_EDITABLE);
 		
         this.horizontalLayout = new HorizontalLayout();
         this.horizontalLayout.addComponent(mainInformationPanel);
