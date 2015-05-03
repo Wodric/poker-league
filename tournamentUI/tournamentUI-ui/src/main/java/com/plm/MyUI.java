@@ -2,6 +2,7 @@ package com.plm;
 
 import javax.servlet.annotation.WebServlet;
 
+import com.plm.tournament.structures.blinds.BlindStructureMainInformationPanel;
 import com.plm.tournament.structures.blinds.BlindStructurePresenter;
 import com.plm.tournament.structures.blinds.BlindStructureView;
 import com.plm.tournament.structures.blinds.BlindStructureViewImpl;
@@ -18,7 +19,7 @@ import com.vaadin.ui.VerticalLayout;
 /**
  *
  */
-@Theme("mytheme")
+@Theme("valo")
 @Widgetset("com.plm.MyAppWidgetset")
 public class MyUI extends UI {
 
@@ -40,8 +41,7 @@ public class MyUI extends UI {
         navigator = new Navigator(this, this);
         navigator.addView("" /*BlindStructureView.BLIND_STRCUTURE_VIEW*/, createStructureView);
         
-        BlindStructurePresenter structurePresenter = new BlindStructurePresenter(structureModel,createStructureView);
-
+        new BlindStructurePresenter(structureModel,createStructureView);
     }
 
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
