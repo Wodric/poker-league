@@ -136,7 +136,6 @@ public class BlindStructure {
 				blindFound = true;
 			}
 			
-
 		}
 		
 		BlindLevel nextBlindLevel = new BlindLevel(pCurrentLevel.getDuration());
@@ -353,6 +352,57 @@ public class BlindStructure {
 	public BlindStructure setAnte(boolean ante) {
 		this.ante = ante;
 		return this;
+	}
+
+	/**
+	 * enable and set the ante. Return the ante to set it in UI
+	 * @return the list of ante in order of increasing blind
+	 */
+	public void recalculateAnteFromBlinds() {
+		this.ante = true;
+		for(BlindLevel aBlindLevel : structure){
+			
+			// calculate the number of decade
+			int decade = 0 ;
+			double blindFactor = aBlindLevel.getBigBlind();
+			while(blindFactor >= BlindConstants.DECIMAL_FACTOR){
+				decade ++;
+				blindFactor = blindFactor/BlindConstants.DECIMAL_FACTOR;
+			}
+
+			int iterator = 0;
+			boolean blindFound = false;
+			// get the blind factor
+			while(!blindFound){
+
+				if(iterator >= BlindConstants.BLIND_AUTHORIZED_MULTIPLE_TAB.length){
+					// case  8 < theoricNewBlind < 10, round to superior decade 
+					blindFound = true;
+					decade ++;
+					iterator = 0;
+				}
+				else if(blindFactor > BlindConstants.BLIND_AUTHORIZED_MULTIPLE_TAB[iterator]){
+					iterator++;
+				}
+				else{
+					blindFound = true;
+				}
+				
+			}	
+			// calculate ante from blind decade and factor
+			int calculatedAnte = this.calculateAnteFromBigBlind(BlindConstants.ANTE_AUTHORIZED_MULTIPLE_TAB[iterator],decade);
+			aBlindLevel.setAnte(calculatedAnte);
+		}
+	}
+	
+	/**
+	 * disable and remove the ante value. Set all the ante to 0
+	 */
+	public void removeAnte() {
+		this.ante = false;
+		for(BlindLevel aBlindLevel : structure){
+			aBlindLevel.setAnte(0);
+		}	
 	}
 
 }

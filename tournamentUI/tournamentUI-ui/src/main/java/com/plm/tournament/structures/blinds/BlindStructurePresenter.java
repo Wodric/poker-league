@@ -1,5 +1,6 @@
 package com.plm.tournament.structures.blinds;
 
+import com.plm.component.datagrid.BlindStructureGrid;
 import com.plm.tournamentCore.blind.BlindStructure;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.ui.Button.ClickEvent;
@@ -54,13 +55,17 @@ public class BlindStructurePresenter implements
 		BlindStructureChipsInformationPanel chipsInformationPanel = this.structureView
 				.getChipsInformationPanel();
 		BlindStructurePreviewPanel structurePreviewPanel = this.structureView.getStructurePreviewPanel();
+		BlindStructureGrid structureGrid = structurePreviewPanel.getStructureGrid();
+		
+		// in case we allow or disallow ante
 		if(pEvent.getProperty().equals(mainInformationPanel.getAllowAnteField())){
-
+			// in case we allow ante we need to create the ante column and feed it
 			if(mainInformationPanel.getAllowAnteFieldValue()){
-				structurePreviewPanel.getStructureGrid().addColumn("Ante", Integer.class);
+				structureGrid.enableAnte();
 			}
+			 //else remove the column
 			else{
-				structurePreviewPanel.getStructureGrid().removeColumn("Ante");
+				structureGrid.removeAnte();
 			}
 			System.out.println("coucou");
 		}
