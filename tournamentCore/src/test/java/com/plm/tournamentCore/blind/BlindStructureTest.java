@@ -1,14 +1,13 @@
 package com.plm.tournamentCore.blind;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 
 import org.junit.Test;
 
-import com.plm.tournamentCore.blind.BlindLevel;
-import com.plm.tournamentCore.blind.BlindStructure;
 import com.plm.tournamentCore.chip.Chip;
 import com.plm.tournamentCore.chip.ChipsSet;
 
@@ -236,7 +235,19 @@ public class BlindStructureTest {
 		int blindAtExpectedEnd = (playerExpected * startingStack)/ getBBatExpectedEnd;
 		// consider at expected end that there is between 45 et 75 blinds
 		assertTrue(blindAtExpectedEnd > 45 && blindAtExpectedEnd < 75);
+		
+		// get last element must have ante
+		int lastAnte = structure.getStructure().get(structure.getStructure().size()-1).getAnte();
+		assertTrue(lastAnte > 0);
+		//remove ante
+		structure.removeAnte();
+		int lastAnteRemoved = structure.getStructure().get(structure.getStructure().size()-1).getAnte();
+		assertFalse(structure.isAnte());
+		assertTrue(lastAnteRemoved == 0);
+		//add & recalculate ante
+		structure.recalculateAnteFromBlinds();
+		assertTrue(structure.isAnte());
+		int lastAnteRecalculate = structure.getStructure().get(structure.getStructure().size()-1).getAnte();
+		assertEquals(lastAnte,lastAnteRecalculate);
 	}
-	
-
 }
