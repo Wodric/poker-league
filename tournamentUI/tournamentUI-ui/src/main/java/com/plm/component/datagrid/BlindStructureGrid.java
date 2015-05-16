@@ -2,6 +2,7 @@ package com.plm.component.datagrid;
 
 import com.plm.tournamentCore.blind.BlindLevel;
 import com.plm.tournamentCore.blind.BlindStructure;
+import com.plm.tournamentCore.chip.ChipsSet;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.ui.Grid;
 
@@ -73,7 +74,26 @@ public class BlindStructureGrid extends Grid {
 		this.setEditorEnabled(isEditable);
 	}
 
-	
+	/**
+	 * Update the grid with new information
+	 * @param pMaxPlayerNumber int The number of player expected 
+	 * @param pInitialStackSize int the initial size of player stack
+	 * @param pTournamentDurationExpected int the duration of the tournament you expect
+	 * @param pLevelDurations int duration of level
+	 * @param pMinimumBlind int the startup big blind. MUST BE A MULTIPLE OF SMALLEST CHIP
+	 * @param pWithAnte boolean allow ante in tournament if true
+	 * @param pChipSet the list of chip available in tournament
+	 */
+	public void updateGrid(int pMaxPlayerNumber, int pInitialStackSize, int pTournamentDurationExpected, 
+			int pLevelDurations, BlindLevel pMinimumBlind, boolean pWithAnte, ChipsSet pChipSet){
+		
+		this.structure.recalculateStructure(pMaxPlayerNumber,pInitialStackSize,pTournamentDurationExpected,
+				pLevelDurations,pMinimumBlind,pWithAnte, pChipSet);
+		BeanItemContainer<BlindLevel> container =
+			    new BeanItemContainer<BlindLevel>(BlindLevel.class, this.structure.getStructure());
+		this.setContainerDataSource(container);
+		
+	}
 	/**
 	 * Get the blind structure object display in grid
 	 * @return the blind structure object display in grid of this panel
@@ -95,9 +115,6 @@ public class BlindStructureGrid extends Grid {
 	 * This method disable ante
 	 */
 	public void removeAnte(){
-		BeanItemContainer<BlindLevel> container =
-			    new BeanItemContainer<BlindLevel>(BlindLevel.class, this.structure.getStructure());
-		this.setContainerDataSource(container);
 		this.structure.removeAnte();
 
 		this.removeColumn(COLUM_ANTE_NAME);

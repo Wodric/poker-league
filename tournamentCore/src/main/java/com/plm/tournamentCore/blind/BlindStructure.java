@@ -43,7 +43,22 @@ public class BlindStructure {
 	 */
 	public BlindStructure(int pMaxPlayerNumber, int pInitialStackSize, int pTournamentDurationExpected, 
 			int pLevelDurations, BlindLevel pMinimumBlind, boolean pWithAnte, ChipsSet pChipSet){
-		
+		this.recalculateStructure(pMaxPlayerNumber,pInitialStackSize,pTournamentDurationExpected,
+				pLevelDurations,pMinimumBlind,pWithAnte, pChipSet);
+	}
+	
+	/**
+	 * Build the structure from the information in parameter
+	 * @param pMaxPlayerNumber int The number of player expected 
+	 * @param pInitialStackSize int the initial size of player stack
+	 * @param pTournamentDurationExpected int the duration of the tournament you expect
+	 * @param pLevelDurations int duration of level
+	 * @param pMinimumBlind int the startup big blind. MUST BE A MULTIPLE OF SMALLEST CHIP
+	 * @param pWithAnte boolean allow ante in tournament if true
+	 * @param pChipSet the list of chip available in tournament
+	 */
+	public void recalculateStructure(int pMaxPlayerNumber, int pInitialStackSize, int pTournamentDurationExpected, 
+			int pLevelDurations, BlindLevel pMinimumBlind, boolean pWithAnte, ChipsSet pChipSet){
 		int totalChip = calculateTotalNumberOfChips(pMaxPlayerNumber,pInitialStackSize);
 		BlindLevel maxLevelExpected = calculateBigBlindMax(totalChip, pWithAnte,pLevelDurations);
 		int totalNumberOfLevel = calculateNumberOfLevels(pTournamentDurationExpected,pLevelDurations);
@@ -91,7 +106,7 @@ public class BlindStructure {
 				blindFactor = maxLevelExpected.getBigBlind() / currentBlindLevel.getBigBlind(); 
 				theoricFactorBetweenLevels = Math.pow(blindFactor, 1/(double)totalNumberOfLevel)*0.95;
 			}
-		}	
+		}
 	}
 
 

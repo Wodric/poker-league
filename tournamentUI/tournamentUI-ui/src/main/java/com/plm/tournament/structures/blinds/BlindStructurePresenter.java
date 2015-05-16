@@ -1,7 +1,9 @@
 package com.plm.tournament.structures.blinds;
 
 import com.plm.component.datagrid.BlindStructureGrid;
+import com.plm.tournamentCore.blind.BlindLevel;
 import com.plm.tournamentCore.blind.BlindStructure;
+import com.plm.tournamentCore.chip.ChipsSet;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.ui.Button.ClickEvent;
 /**
@@ -67,9 +69,27 @@ public class BlindStructurePresenter implements
 			else{
 				structureGrid.removeAnte();
 			}
-			System.out.println("coucou");
 		}
-		System.out.println("Nothing on change value");
-		
+		else if(pEvent.getProperty().equals(mainInformationPanel.getLevelDurationField()) ||
+				pEvent.getProperty().equals(mainInformationPanel.getMaxPlayerField()) ||
+				pEvent.getProperty().equals(mainInformationPanel.getTournamentDurationField()) ||
+				pEvent.getProperty().equals(chipsInformationPanel.getInitialStackField())||
+				pEvent.getProperty().equals(chipsInformationPanel.getMinimumSmallBlindField())||
+				pEvent.getProperty().equals(chipsInformationPanel.getChipSetComboBox())){
+			
+			BlindLevel firstLevel = new BlindLevel(mainInformationPanel.getLevelDurationFieldValue(), 
+					chipsInformationPanel.getMinimumSmallBlindFieldValue(), 
+					chipsInformationPanel.getMinimumSmallBlindFieldValue()*2);
+			
+			structureGrid.updateGrid(
+					mainInformationPanel.getMaxPlayerFieldValue(),
+					chipsInformationPanel.getInitialStackFieldValue(),
+					mainInformationPanel.getTournamentDurationFieldValue(),
+					mainInformationPanel.getLevelDurationFieldValue(),
+					firstLevel,
+					mainInformationPanel.getAllowAnteFieldValue(),
+					new ChipsSet(chipsInformationPanel.getChipSetComboBoxValue()));
+			
+		}		
 	}
 }
