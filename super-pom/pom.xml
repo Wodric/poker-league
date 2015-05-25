@@ -86,6 +86,7 @@
 		<module>../tournamentCore</module>
 		<module>../championshipCore</module>
 		<module>../dao</module>
+		<module>../internalFramework</module>
 	</modules>
 
 	<profiles>
