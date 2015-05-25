@@ -7,10 +7,10 @@
 		<version>0.0.1-SNAPSHOT</version>
 		<relativePath>../super-pom/pom.xml</relativePath>
 	</parent>
-	<artifactId>InternalFramework</artifactId>
+	<artifactId>internalFramework</artifactId>
 	<packaging>jar</packaging>
 
-	<name>internationalization</name>
+	<name>Internal Framework</name>
 	<url>http://maven.apache.org</url>
 
 	<properties>
@@ -20,7 +20,7 @@
 	<dependencies>
 		<dependency>
 			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>>
+			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
