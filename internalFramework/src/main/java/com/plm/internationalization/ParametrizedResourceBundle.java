@@ -1,18 +1,19 @@
 package com.plm.internationalization;
 
 import java.text.MessageFormat;
+import java.util.Enumeration;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 /**
- * Ressource bundle with parametrized messages. 
+ *  parametrized Ressource bundle must be used like ressource bundle
  * The parameters will replace the pattern "{X}" where X is a number. The pattern is 0-based
  * The X it's the index of the parameters you set in method.
  * The first parameter will replace the {0} pattern if it exists. 
  * If there is not enought parameters, the pattern will not be replace
  * @author Alexandre Lefèvre "Wodric"
  */
-public class ResourceBundleParametrized {
+public class ParametrizedResourceBundle extends ResourceBundle{
 	
 	/**
 	 * Bundle we will get the messages
@@ -27,10 +28,19 @@ public class ResourceBundleParametrized {
 
 	/**
 	 * This constructor build the final ResourceBundle of the class from the file name and the local
+	 * 
+	 */
+	private ParametrizedResourceBundle(ResourceBundle pBundle){
+		this.bundle = pBundle;
+	}
+	
+	/**
+	 * Get the parametrized bundle to getm essage on it
 	 * @param pBaseName base name of the file to use
 	 * @param pLocale Localization of user. Must contains at least the language code from ISO 639 alpha-2.  
+	 * @return  the parametrized bundle to getm essage on it
 	 */
-	public ResourceBundleParametrized(String pBaseName, Locale pLocale){
+	public static ParametrizedResourceBundle getParametrizedBundle(String pBaseName, Locale pLocale){
 		ResourceBundle tempBundle = null;
 		try{
 			tempBundle = ResourceBundle.getBundle(pBaseName,pLocale);
@@ -43,10 +53,10 @@ public class ResourceBundleParametrized {
 			catch(MissingResourceException e1){
 				// Must be a base name error or local not supported
 				throw new MissingResourceException("Base name or local not supported",
-						ResourceBundleParametrized.class.getName(),pBaseName);
+						ParametrizedResourceBundle.class.getName(),pBaseName);
 			}
 		}
-		this.bundle = tempBundle;
+		return new ParametrizedResourceBundle(tempBundle);
 	}
 	
 	/**
@@ -81,5 +91,15 @@ public class ResourceBundleParametrized {
             return '!' + key + '!';
         }
     }
+
+	@Override
+	protected Object handleGetObject(String key) {
+		return null;
+	}
+
+	@Override
+	public Enumeration<String> getKeys() {
+		return null;
+	}
     
 }

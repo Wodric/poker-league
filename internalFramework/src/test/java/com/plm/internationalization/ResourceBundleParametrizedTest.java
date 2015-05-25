@@ -39,32 +39,32 @@ public class ResourceBundleParametrizedTest {
 
 	@Test
 	public void constructorAffirmativeTest() {
-		ResourceBundleParametrized bundleFr = new ResourceBundleParametrized(
+		ParametrizedResourceBundle bundleFr = ParametrizedResourceBundle.getParametrizedBundle(
 				testingBaseName, new Locale("fr"));
 		assertEquals(labelTestResultFr, bundleFr.getMessage(labelTest));
 
 
-		ResourceBundleParametrized bundleEn = new ResourceBundleParametrized(
+		ParametrizedResourceBundle bundleEn = ParametrizedResourceBundle.getParametrizedBundle(
 				testingBaseName, new Locale("en"));
 		assertEquals(labelTestResultEn, bundleEn.getMessage(labelTest));
 	}
 
 	@Test(expected = MissingResourceException.class)
 	public void constructorNegativeTest() {
-		new ResourceBundleParametrized(
+		ParametrizedResourceBundle.getParametrizedBundle(
 				testingBaseName + "n", new Locale("fr"));
 	}
 
 	@Test
 	public void getMessageTest() {
-		ResourceBundleParametrized bundleFr = new ResourceBundleParametrized(
+		ParametrizedResourceBundle bundleFr = ParametrizedResourceBundle.getParametrizedBundle(
 				testingBaseName, new Locale("fr"));
 		assertEquals(labelTestResultFr, bundleFr.getMessage(labelTest));
 	}
 	
 	@Test
 	public void getMessageNegativeTest() {
-		ResourceBundleParametrized bundleFr = new ResourceBundleParametrized(
+		ParametrizedResourceBundle bundleFr = ParametrizedResourceBundle.getParametrizedBundle(
 				testingBaseName, new Locale("fr"));
 		assertEquals("!"+labelTest+"n"+"!", bundleFr.getMessage(labelTest+"n"));
 	}
@@ -72,7 +72,7 @@ public class ResourceBundleParametrizedTest {
 
 	@Test
 	public void getParametrizedMessageTest() {
-		ResourceBundleParametrized bundleFr = new ResourceBundleParametrized(
+		ParametrizedResourceBundle bundleFr = ParametrizedResourceBundle.getParametrizedBundle(
 				testingBaseName, new Locale("fr"));
 		assertEquals(labelTestResultParametrizedFrNoReplacement, 
 				bundleFr.getMessage(labelTestParametrized));
