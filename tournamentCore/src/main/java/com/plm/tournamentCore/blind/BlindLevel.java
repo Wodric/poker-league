@@ -1,13 +1,20 @@
 package com.plm.tournamentCore.blind;
 
+import java.io.Serializable;
+
 /**
  * A blind level, is a time in which the blind has a constant value. 
  * Blind evolve between each level but not during. A level can have ante. 
  * Ante is like a mandatory tax to pay each hand.
- * @author alexandre
+ * @author Alexandre Lefèvre "Wodric"
  *
  */
-public class BlindLevel {
+public class BlindLevel implements Serializable {
+	/**
+	 * generated serial number
+	 */
+	private static final long serialVersionUID = 3747420269027589858L;
+
 	/**
 	 * The duration of the blind level
 	 */

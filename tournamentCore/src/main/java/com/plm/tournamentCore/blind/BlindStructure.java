@@ -1,5 +1,6 @@
 package com.plm.tournamentCore.blind;
 
+import java.io.Serializable;
 import java.util.LinkedList;
 
 import com.plm.tournamentCore.chip.Chip;
@@ -9,7 +10,12 @@ import com.plm.tournamentCore.chip.ChipsSet;
  * The blind structure is an object representing the list of level of tournament. 
  * @author Alexandre Lefevre
  */
-public class BlindStructure {	
+public class BlindStructure implements Serializable{	
+	/**
+	 * generated serial ID
+	 */
+	private static final long serialVersionUID = -1688520467905029504L;
+
 	/**
 	 * id Of blind structure in database
 	 */

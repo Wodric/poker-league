@@ -1,11 +1,18 @@
 package com.plm.tournamentCore.chip;
 
+import java.io.Serializable;
+
 /**
  * This object represent a chip. In poker the chips is the money used to bet.
  * @author Alexandre Lefevre
  *
  */
-public class Chip implements Comparable<Chip>{
+public class Chip implements Comparable<Chip>, Serializable{
+	
+	/**
+	 * Generated serial version
+	 */
+	private static final long serialVersionUID = 9166321707261321844L;
 	
 	/**
 	 * The value of the chip

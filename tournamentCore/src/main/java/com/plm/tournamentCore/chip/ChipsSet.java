@@ -1,5 +1,6 @@
 package com.plm.tournamentCore.chip;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -13,8 +14,13 @@ import java.util.stream.Collectors;
  * @author Alexandre Lefevre
  *
  */
-public class ChipsSet {
+public class ChipsSet implements Serializable{
 	
+	/**
+	 * Generated serial number
+	 */
+	private static final long serialVersionUID = 3191718993219656837L;
+
 	/**
 	 * The chipSet is a chip list ordered per chip value
 	 */
