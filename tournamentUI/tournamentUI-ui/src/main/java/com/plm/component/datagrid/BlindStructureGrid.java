@@ -1,5 +1,8 @@
 package com.plm.component.datagrid;
 
+import com.plm.MyUI;
+import com.plm.internationalization.ParametrizedResourceBundle;
+import com.plm.messages.constants.MessagesConstants;
 import com.plm.tournamentCore.blind.BlindLevel;
 import com.plm.tournamentCore.blind.BlindStructure;
 import com.plm.tournamentCore.chip.ChipsSet;
@@ -37,6 +40,11 @@ public class BlindStructureGrid extends Grid {
 	 */
 	private BlindStructure structure;
 
+	/**
+	 * Blind structure grid constructor. Set a particular structure and not the default one
+	 * @param pStructure the Structure to set on this grid component
+	 * @param isEditable Set the structure editable or not
+	 */
 	public BlindStructureGrid(BlindStructure pStructure, boolean isEditable){
 		// set column name and type
 		this.structure = pStructure;
@@ -51,17 +59,22 @@ public class BlindStructureGrid extends Grid {
 			this.removeColumn(COLUM_ANTE_NAME);
 			this.setColumnOrder(COLUMN_TIME_NAME,COLUMN_SMALL_BLIND_NAME,COLUMN_BIG_BLIND_NAME);
 		}
+		this.setColumnHeaderCaption();
 		
 		// feed the grid
 		this.setEditorEnabled(isEditable);
 	}
 	
+	/**
+	 * Blind structure grid constructor. Set the default structure and not the default one
+	 * @param pStructure the Structure to set on this grid component
+	 * @param isEditable Set the structure editable or not
+	 */
 	public BlindStructureGrid(boolean isEditable) {
 		this.structure = BlindStructure.getDefaultBlindStructure();
 		BeanItemContainer<BlindLevel> container =
 			    new BeanItemContainer<BlindLevel>(BlindLevel.class, this.structure.getStructure());
 		this.setContainerDataSource(container);
-		
 
 		if(this.structure.isAnte()){
 			this.setColumnOrder(COLUMN_TIME_NAME,COLUMN_SMALL_BLIND_NAME,COLUMN_BIG_BLIND_NAME,COLUM_ANTE_NAME);
@@ -70,8 +83,37 @@ public class BlindStructureGrid extends Grid {
 			this.removeColumn(COLUM_ANTE_NAME);
 			this.setColumnOrder(COLUMN_TIME_NAME,COLUMN_SMALL_BLIND_NAME,COLUMN_BIG_BLIND_NAME);
 		}
-	
+		this.setColumnHeaderCaption();
 		this.setEditorEnabled(isEditable);
+	}
+	
+	/**
+	 * Set the grid column header
+	 */
+	private void setColumnHeaderCaption(){
+		ParametrizedResourceBundle bundle = ParametrizedResourceBundle.
+				getParametrizedBundle(MessagesConstants.UI_MESSAGE_FILE_BASE_NAME, MyUI.getUserLocale());
+		this.getColumn(COLUMN_TIME_NAME).setHeaderCaption(
+				bundle.getMessage(MessagesConstants.BLINDSTRUCTURE_GRID_COLUMN_HEADER_DURATION));
+		this.getColumn(COLUMN_SMALL_BLIND_NAME).setHeaderCaption(
+				bundle.getMessage(MessagesConstants.BLINDSTRUCTURE_GRID_COLUMN_HEADER_SMALLBLIND));
+		this.getColumn(COLUMN_BIG_BLIND_NAME).setHeaderCaption(
+				bundle.getMessage(MessagesConstants.BLINDSTRUCTURE_GRID_COLUMN_HEADER_BIGBLIND));		
+		if(this.structure.isAnte()){
+			this.getColumn(COLUM_ANTE_NAME).setHeaderCaption(MessagesConstants.BLINDSTRUCTURE_GRID_COLUMN_HEADER_ANTE);
+		}
+	}
+	
+	/**
+	 * Set the grid column ante header
+	 */
+	private void setAnteColumnHeaderCaption(){
+		ParametrizedResourceBundle bundle = ParametrizedResourceBundle.
+				getParametrizedBundle(MessagesConstants.UI_MESSAGE_FILE_BASE_NAME, MyUI.getUserLocale());	
+		if(this.structure.isAnte()){
+			this.getColumn(COLUM_ANTE_NAME).setHeaderCaption(
+					bundle.getMessage(MessagesConstants.BLINDSTRUCTURE_GRID_COLUMN_HEADER_ANTE));
+		}
 	}
 
 	/**
@@ -108,7 +150,8 @@ public class BlindStructureGrid extends Grid {
 	public void enableAnte(){
 		this.addColumn(COLUM_ANTE_NAME);
 		this.structure.recalculateAnteFromBlinds();
-		this.setColumnOrder(COLUMN_TIME_NAME,COLUMN_SMALL_BLIND_NAME,COLUMN_BIG_BLIND_NAME,COLUM_ANTE_NAME);	
+		this.setColumnOrder(COLUMN_TIME_NAME,COLUMN_SMALL_BLIND_NAME,COLUMN_BIG_BLIND_NAME,COLUM_ANTE_NAME);
+		this.setAnteColumnHeaderCaption();
 	}
 	
 	/**
