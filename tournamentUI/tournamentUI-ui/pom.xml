@@ -43,6 +43,12 @@
             <artifactId>tournamentCore</artifactId>
             <version>${project.version}</version>
         </dependency>
+        
+        <dependency>
+            <groupId>${project.groupId}</groupId>
+            <artifactId>internalFramework</artifactId>
+            <version>${project.version}</version>
+        </dependency>
 
         <!-- Bean validation implementation -->
         <dependency>
@@ -61,6 +67,11 @@
     </dependencies>
 
     <build>
+    	<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+		</resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
