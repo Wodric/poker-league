@@ -3,8 +3,11 @@ package com.plm.tournament.structures.blinds;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.plm.MyUI;
 import com.plm.framework.ui.mvp.BasePanel;
 import com.plm.framework.ui.mvp.BaseView;
+import com.plm.internationalization.ParametrizedResourceBundle;
+import com.plm.messages.constants.MessagesConstants;
 import com.plm.tournament.structures.blinds.beans.BlindStructureParameters;
 import com.plm.tournamentCore.blind.BlindConstants;
 import com.plm.tournamentCore.chip.ChipsSet;
@@ -28,9 +31,16 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 	private static final long serialVersionUID = 6828111650513726471L;
 	
 	/**
+	 * bundle for message
+	 */
+	private static final ParametrizedResourceBundle bundle = ParametrizedResourceBundle.
+			getParametrizedBundle(MessagesConstants.UI_MESSAGE_FILE_BASE_NAME, MyUI.getUserLocale());
+	
+	/**
 	 * Constaint which defin the caption of panel
 	 */
-	private static final String CHIPS_INFORMATION_PANEL_CAPTION = "Chips information";
+	private static final String CHIPS_INFORMATION_PANEL_CAPTION = bundle.
+			getMessage(MessagesConstants.BLINDSTRUCTURE_PANEL_CHIPS_TITLE);
 	
 	/**
 	 * the combo box to select the chip set
@@ -59,9 +69,12 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 
 		FormLayout content = new FormLayout();
 		content.addComponent(this.binder.buildAndBind
-				("Initial small blind", BlindStructureParameters.PARAMETER_NAME_MINIMUM_SMALL_BLIND_VALUE));
+				(bundle.getMessage(MessagesConstants.BLINDSTRUCTURE_PANEL_CHIPS_SMALLBLIND),
+						BlindStructureParameters.PARAMETER_NAME_MINIMUM_SMALL_BLIND_VALUE));
 		content.addComponent(this.binder.buildAndBind
-				("Initial stack size", BlindStructureParameters.PARAMETER_NAME_INITIAL_STACK_SIZE));
+				(bundle.getMessage(MessagesConstants.BLINDSTRUCTURE_PANEL_CHIPS_STACKSIZE),
+						BlindStructureParameters.PARAMETER_NAME_INITIAL_STACK_SIZE));
+		
 		this.initChipSetSelector();
 		this.setDefaultFieldBehavior();
 		content.addComponent(this.chipsSetsComboBox);
@@ -92,14 +105,18 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 				(BlindStructureParameters.PARAMETER_NAME_MINIMUM_SMALL_BLIND_VALUE);
 		smallBlind.setNullRepresentation(
 				String.valueOf(BlindConstants.DEFAULT_SMALL_BLIND_VALUE));
-		smallBlind.setConversionError("Value must be a number between 1 and 5 000 000");
+		smallBlind.setConversionError(
+				bundle.getMessage(MessagesConstants.BLINDSTRUCTURE_PANEL_CHIPS_SMALLBLIND_TOOLTIP,
+						BlindConstants.MIN_SMALL_BLIND_VALUE,BlindConstants.MAX_SMALL_BLIND_VALUE));
 		smallBlind.addValueChangeListener(this.parentComponent);
 
 		AbstractTextField initialStack = (AbstractTextField) binder.getField
 				(BlindStructureParameters.PARAMETER_NAME_INITIAL_STACK_SIZE);
 		initialStack.setNullRepresentation(
 				String.valueOf(BlindConstants.DEFAULT_INITIAL_STACK_SIZE));
-		initialStack.setConversionError("Value must be a number between 10 and 50 000 000");
+		initialStack.setConversionError(
+				bundle.getMessage(MessagesConstants.BLINDSTRUCTURE_PANEL_CHIPS_SMALLBLIND_TOOLTIP,
+				BlindConstants.MIN_INITIAL_STACK_SIZE,BlindConstants.MAX_INITIAL_STACK_SIZE));
 		initialStack.addValueChangeListener(this.parentComponent);
 
 		this.chipsSetsComboBox.addValueChangeListener(this.parentComponent);
@@ -116,7 +133,8 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 			defaultChipsSetToString.add(aSet.toString());
 		}
 
-		this.chipsSetsComboBox = new ComboBox("Chips set");
+		this.chipsSetsComboBox = new ComboBox(
+				bundle.getMessage(MessagesConstants.BLINDSTRUCTURE_PANEL_CHIPS_SMALLBLIND_SET));
 		
 		for(String chipSet : defaultChipsSetToString){
 			this.chipsSetsComboBox.addItem(chipSet);

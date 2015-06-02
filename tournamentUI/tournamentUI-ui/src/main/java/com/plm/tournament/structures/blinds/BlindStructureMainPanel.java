@@ -1,7 +1,10 @@
 package com.plm.tournament.structures.blinds;
 
+import com.plm.MyUI;
 import com.plm.framework.ui.mvp.BasePanel;
 import com.plm.framework.ui.mvp.BaseView;
+import com.plm.internationalization.ParametrizedResourceBundle;
+import com.plm.messages.constants.MessagesConstants;
 import com.vaadin.ui.HorizontalLayout;
 
 /**
@@ -14,10 +17,18 @@ public class BlindStructureMainPanel extends BasePanel {
 	 * Generated serial version UID
 	 */
 	private static final long serialVersionUID = -3501751795892817295L;
+	
+	/**
+	 * bundle for message
+	 */
+	private static final ParametrizedResourceBundle bundle = ParametrizedResourceBundle.
+			getParametrizedBundle(MessagesConstants.UI_MESSAGE_FILE_BASE_NAME, MyUI.getUserLocale());
+	
 	/**
 	 * constant which define the caption of panel
 	 */
-	private static final String STRUCTURE_BUILDER_PANEL_CAPTION = "Structure builder";
+	private static final String STRUCTURE_BUILDER_PANEL_CAPTION = bundle.
+			getMessage(MessagesConstants.INFORMATION_PANEL_INFORMATIONS_TITLE);
 	
 	/**
 	 * Panel width

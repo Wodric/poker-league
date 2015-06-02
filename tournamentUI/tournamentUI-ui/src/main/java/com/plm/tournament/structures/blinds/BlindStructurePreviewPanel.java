@@ -1,8 +1,11 @@
 package com.plm.tournament.structures.blinds;
 
+import com.plm.MyUI;
 import com.plm.component.datagrid.BlindStructureGrid;
 import com.plm.framework.ui.mvp.BasePanel;
 import com.plm.framework.ui.mvp.BaseView;
+import com.plm.internationalization.ParametrizedResourceBundle;
+import com.plm.messages.constants.MessagesConstants;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.VerticalLayout;
 
@@ -18,9 +21,16 @@ public class BlindStructurePreviewPanel extends BasePanel{
 	private static final long serialVersionUID = 4561111650513726471L;
 	
 	/**
+	 * bundle for message
+	 */
+	private static final ParametrizedResourceBundle bundle = ParametrizedResourceBundle.
+			getParametrizedBundle(MessagesConstants.UI_MESSAGE_FILE_BASE_NAME, MyUI.getUserLocale());
+	
+	/**
 	 * constant which define the caption of panel
 	 */
-	private static final String STRUCTURE_PREVIEW_PANEL_CAPTION = "Structure preview";
+	private static final String STRUCTURE_PREVIEW_PANEL_CAPTION = bundle.
+			getMessage(MessagesConstants.BLINDSTRUCTURE_PANEL_STRUCTURE_TITLE);
 	
 	
 	/**
@@ -31,7 +41,8 @@ public class BlindStructurePreviewPanel extends BasePanel{
 	/**
 	 * the label for saveStructureBtn
 	 */
-	public static String SAVE_STRUCTURE_LABEL = "Save";
+	public static String SAVE_STRUCTURE_LABEL =  bundle.
+			getMessage(MessagesConstants.BLINDSTRUCTURE_PANEL_STRUCTURE_BTN_SAVE);
 	
 	
 	/**

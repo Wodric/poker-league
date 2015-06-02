@@ -1,8 +1,11 @@
 package com.plm.tournament.structures.blinds;
 
 
+import com.plm.MyUI;
 import com.plm.framework.ui.mvp.BasePanel;
 import com.plm.framework.ui.mvp.BaseView;
+import com.plm.internationalization.ParametrizedResourceBundle;
+import com.plm.messages.constants.MessagesConstants;
 import com.plm.tournament.structures.blinds.beans.BlindStructureParameters;
 import com.plm.tournamentCore.blind.BlindConstants;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
@@ -29,9 +32,16 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 	private static final long serialVersionUID = 6828111650513726232L;
 	
 	/**
+	 * bundle for message
+	 */
+	private static final ParametrizedResourceBundle bundle = ParametrizedResourceBundle.
+			getParametrizedBundle(MessagesConstants.UI_MESSAGE_FILE_BASE_NAME, MyUI.getUserLocale());
+	
+	/**
 	 * Constaint which define the caption of panel
 	 */
-	private static final String MAIN_INFORMATION_PANEL_CAPTION = "Main information";
+	private static final String MAIN_INFORMATION_PANEL_CAPTION = bundle.
+			getMessage(MessagesConstants.BLINDSTRUCTURE_PANEL_MAIN_TITLE);
 	
 	/**
 	 * Panel width
@@ -55,13 +65,17 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 		
 		FormLayout content = new FormLayout();	
 		content.addComponent(this.binder.buildAndBind
-				("Number of player", BlindStructureParameters.PARAMETER_NAME_MAX_PLAYER_NUMBER));
+				(bundle.getMessage(MessagesConstants.INFORMATION_PANEL_INFORMATIONS_PLAYERS),
+						BlindStructureParameters.PARAMETER_NAME_MAX_PLAYER_NUMBER));
 		content.addComponent(this.binder.buildAndBind
-				("Time per level", BlindStructureParameters.PARAMETER_NAME_LEVEL_DURATION));
+				(bundle.getMessage(MessagesConstants.INFORMATION_PANEL_INFORMATIONS_DURATION_LEVELS),
+						BlindStructureParameters.PARAMETER_NAME_LEVEL_DURATION));
 		content.addComponent(this.binder.buildAndBind
-				("Duration (min)", BlindStructureParameters.PARAMETER_NAME_TOURNAMENT_DURATION_EXPECTED));
+				(bundle.getMessage(MessagesConstants.INFORMATION_PANEL_INFORMATIONS_DURATION_TOURNAMENT),
+						BlindStructureParameters.PARAMETER_NAME_TOURNAMENT_DURATION_EXPECTED));
 		content.addComponent(this.binder.buildAndBind
-				("Allow ante",  BlindStructureParameters.PARAMETER_NAME_WITH_ANTE));
+				(bundle.getMessage(MessagesConstants.INFORMATION_PANEL_INFORMATIONS_ANTE),
+						BlindStructureParameters.PARAMETER_NAME_WITH_ANTE));
 		content.setMargin(true);
 		content.setSpacing(true);
 
@@ -79,13 +93,17 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 
 		FormLayout content = new FormLayout();	
 		content.addComponent(this.binder.buildAndBind
-				("Number of player", BlindStructureParameters.PARAMETER_NAME_MAX_PLAYER_NUMBER));
+				(bundle.getMessage(MessagesConstants.INFORMATION_PANEL_INFORMATIONS_PLAYERS),
+						BlindStructureParameters.PARAMETER_NAME_MAX_PLAYER_NUMBER));
 		content.addComponent(this.binder.buildAndBind
-				("Time per level", BlindStructureParameters.PARAMETER_NAME_LEVEL_DURATION));
+				(bundle.getMessage(MessagesConstants.INFORMATION_PANEL_INFORMATIONS_DURATION_LEVELS),
+						BlindStructureParameters.PARAMETER_NAME_LEVEL_DURATION));
 		content.addComponent(this.binder.buildAndBind
-				("Duration (min)", BlindStructureParameters.PARAMETER_NAME_TOURNAMENT_DURATION_EXPECTED));
+				(bundle.getMessage(MessagesConstants.INFORMATION_PANEL_INFORMATIONS_DURATION_TOURNAMENT),
+						BlindStructureParameters.PARAMETER_NAME_TOURNAMENT_DURATION_EXPECTED));
 		content.addComponent(this.binder.buildAndBind
-				("Allow ante",  BlindStructureParameters.PARAMETER_NAME_WITH_ANTE));
+				(bundle.getMessage(MessagesConstants.INFORMATION_PANEL_INFORMATIONS_ANTE),
+						BlindStructureParameters.PARAMETER_NAME_WITH_ANTE));
 		content.setMargin(true);
 		content.setSpacing(true);
 
@@ -102,21 +120,27 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 				(BlindStructureParameters.PARAMETER_NAME_MAX_PLAYER_NUMBER);
 		maxPlayer.setNullRepresentation(
 				String.valueOf(BlindConstants.DEFAULT_NUMBER_PLAYER));
-		maxPlayer.setConversionError("Value must be a number between 2 and 50 000");
+		maxPlayer.setConversionError(
+				bundle.getMessage(MessagesConstants.INFORMATION_PANEL_INFORMATIONS_PLAYERS_TOOLTIP,
+				BlindConstants.MIN_NUMBER_PLAYER, BlindConstants.MAX_NUMBER_PLAYER));
 		maxPlayer.addValueChangeListener(this.parentComponent);
 
 		AbstractTextField levelDuration = (AbstractTextField) binder.getField
 				(BlindStructureParameters.PARAMETER_NAME_LEVEL_DURATION);
 		levelDuration.setNullRepresentation(
 				String.valueOf(BlindConstants.DEFAULT_LEVEL_DURATION));
-		levelDuration.setConversionError("Value must be a number between 10 and 300");
+		levelDuration.setConversionError(
+				bundle.getMessage(MessagesConstants.INFORMATION_PANEL_INFORMATIONS_DURATION_LEVELS_TOOLTIP,
+				BlindConstants.MIN_LEVEL_DURATION, BlindConstants.MAX_LEVEL_DURATION));
 		levelDuration.addValueChangeListener(this.parentComponent);
 		
 		AbstractTextField tournamentDuration = (AbstractTextField) binder.getField
 				(BlindStructureParameters.PARAMETER_NAME_TOURNAMENT_DURATION_EXPECTED);
 		tournamentDuration.setNullRepresentation(
 				String.valueOf(BlindConstants.DEFAULT_TOURNAMENT_DURATION));
-		tournamentDuration.setConversionError("Value must be a number between 30 and 60 000");
+		tournamentDuration.setConversionError(
+				bundle.getMessage(MessagesConstants.INFORMATION_PANEL_INFORMATIONS_DURATION_TOURNAMENT_TOOLTIP,
+				BlindConstants.MIN_TOURNAMENT_DURATION, BlindConstants.MAX_TOURNAMENT_DURATION));
 		tournamentDuration.addValueChangeListener(this.parentComponent);
 		
 		CheckBox withAnte = (CheckBox) binder.getField
