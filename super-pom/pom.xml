@@ -143,6 +143,7 @@
 		<module>../championshipCore</module>
 		<module>../dao</module>
 		<module>../internalFramework</module>
+		<module>../tournamentUI</module>
 	</modules>
 
 	<profiles>

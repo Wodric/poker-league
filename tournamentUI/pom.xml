@@ -138,7 +138,6 @@
 		</profile>
 	</profiles>
 	<modules>
-
 		<module>tournamentUI-ui</module>
 		<module>tournamentUI-production</module>
 	</modules>
