@@ -30,7 +30,7 @@ public class BlindStructureParameters implements Serializable{
     /**
      * Parameter name for max player number
      */
-    public static String PARAMETER_NAME_MAX_PLAYER_NUMBER = "maxPlayerNumber";
+    public static final String PARAMETER_NAME_MAX_PLAYER_NUMBER = "maxPlayerNumber";
 	
 	/**
 	 *  the initial size of player stack with constrains validation
@@ -42,7 +42,7 @@ public class BlindStructureParameters implements Serializable{
     /**
      * Parameter name for initial stack size
      */
-    public static String PARAMETER_NAME_INITIAL_STACK_SIZE = "initialStackSize";
+    public static final String PARAMETER_NAME_INITIAL_STACK_SIZE = "initialStackSize";
 	
     /**
      *  the duration of the tournament you expect with constrains validation
@@ -54,7 +54,7 @@ public class BlindStructureParameters implements Serializable{
     /**
      * Parameter name for tournament duration expected
      */
-    public static String PARAMETER_NAME_TOURNAMENT_DURATION_EXPECTED = "tournamentDurationExpected";
+    public static final String PARAMETER_NAME_TOURNAMENT_DURATION_EXPECTED = "tournamentDurationExpected";
 	
     /**
      * duration of level with constrains validation
@@ -66,7 +66,7 @@ public class BlindStructureParameters implements Serializable{
     /**
      * Parameter name for level duration
      */
-    public static String PARAMETER_NAME_LEVEL_DURATION = "levelDuration";
+    public static final String PARAMETER_NAME_LEVEL_DURATION = "levelDuration";
     
     /**
      *  the startup big blind. MUST BE A MULTIPLE OF SMALLEST CHIP
@@ -79,7 +79,7 @@ public class BlindStructureParameters implements Serializable{
 	/**
      * Parameter name for level duration
      */
-    public static String PARAMETER_NAME_MINIMUM_SMALL_BLIND_VALUE = "minimumSmallBlindValue";
+    public static final String PARAMETER_NAME_MINIMUM_SMALL_BLIND_VALUE = "minimumSmallBlindValue";
 	
 	/**
 	 *  allow ante in tournament if true
@@ -88,7 +88,7 @@ public class BlindStructureParameters implements Serializable{
     /**
      * Parameter name for with ante
      */
-    public static String PARAMETER_NAME_WITH_ANTE = "withAnte";
+    public static final String PARAMETER_NAME_WITH_ANTE = "withAnte";
 	
 	/**
 	 * the list of chip available in tournament
@@ -97,7 +97,7 @@ public class BlindStructureParameters implements Serializable{
     /**
      * Parameter name for with ante
      */
-    public static String PARAMETER_NAME_CHIP_SET = "chipSet";
+    public static final String PARAMETER_NAME_CHIP_SET = "chipSet";
 	
 	
 	

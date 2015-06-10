@@ -21,6 +21,10 @@ import com.vaadin.ui.TextField;
 public class BlindStructureMainInformationPanel extends BasePanel{
 	
 	/**
+	 * The java space char
+	 */
+	public static final String JAVA_SPACE_CHAR = "\\p{javaSpaceChar}";
+	/**
 	 * Bean validator for structure parameters and variable
 	 */
 	private final BeanFieldGroup<BlindStructureParameters> binder = 
@@ -178,8 +182,8 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 	 * @return return the integer value in max player field
 	 */
 	public int getMaxPlayerFieldValue(){
-		String valueWithoutSpace =  this.getMaxPlayerField().getValue().replaceAll("\\p{javaSpaceChar}","");
-		return Integer.valueOf(valueWithoutSpace).intValue();
+		String valueWithoutSpace =  this.getMaxPlayerField().getValue().replaceAll(JAVA_SPACE_CHAR,"");
+		return Integer.parseInt(valueWithoutSpace);
 	}
 	
 	/**
@@ -196,8 +200,8 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 	 * @return return the integer value in level duration field
 	 */
 	public int getLevelDurationFieldValue(){
-		String valueWithoutSpace =  this.getLevelDurationField().getValue().replaceAll("\\p{javaSpaceChar}","");
-		return Integer.valueOf(valueWithoutSpace).intValue();
+		String valueWithoutSpace =  this.getLevelDurationField().getValue().replaceAll(JAVA_SPACE_CHAR,"");
+		return Integer.parseInt(valueWithoutSpace);
 	}
 	
 	/**
@@ -214,8 +218,8 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 	 * @return return the integer value in tournament duration field
 	 */
 	public int getTournamentDurationFieldValue(){
-		String valueWithoutSpace =  this.getTournamentDurationField().getValue().replaceAll("\\p{javaSpaceChar}","");
-		return Integer.valueOf(valueWithoutSpace).intValue();
+		String valueWithoutSpace =  this.getTournamentDurationField().getValue().replaceAll(JAVA_SPACE_CHAR,"");
+		return Integer.parseInt(valueWithoutSpace);
 	}
 	
 	/**

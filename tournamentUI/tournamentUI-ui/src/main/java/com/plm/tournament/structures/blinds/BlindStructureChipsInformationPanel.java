@@ -50,7 +50,7 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 	/**
 	 * Panel width
 	 */
-	public static float PANEL_WIDTH = (float) 28.0;
+	public static final float PANEL_WIDTH = (float) 28.0;
 	
 	/**
 	 * Component parent, used to get listener for exemple

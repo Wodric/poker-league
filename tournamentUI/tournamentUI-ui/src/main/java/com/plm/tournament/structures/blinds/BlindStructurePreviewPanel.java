@@ -48,7 +48,7 @@ public class BlindStructurePreviewPanel extends BasePanel{
 	/**
 	 * Panel width
 	 */
-	public static float PANEL_WIDTH = (float) 44.0;
+	public static final float PANEL_WIDTH = (float) 44.0;
 	
 	/**
 	 * 

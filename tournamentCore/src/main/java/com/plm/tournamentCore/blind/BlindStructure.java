@@ -321,7 +321,7 @@ public class BlindStructure implements Serializable{
 	 */
 	private int calculateAnteFromBigBlind(double pBlindMultiple, int pBlindDecimal){
 		if(pBlindDecimal >= BlindConstants.MINIMUM_BLIND_DECIMAL_FOR_ANTE){
-			return (int) (pBlindMultiple * Math.pow(BlindConstants.DECIMAL_FACTOR, (pBlindDecimal - 1)));
+			return (int) (pBlindMultiple * Math.pow(BlindConstants.DECIMAL_FACTOR, pBlindDecimal - 1));
 		}
 		else{
 			return 0; // if blind are small there is no blind

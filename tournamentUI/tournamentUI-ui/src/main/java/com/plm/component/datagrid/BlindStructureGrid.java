@@ -18,22 +18,22 @@ public class BlindStructureGrid extends Grid {
 	/**
 	 * Name and id of the time column in BlindStructureGrid
 	 */
-	public static String COLUMN_TIME_NAME = "duration";
+	public static final String COLUMN_TIME_NAME = "duration";
 	
 	/**
 	 * Name and id of the small blind column in BlindStructureGrid
 	 */
-	public static String COLUMN_SMALL_BLIND_NAME = "smallBlind";
+	public static final String COLUMN_SMALL_BLIND_NAME = "smallBlind";
 	
 	/**
 	 * Name and id of the time big blind in BlindStructureGrid
 	 */
-	public static String COLUMN_BIG_BLIND_NAME = "bigBlind";
+	public static final String COLUMN_BIG_BLIND_NAME = "bigBlind";
 	
 	/**
 	 * Name and id of the ante column in BlindStructureGrid
 	 */
-	public static String COLUM_ANTE_NAME = "ante";
+	public static final String COLUM_ANTE_NAME = "ante";
 	
 	/**
 	 * blind Structure
