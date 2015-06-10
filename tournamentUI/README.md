@@ -7,7 +7,7 @@ Template for a full-blown Vaadin application that only requires a Servlet 3.0 co
 Project Structure
 =================
 
-The project consists of the following three modules:
+The project consists of the following three modules: 
 
 - parent project: common metadata and configuration
 - tournamentUI-widgetset: widgetset, custom client side code and dependencies to widget add-ons
