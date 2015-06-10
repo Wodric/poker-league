@@ -29,7 +29,7 @@ public class ChipsSet implements Serializable{
 	/**
 	 * the default chips set index from @link #getDefaultChipsSets() getDefaultChipsSets}
 	 */
-	public static int DEFAULT_CHIPS_SET_INDEX = 0;
+	public static final int DEFAULT_CHIPS_SET_INDEX = 0;
 
 	/**
 	 * Create a chip set from the chip it will contains

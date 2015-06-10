@@ -24,7 +24,7 @@ public class ParametrizedResourceBundle extends ResourceBundle{
 	 * the default message language is English. this string contains 
 	 * ISO 639 alpha-2 code for default language
 	 */
-	public static String DEFAULT_MESSAGE_LANGUAGE = "en";
+	public static final String DEFAULT_MESSAGE_LANGUAGE = "en";
 
 	/**
 	 * This constructor build the final ResourceBundle of the class from the file name and the local

@@ -7,25 +7,25 @@ public class BlindConstants {
 	/**
 	 * Factor to add or remove a decimal for a number
 	 */
-	public static int DECIMAL_FACTOR = 10;
+	public static final int DECIMAL_FACTOR = 10;
 	
 	/**
 	 * The minimum value for big blind with ante
 	 */
-	public static int MINIMUM_BLIND_DECIMAL_FOR_ANTE = 3;
+	public static final int MINIMUM_BLIND_DECIMAL_FOR_ANTE = 3;
 	
 	/**
 	 * Set duration to 0 when it's not set by user
 	 */
-	public static int NO_DURATION = 0;
+	public static final int NO_DURATION = 0;
 	/**
 	 * to define if structure uses ante= true
 	 */
-	public static boolean WITH_ANTE = true; 
+	public static final boolean WITH_ANTE = true; 
 	/**
 	 * to define if structure doesn't use ante = false
 	 */
-	public static boolean WITHOUT_ANTE = false; 
+	public static final boolean WITHOUT_ANTE = false; 
 	/**
 	 * This variable define the list of blind authorized
 	 */
