@@ -5,6 +5,9 @@ import java.util.Enumeration;
 import java.util.Locale;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 /**
  *  parametrized Ressource bundle must be used like ressource bundle
  * The parameters will replace the pattern "{X}" where X is a number. The pattern is 0-based
@@ -14,6 +17,8 @@ import java.util.ResourceBundle;
  * @author Alexandre Lefèvre "Wodric"
  */
 public class ParametrizedResourceBundle extends ResourceBundle{
+	
+	private static Logger logger = LoggerFactory.getLogger(ParametrizedResourceBundle.class);
 	
 	/**
 	 * Bundle we will get the messages
@@ -52,6 +57,7 @@ public class ParametrizedResourceBundle extends ResourceBundle{
 			}
 			catch(MissingResourceException e1){
 				// Must be a base name error or local not supported
+				logger.error(e1.getMessage());
 				throw new MissingResourceException("Base name or local not supported",
 						ParametrizedResourceBundle.class.getName(),pBaseName);
 			}
@@ -68,6 +74,7 @@ public class ParametrizedResourceBundle extends ResourceBundle{
         try {
             return this.bundle.getString(key);
         } catch (MissingResourceException e) {
+        	logger.error("Can't find message with key'" + key + "'");
             return '!' + key + '!';
         }
     }
@@ -88,6 +95,7 @@ public class ParametrizedResourceBundle extends ResourceBundle{
         try {
             return MessageFormat.format(this.bundle.getString(key), params);
         } catch (MissingResourceException e) {
+        	logger.error("Can't find message with key'" + key + "'");
             return '!' + key + '!';
         }
     }
