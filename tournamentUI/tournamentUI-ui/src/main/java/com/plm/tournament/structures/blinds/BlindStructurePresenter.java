@@ -45,7 +45,8 @@ public class BlindStructurePresenter implements
 		if(pEvent.getSource().equals(this.structureView.
 				getStructurePreviewPanel().getSaveStructureBtn())){
 			// will save the 
-			logger.warn("Not implement yet");
+			this.structure.saveBlindStructure();
+			logger.warn("Implemented");
 			
 		}
 	}

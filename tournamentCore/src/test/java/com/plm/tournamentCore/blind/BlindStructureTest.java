@@ -6,6 +6,9 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Test;
 
 import com.plm.tournamentCore.chip.Chip;
@@ -13,6 +16,10 @@ import com.plm.tournamentCore.chip.ChipsSet;
 
 public class BlindStructureTest {
 
+	private static String BLIND_LVL16_JSON_DEFAUTL_STRUCTURE = "{\"blinds\":\"12000/24000/3000\",\"duration\":20,\"id\":16}";
+	private static String BLIND_LVL1_JSON_DEFAUTL_STRUCTURE = "{\"blinds\":\"25/50/0\",\"duration\":20,\"id\":0}";
+	private static String NO_LEVEL_JSON_DEFAUTL_STRUCTURE = "{\"levels\":[]}";
+	
 	@Test
 	public void calculateBigBlindMaxTestHighLimitWithoutAnte() {
 		BlindStructure structure = new BlindStructure();
@@ -249,5 +256,25 @@ public class BlindStructureTest {
 		assertTrue(structure.isAnte());
 		int lastAnteRecalculate = structure.getStructure().get(structure.getStructure().size()-1).getAnte();
 		assertEquals(lastAnte,lastAnteRecalculate);
+	}
+	
+	@Test
+	public void blindStructureAsJsonWithoutInitialize(){
+		BlindStructure structure = new BlindStructure(); 
+		assertEquals(NO_LEVEL_JSON_DEFAUTL_STRUCTURE, structure.getStructureAsJsonObject().toString());
+	}
+	
+	@Test (expected = JSONException.class)
+	public void blindStructureAsJsonDefaultStructure(){
+		BlindStructure defaultStructure = BlindStructure.getDefaultBlindStructure();
+		JSONObject jsonDefaultStructure = defaultStructure.getStructureAsJsonObject();
+		
+		JSONArray levelsArray = (JSONArray) jsonDefaultStructure.get("levels");
+		int sizeDefaultStructure = defaultStructure.getStructure().size();
+		
+		assertEquals(BLIND_LVL1_JSON_DEFAUTL_STRUCTURE,levelsArray.get(0).toString());
+		assertEquals(BLIND_LVL16_JSON_DEFAUTL_STRUCTURE,levelsArray.get(sizeDefaultStructure-1).toString());
+		
+		levelsArray.get(sizeDefaultStructure);
 	}
 }

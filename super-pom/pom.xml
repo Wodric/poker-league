@@ -9,6 +9,7 @@
 	<properties>
 		<slf4j.version>1.7.12</slf4j.version>
 		<log4j.version>2.3</log4j.version>
+		<hibernate.version>4.3.10.Final</hibernate.version>
 	</properties>
 
 	<!-- Manage dependency version -->
@@ -50,6 +51,33 @@
 				<groupId>org.apache.logging.log4j</groupId>
 				<artifactId>log4j-slf4j-impl</artifactId>
 				<version>${log4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-core</artifactId>
+				<version>${hibernate.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-c3p0</artifactId>
+				<version>${hibernate.version}</version>
+			</dependency>
+			<!-- Hibernate c3p0 connection pool -->
+			<dependency>
+				<groupId>org.hibernate</groupId>
+				<artifactId>hibernate-c3p0</artifactId>
+				<version>${hibernate.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>5.1.35</version>
+			</dependency>
+			<dependency>
+				<groupId>org.json</groupId>
+				<artifactId>json</artifactId>
+				<version>20141113</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

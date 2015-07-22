@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.plm.dao.tournament.LegalFee" table="legalFee" catalog="PokerLeagueManager" optimistic-lock="version">
+        <id name="idFee" type="int">
+            <column name="idFee" />
+            <generator class="identity" />
+        </id>
+        <property name="shortName" type="string">
+            <column name="shortName" length="50" not-null="true" />
+        </property>
+        <property name="description" type="string">
+            <column name="description" length="200" />
+        </property>
+        <property name="feePercent" type="java.lang.Integer">
+            <column name="feePercent" />
+        </property>
+        <property name="feeFixed" type="java.lang.Integer">
+            <column name="feeFixed" />
+        </property>
+        <set name="tournaments" table="tournament" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="legalFee_feeId" />
+            </key>
+            <one-to-many class="com.plm.dao.tournament.Tournament" />
+        </set>
+    </class>
+</hibernate-mapping>

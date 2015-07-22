@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8'?>
+	<!DOCTYPE hibernate-configuration PUBLIC
+	          '-//Hibernate/Hibernate Configuration DTD 3.0//EN'
+	          'http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd'>
+
+<hibernate-configuration>
+	<session-factory>
+		<!-- Database connection settings -->
+		<property name='connection.driver_class'>com.mysql.jdbc.Driver</property>
+		<property name='connection.url'>jdbc:mysql://localhost:3306/PokerLeagueManager</property>
+		<property name='connection.username'>root</property>
+		<property name='connection.password'>maria</property>
+		<property name="show_sql">true</property>
+
+		<!-- JDBC connection pool (use the built-in) -->
+		<property name="connection.provider_class">org.hibernate.connection.C3P0ConnectionProvider</property>
+		<property name="hibernate.c3p0.acquire_increment">1</property>
+		<property name="hibernate.c3p0.idle_test_period">120</property>
+		<property name="hibernate.c3p0.min_size">1</property>
+		<property name="hibernate.c3p0.max_size">10</property>
+		<property name="hibernate.c3p0.max_statements">50</property>
+		<property name="hibernate.c3p0.timeout">120</property>
+		<property name="hibernate.c3p0.acquireRetryAttempts">1</property>
+		<property name="hibernate.c3p0.acquireRetryDelay">250</property>
+		<!--  Dev -->
+		<property name="hibernate.c3p0.validate">true</property>
+
+		<!-- SQL dialect -->
+		<property name='dialect'>org.hibernate.dialect.MySQL5InnoDBDialect</property>
+
+		<!-- Enable Hibernate's automatic session context management -->
+		<property name="current_session_context_class">thread</property>
+		<!-- Disable the second-level cache -->
+		<property name="cache.provider_class">org.hibernate.cache.internal.NoCacheProvider</property>
+
+
+		<!-- Echo all executed SQL to stdout -->
+		<property name='show_sql'>true</property>
+		
+		<mapping resource="mappings/BlindStructure.hbm.xml"/>
+		<mapping resource="mappings/Tournament.hbm.xml"/>
+		<mapping resource="mappings/LegalFee.hbm.xml"/>
+	</session-factory>
+	
+
+</hibernate-configuration>
