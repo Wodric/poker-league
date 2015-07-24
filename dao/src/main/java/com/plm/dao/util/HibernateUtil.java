@@ -52,6 +52,10 @@ public class HibernateUtil {
      * @return the session in auto flush mode
      */
     public static Session getCommitFlushModeSession(){
+    	if(sessionFactory == null){
+    		getSessionFactory();
+    	}
+    
     	Session flusedModeSession = sessionFactory.openSession();
     	flusedModeSession.setFlushMode(FlushMode.COMMIT);
     	return flusedModeSession;
@@ -62,6 +66,10 @@ public class HibernateUtil {
      * @return the session in auto flush mode
      */
     public static Session getAutoFlushModeSession(){
+    	if(sessionFactory == null){
+    		getSessionFactory();
+    	}
+    	
     	return sessionFactory.openSession();
     }
   
