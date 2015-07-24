@@ -1,8 +1,9 @@
 package com.plm.dao.tournament.service;
 
-import org.hibernate.FlushMode;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.plm.dao.tournament.BlindStructure;
 import com.plm.dao.util.HibernateUtil;
@@ -12,6 +13,9 @@ import com.plm.dao.util.HibernateUtil;
  * @author Alexandre Lefèvre "Wodric"
  */
 public class BlindStructureDaoService {
+	
+	private static Logger logger = LoggerFactory.getLogger(BlindStructureDaoService.class);
+
 
 	/**
 	 * THis methode save in database the pBlindStructureAsJson converted as blind structure
@@ -29,20 +33,22 @@ public class BlindStructureDaoService {
 	 */
 	public static long createBlindStructure(BlindStructure pBlindStructure){
         Transaction tcx = null;
+        System.out.println("test");
         Session session = HibernateUtil.getCommitFlushModeSession();
+        long id = -1;
     	try{
-    		session.setFlushMode(FlushMode.COMMIT);
             tcx = session.beginTransaction();
-            session.save(pBlindStructure);
+            id = (Integer) session.save(pBlindStructure);
             tcx.commit();
     	}
     	catch( Throwable e){
     		tcx.rollback();
+    		logger.error(e.getMessage(), e);
     	}
     	finally{
             session.close();
     	}
-		return pBlindStructure.getIdBlindStructure();
+		return id;
 	}
 
 }
