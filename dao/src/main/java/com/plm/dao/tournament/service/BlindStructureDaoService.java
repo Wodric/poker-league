@@ -33,12 +33,11 @@ public class BlindStructureDaoService {
 	 */
 	public static long createBlindStructure(BlindStructure pBlindStructure){
         Transaction tcx = null;
-        System.out.println("test");
         Session session = HibernateUtil.getCommitFlushModeSession();
         long id = -1;
     	try{
             tcx = session.beginTransaction();
-            id = (Integer) session.save(pBlindStructure);
+            id = (Long) session.save(pBlindStructure);
             tcx.commit();
     	}
     	catch( Throwable e){

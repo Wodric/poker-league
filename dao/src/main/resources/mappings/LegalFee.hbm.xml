@@ -4,7 +4,7 @@
 
 <hibernate-mapping>
     <class name="com.plm.dao.tournament.LegalFee" table="legalFee" catalog="PokerLeagueManager" optimistic-lock="version">
-        <id name="idFee" type="int">
+        <id name="idFee" type="java.lang.Long">
             <column name="idFee" />
             <generator class="identity" />
         </id>

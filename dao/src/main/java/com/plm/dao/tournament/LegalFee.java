@@ -19,7 +19,7 @@ public class LegalFee implements Serializable {
 	/**
 	 *  id fee, auto generated
 	 */
-	private int idFee;
+	private long idFee;
 	
 	/**
 	 * fee short name
@@ -64,11 +64,11 @@ public class LegalFee implements Serializable {
 		this.tournaments = tournaments;
 	}
 
-	public int getIdFee() {
+	public long getIdFee() {
 		return this.idFee;
 	}
 
-	public void setIdFee(int idFee) {
+	public void setIdFee(long idFee) {
 		this.idFee = idFee;
 	}
 

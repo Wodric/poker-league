@@ -16,7 +16,7 @@ public class Tournament implements Serializable {
 	/**
 	 * Tournament id auto generated
 	 */
-	private int idTournament;
+	private long idTournament;
 	
 	/**
 	 * Blind structure for this tournament
@@ -133,11 +133,11 @@ public class Tournament implements Serializable {
 		this.rebuyChips = rebuyChips;
 	}
 
-	public int getIdTournament() {
+	public long getIdTournament() {
 		return this.idTournament;
 	}
 
-	public void setIdTournament(int idTournament) {
+	public void setIdTournament(long idTournament) {
 		this.idTournament = idTournament;
 	}
 

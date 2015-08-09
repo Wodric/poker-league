@@ -18,7 +18,7 @@ public class BlindStructure implements Serializable {
 	/**
 	 *  auto generated ID
 	 */
-	private int idBlindStructure;
+	private long idBlindStructure;
 	/**
 	 * this string contains the JSON structure representing the bliond structure:
 	 * eg:
@@ -69,11 +69,11 @@ public class BlindStructure implements Serializable {
 		this.tournaments = tournaments;
 	}
 
-    public int getIdBlindStructure() {
+    public long getIdBlindStructure() {
         return this.idBlindStructure;
     }
  
-    public void setIdBlindStructure(int idBlindStructure) {
+    public void setIdBlindStructure(long idBlindStructure) {
         this.idBlindStructure = idBlindStructure;
     }
  
