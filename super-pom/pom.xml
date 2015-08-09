@@ -178,7 +178,7 @@
 		<profile>
 			<id>dev</id>
 			<properties>
-				<tomcatPath>/opt/apache-tomcat-8.0.15</tomcatPath>
+				<tomcatPath>/opt/apache-tomcat-8.0.24</tomcatPath>
 				<tomcatAutoDeployDir>${tomcatPath}/webapps</tomcatAutoDeployDir>
 			</properties>
 		</profile>
