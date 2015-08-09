@@ -3,6 +3,10 @@ package com.plm.tournamentCore.blind;
 import java.io.Serializable;
 import java.util.LinkedList;
 
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import com.plm.dao.tournament.service.BlindStructureDaoService;
 import com.plm.tournamentCore.chip.Chip;
 import com.plm.tournamentCore.chip.ChipsSet;
 
@@ -24,8 +28,8 @@ public class BlindStructure implements Serializable{
 	/**
 	 * List of blind level which constitute the structure
 	 */
-	private LinkedList<BlindLevel> structure;
 	
+	private LinkedList<BlindLevel> structure;
 	/**
 	 * boolean representing if the structure contains ante or not.
 	 * default value : false
@@ -424,6 +428,55 @@ public class BlindStructure implements Serializable{
 		for(BlindLevel aBlindLevel : structure){
 			aBlindLevel.setAnte(0);
 		}	
+	}
+	
+	/**
+	 * Convert blind structure as JSOn to save it in database
+	 * eg:
+	 * {
+	 *	    "levels" : 
+	 *		[
+	 *			{
+	 *				"id" : "0",
+	 *				"blinds" : "25/50/0",
+	 *				"duration" : "30",
+	 *			},
+	 *			...
+	 *			...
+	 *			{
+	 *				"id" : "5",
+	 *				"blinds" : "500/1000/100",
+	 *				"duration" : "30",
+	 *			}
+	 *			...
+	 *			...
+	 *		...
+	 *	@return return the current structure as JsonObject
+	 */
+	public JSONObject getStructureAsJsonObject(){
+		JSONObject blindStructureJson = new JSONObject();
+		
+		JSONArray levels = new JSONArray();
+		int idLevel = 0;
+		if(this.structure != null && this.structure.size() != 0){
+			for(BlindLevel aLevel : this.structure){
+				JSONObject aBlindLevelAsJson = new JSONObject();
+				aBlindLevelAsJson.put("id",idLevel);
+				aBlindLevelAsJson.put("blinds",aLevel.blindsAsString());
+				aBlindLevelAsJson.put("duration",aLevel.getDuration());
+				levels.put(aBlindLevelAsJson);
+				idLevel ++;
+			}			
+		}
+		blindStructureJson.put("levels", levels);
+		return blindStructureJson;
+	}
+	
+	/**
+	 * This method use DAO service to save the current blind structure
+	 */
+	public void saveBlindStructure(){
+		BlindStructureDaoService.createBlindStructure(this.getStructureAsJsonObject().toString());
 	}
 
 }

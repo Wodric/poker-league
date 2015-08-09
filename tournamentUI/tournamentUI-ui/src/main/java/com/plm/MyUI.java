@@ -4,7 +4,8 @@ import java.util.Locale;
 
 import javax.servlet.annotation.WebServlet;
 
-import org.atmosphere.cache.SessionBroadcasterCache;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.plm.internationalization.ParametrizedResourceBundle;
 import com.plm.messages.constants.MessagesConstants;
@@ -31,12 +32,17 @@ public class MyUI extends UI {
 	 */
 	private static final long serialVersionUID = 1L;
 	
+	private static Logger logger = LoggerFactory.getLogger(MyUI.class);
+	
     Navigator navigator;
     
     private static Locale userLocale; 
     
 	@Override
     protected void init(VaadinRequest vaadinRequest) {
+	   
+	    logger.debug("Connection from " + vaadinRequest.getLocale().toLanguageTag() + " for user " + vaadinRequest.getRemoteUser());
+
 		userLocale = vaadinRequest.getLocale();
 		ParametrizedResourceBundle bundle = ParametrizedResourceBundle.
 				getParametrizedBundle(MessagesConstants.UI_MESSAGE_FILE_BASE_NAME, userLocale);

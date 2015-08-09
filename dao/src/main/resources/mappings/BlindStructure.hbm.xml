@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.plm.dao.tournament.BlindStructure" table="blindStructure" catalog="PokerLeagueManager" optimistic-lock="version">
+        <id name="idBlindStructure" type="java.lang.Long">
+            <column name="idblindStructure" />
+            <generator class="identity" />
+        </id>
+        <property name="structureJson" type="string">
+            <column name="structureJson" />
+        </property>
+        <set name="tournaments" table="tournament" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="blindStructure_idblindStructure" />
+            </key>
+            <one-to-many class="com.plm.dao.tournament.Tournament" />
+        </set>
+    </class>
+</hibernate-mapping>

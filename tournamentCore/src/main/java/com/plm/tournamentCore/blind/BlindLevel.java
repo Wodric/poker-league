@@ -10,6 +10,8 @@ import java.io.Serializable;
  *
  */
 public class BlindLevel implements Serializable {
+	
+	public static String BLIND_SEPARATOR = "/";
 	/**
 	 * generated serial number
 	 */
@@ -143,5 +145,19 @@ public class BlindLevel implements Serializable {
 		this.ante = ante;
 		return this;
 	}
-
+	
+	/**
+	 * Build  string with blind and ante follow this pattern smallblind/bigBlind/ante
+	 * eg : 
+	 * for level with 1000 small blind / 2000 small blind / 200 ante 
+	 * create the string "1000/2000/200"
+	 * @return string formatted
+	 */
+	public String blindsAsString(){
+		StringBuilder blindBuilder = new StringBuilder();
+		blindBuilder.append(this.smallBlind).append(BLIND_SEPARATOR);
+		blindBuilder.append(this.bigBlind).append(BLIND_SEPARATOR);
+		blindBuilder.append(this.ante);
+		return blindBuilder.toString();
+	}
 }

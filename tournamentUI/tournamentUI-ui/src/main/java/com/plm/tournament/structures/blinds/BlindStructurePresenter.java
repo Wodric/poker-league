@@ -1,5 +1,8 @@
 package com.plm.tournament.structures.blinds;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.plm.component.datagrid.BlindStructureGrid;
 import com.plm.tournamentCore.blind.BlindLevel;
 import com.plm.tournamentCore.blind.BlindStructure;
@@ -16,6 +19,7 @@ public class BlindStructurePresenter implements
 	BlindStructureView.BlindStructureViewListener{
 	BlindStructure structure;
 	BlindStructureViewImpl structureView;
+	private static Logger logger = LoggerFactory.getLogger(BlindStructurePresenter.class);
 
 	/**
 	 * Constructor to link all part of UI and MVP partern
@@ -41,7 +45,8 @@ public class BlindStructurePresenter implements
 		if(pEvent.getSource().equals(this.structureView.
 				getStructurePreviewPanel().getSaveStructureBtn())){
 			// will save the 
-			System.out.println("Save action not define");
+			this.structure.saveBlindStructure();
+			logger.warn("Implemented");
 			
 		}
 	}
