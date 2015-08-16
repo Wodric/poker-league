@@ -64,6 +64,14 @@
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>org.stagemonitor</groupId>
+			<artifactId>stagemonitor-web</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.stagemonitor</groupId>
+			<artifactId>stagemonitor-os</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -135,16 +143,23 @@
 					</execution>
 				</executions>
 				<configuration>
-					<file>../${parent.artifactId}/${artifactId}/target/classes/log4j2.xml</file>
+					<basedir>../${parent.artifactId}/${artifactId}/target/classes</basedir>
+					<includes>
+						<include>log4j2.xml</include>
+						<include>stagemonitor.properties</include>
+					</includes>
 					<replacements>
 						<replacement>
 							<token>%serverLocation%</token>
 							<value>${tomcatPath}</value>
 						</replacement>
+						<replacement>
+							<token>%env%</token>
+							<value>${environment.name}</value>
+						</replacement>
 					</replacements>
 				</configuration>
 			</plugin>
-
 		</plugins>
 	</build>
 
