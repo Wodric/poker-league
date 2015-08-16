@@ -53,7 +53,7 @@ public class ParametrizedResourceBundle extends ResourceBundle{
 		catch(MissingResourceException e){
 			// Test with default language before throwing exception
 			try{
-				tempBundle = ResourceBundle.getBundle(pBaseName,new Locale("en"));
+				tempBundle = ResourceBundle.getBundle(pBaseName,new Locale(DEFAULT_MESSAGE_LANGUAGE));
 			}
 			catch(MissingResourceException e1){
 				// Must be a base name error or local not supported
