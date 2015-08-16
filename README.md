@@ -5,12 +5,12 @@ Tools to manage poker leagues.
 
 Features
 ===========
-  List of features:
+  
+List of features:
   
   - Create tournament blind structure
-  
-  Following
-  =========
+
+Following features:
   - Manage user
   - Manage tournament instance
   - Manage championship
