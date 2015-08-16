@@ -1,4 +1,4 @@
-poker-league
+Poker League Manager
 ============
 
 Tools to manage poker leagues.
