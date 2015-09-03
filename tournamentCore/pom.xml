@@ -25,7 +25,7 @@
 		<dependency>
 			<groupId>com.plm</groupId>
 			<artifactId>dao</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<version>${parent.version}</version>
 			<scope>compile</scope>
 		</dependency>
 		<dependency>
