@@ -5,7 +5,7 @@
 <hibernate-mapping>
     <class name="com.plm.dao.tournament.LegalFee" table="legalFee" catalog="PokerLeagueManager" optimistic-lock="version">
         <id name="idFee" type="java.lang.Long">
-            <column name="idFee" />
+            <column name="feeId" />
             <generator class="identity" />
         </id>
         <property name="shortName" type="string">
@@ -22,7 +22,7 @@
         </property>
         <set name="tournaments" table="tournament" inverse="true" lazy="true" fetch="select">
             <key>
-                <column name="legalFee_feeId" />
+                <column name="fk_feedId" />
             </key>
             <one-to-many class="com.plm.dao.tournament.Tournament" />
         </set>

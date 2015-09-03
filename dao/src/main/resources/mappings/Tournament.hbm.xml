@@ -9,10 +9,10 @@
             <generator class="identity" />
         </id>
         <many-to-one name="blindStructure" class="com.plm.dao.tournament.BlindStructure" fetch="select">
-            <column name="blindStructure_idblindStructure" />
+            <column name="fk_blindStructureId" />
         </many-to-one>
         <many-to-one name="legalFee" class="com.plm.dao.tournament.LegalFee" fetch="select">
-            <column name="legalFeeId" />
+            <column name="fk_feedId" />
         </many-to-one>
         <property name="name" type="string">
             <column name="name" length="100" />
