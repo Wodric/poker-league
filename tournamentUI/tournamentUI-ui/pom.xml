@@ -50,6 +50,12 @@
 			<artifactId>internalFramework</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>userManagement</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 
 		<!-- Bean validation implementation -->
 		<dependency>

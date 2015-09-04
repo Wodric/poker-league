@@ -11,6 +11,7 @@
 		<log4j.version>2.3</log4j.version>
 		<hibernate.version>4.3.10.Final</hibernate.version>
 		<stagemonitor.version>0.17.1</stagemonitor.version>
+		<shiro.version>1.2.4</shiro.version>
 	</properties>
 
 	<!-- Manage dependency version -->
@@ -80,16 +81,26 @@
 				<artifactId>json</artifactId>
 				<version>20141113</version>
 			</dependency>
-		<dependency>
-			<groupId>org.stagemonitor</groupId>
-			<artifactId>stagemonitor-web</artifactId>
-			<version>${stagemonitor.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.stagemonitor</groupId>
-			<artifactId>stagemonitor-os</artifactId>
-			<version>${stagemonitor.version}</version>
-		</dependency>
+			<dependency>
+				<groupId>org.stagemonitor</groupId>
+				<artifactId>stagemonitor-web</artifactId>
+				<version>${stagemonitor.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.stagemonitor</groupId>
+				<artifactId>stagemonitor-os</artifactId>
+				<version>${stagemonitor.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.shiro</groupId>
+				<artifactId>shiro-core</artifactId>
+				<version>${shiro.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.shiro</groupId>
+				<artifactId>shiro-web</artifactId>
+				<version>${shiro.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
