@@ -192,6 +192,7 @@
 		<module>../tournamentCore</module>
 		<module>../championshipCore</module>
 		<module>../dao</module>
+		<module>../userManagement</module>
 		<module>../internalFramework</module>
 		<module>../tournamentUI</module>
 	</modules>
