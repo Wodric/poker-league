@@ -68,7 +68,7 @@ ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `PokerLeagueManager`.`user`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `user` (
+CREATE TABLE IF NOT EXISTS `PokerLeagueManager`.`user` (
   `userId` BIGINT NOT NULL,
   `username` VARCHAR(32) CHARACTER SET 'utf8' NOT NULL,
   `email` VARCHAR(255) NOT NULL,
@@ -78,24 +78,24 @@ CREATE TABLE IF NOT EXISTS `user` (
   `verified` TINYINT(1) NULL DEFAULT 0,
   `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   `passwordModificationTime` TIMESTAMP NULL,
-  PRIMARY KEY (`userId`))
-ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `fk_userInformationId` BIGINT NOT NULL,
+  PRIMARY KEY (`userId`, `fk_userInformationId`),
+  INDEX `fk_user_userInformation1_idx` (`fk_userInformationId` ASC),
+  CONSTRAINT `fk_user_userInformation1`
+    FOREIGN KEY (`fk_userInformationId`)
+    REFERENCES `PokerLeagueManager`.`userInformation` (`userInformationId`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
 -- Table `PokerLeagueManager`.`userInformation`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `userInformation` (
+CREATE TABLE IF NOT EXISTS `PokerLeagueManager`.`userInformation` (
   `userInformationId` BIGINT NOT NULL,
-  `user_userId` BIGINT NOT NULL,
-  PRIMARY KEY (`userInformationId`, `user_userId`),
-  INDEX `fk_userInformation_user1_idx` (`user_userId` ASC),
-  CONSTRAINT `fk_userInformation_user1`
-    FOREIGN KEY (`user_userId`)
-    REFERENCES `PokerLeagueManager`.`user` (`userId`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  PRIMARY KEY (`userInformationId`))
+ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
 
 
 -- -----------------------------------------------------
