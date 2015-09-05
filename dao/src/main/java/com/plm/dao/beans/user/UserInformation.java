@@ -1,4 +1,4 @@
-package com.plm.dao.user;
+package com.plm.dao.beans.user;
 
 /**
  * UserInformation mapping class see maapings/UserInformation.hbm.xml files in ressources for mapping

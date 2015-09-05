@@ -1,4 +1,4 @@
-package com.plm.dao.user.permission;
+package com.plm.dao.beans.user.permission;
 
 import java.util.HashSet;
 import java.util.Set;

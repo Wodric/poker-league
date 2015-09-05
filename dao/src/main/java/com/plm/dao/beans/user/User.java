@@ -1,10 +1,10 @@
-package com.plm.dao.user;
+package com.plm.dao.beans.user;
 
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.plm.dao.user.permission.Role;
+import com.plm.dao.beans.user.permission.Role;
 
 /**
  * User mapping class see mappings/User.hbm.xml files in ressources for mapping
