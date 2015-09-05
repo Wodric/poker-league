@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 5 sept. 2015 09:39:43 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="UserInformation" table="userInformation" catalog="PokerLeagueManager" optimistic-lock="version">
+        <id name="fkUserId" type="long">
+            <column name="fk_userId" />
+            <generator class="foreign">
+                <param name="property">user</param>
+            </generator>
+        </id>
+        <one-to-one name="user" class="User" constrained="true"></one-to-one>
+    </class>
+</hibernate-mapping>

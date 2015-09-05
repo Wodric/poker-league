@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 5 sept. 2015 09:39:43 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="User" table="user" catalog="PokerLeagueManager" optimistic-lock="version">
+        <id name="userId" type="long">
+            <column name="userId" />
+            <generator class="assigned" />
+        </id>
+        <property name="username" type="string">
+            <column name="username" length="32" not-null="true" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" not-null="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="65535" not-null="true" />
+        </property>
+        <property name="passwordSalt" type="string">
+            <column name="passwordSalt" length="65535" not-null="true" />
+        </property>
+        <property name="active" type="java.lang.Boolean">
+            <column name="active" />
+        </property>
+        <property name="verified" type="java.lang.Boolean">
+            <column name="verified" />
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="create_time" length="19" />
+        </property>
+        <property name="passwordModificationTime" type="timestamp">
+            <column name="passwordModificationTime" length="19" />
+        </property>
+        <one-to-one name="userInformation" class="UserInformation"></one-to-one>
+        <set name="roles" table="userRoles" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="fk_userId" not-null="true" />
+            </key>
+            <many-to-many entity-name="Role">
+                <column name="fk_roleId" not-null="true" />
+            </many-to-many>
+        </set>
+    </class>
+</hibernate-mapping>
