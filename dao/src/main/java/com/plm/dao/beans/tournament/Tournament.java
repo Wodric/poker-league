@@ -1,4 +1,4 @@
-package com.plm.dao.tournament;
+package com.plm.dao.beans.tournament;
 
 import java.io.Serializable;
 
