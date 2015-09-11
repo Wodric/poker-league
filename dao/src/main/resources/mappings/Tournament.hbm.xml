@@ -1,18 +1,18 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-
+<!-- Generated 6 sept. 2015 22:59:01 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="com.plm.dao.tournament.Tournament" table="tournament" catalog="PokerLeagueManager" optimistic-lock="version">
+    <class name="com.plm.dao.beans.tournament.Tournament" table="tournament" optimistic-lock="version">
         <id name="idTournament" type="java.lang.Long">
             <column name="idTournament" />
             <generator class="identity" />
         </id>
-        <many-to-one name="blindStructure" class="com.plm.dao.tournament.BlindStructure" fetch="select">
-            <column name="fk_blindStructureId" />
+        <many-to-one name="blindStructure" class="com.plm.dao.beans.tournament.BlindStructure" fetch="select">
+            <column name="fk_blindStructureId" not-null="true" />
         </many-to-one>
-        <many-to-one name="legalFee" class="com.plm.dao.tournament.LegalFee" fetch="select">
-            <column name="fk_feedId" />
+        <many-to-one name="legalFee" class="com.plm.dao.beans.tournament.LegalFee" fetch="select">
+            <column name="fk_feeId" />
         </many-to-one>
         <property name="name" type="string">
             <column name="name" length="100" />

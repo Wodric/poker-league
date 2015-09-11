@@ -19,7 +19,7 @@ public class LegalFee implements Serializable {
 	/**
 	 *  id fee, auto generated
 	 */
-	private long idFee;
+	private long feeId;
 	
 	/**
 	 * fee short name
@@ -34,7 +34,7 @@ public class LegalFee implements Serializable {
 	/**
 	 *  This variable allow to set a taxe as pourcent
 	 */
-	private Integer feePercent;
+	private Integer feePourcent;
 	
 	/**
 	 *  This variable allow to set a taxe as fixes fee
@@ -46,30 +46,49 @@ public class LegalFee implements Serializable {
 	 */
 	private Set<Tournament> tournaments = new HashSet<Tournament>(0);
 
+	/**
+	 * Default constrctor
+	 */
 	public LegalFee() {
 	}
 
-	public LegalFee(int idFee, String shortName) {
-		this.idFee = idFee;
-		this.shortName = shortName;
-	}
-
-	public LegalFee(int idFee, String shortName, String description,
-			Integer feePercent, Integer feeFixed, Set<Tournament> tournaments) {
-		this.idFee = idFee;
+	/**
+	 *  constructor with mandatory fields
+	 * @param feeId id fee, auto generated
+	 * @param shortName fee short name
+	 * @param description Description of fee
+	 */
+	public LegalFee(long feeId, String shortName, String description) {
+		this.feeId = feeId;
 		this.shortName = shortName;
 		this.description = description;
-		this.feePercent = feePercent;
+	}
+
+	/**
+	 * constructor with all fields
+	 * @param feeId id fee, auto generated
+	 * @param shortName fee short name
+	 * @param description Description of fee
+	 * @param feePourcent  This variable allow to set a taxe as pourcent
+	 * @param feeFixed This variable allow to set a taxe as fixes fee
+	 * @param tournaments The tournament which use the fee
+	 */
+	public LegalFee(long feeId, String shortName, String description, Integer feePourcent, Integer feeFixed,
+			Set<Tournament> tournaments) {
+		this.feeId = feeId;
+		this.shortName = shortName;
+		this.description = description;
+		this.feePourcent = feePourcent;
 		this.feeFixed = feeFixed;
 		this.tournaments = tournaments;
 	}
 
-	public long getIdFee() {
-		return this.idFee;
+	public long getFeeId() {
+		return this.feeId;
 	}
 
-	public void setIdFee(long idFee) {
-		this.idFee = idFee;
+	public void setFeeId(long feeId) {
+		this.feeId = feeId;
 	}
 
 	public String getShortName() {
@@ -88,12 +107,12 @@ public class LegalFee implements Serializable {
 		this.description = description;
 	}
 
-	public Integer getFeePercent() {
-		return this.feePercent;
+	public Integer getFeePourcent() {
+		return this.feePourcent;
 	}
 
-	public void setFeePercent(Integer feePercent) {
-		this.feePercent = feePercent;
+	public void setFeePourcent(Integer feePourcent) {
+		this.feePourcent = feePourcent;
 	}
 
 	public Integer getFeeFixed() {

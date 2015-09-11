@@ -3,7 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-    <class name="com.plm.dao.tournament.BlindStructure" table="blindStructure" catalog="PokerLeagueManager" optimistic-lock="version">
+    <class name="com.plm.dao.beans.tournament.BlindStructure" table="blindStructure" optimistic-lock="version">
         <id name="idBlindStructure" type="java.lang.Long">
             <column name="blindStructureId" />
             <generator class="identity" />
@@ -15,7 +15,7 @@
             <key>
                 <column name="fk_blindStructureId" />
             </key>
-            <one-to-many class="com.plm.dao.tournament.Tournament" />
+            <one-to-many class="com.plm.dao.beans.tournament.Tournament" />
         </set>
     </class>
 </hibernate-mapping>

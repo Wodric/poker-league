@@ -3,7 +3,7 @@
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 <!-- Generated 5 sept. 2015 09:39:43 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="User" table="user" catalog="PokerLeagueManager" optimistic-lock="version">
+    <class name="com.plm.dao.beans.user.User" table="user" optimistic-lock="version">
         <id name="userId" type="long">
             <column name="userId" />
             <generator class="assigned" />

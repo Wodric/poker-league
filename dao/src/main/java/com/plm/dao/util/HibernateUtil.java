@@ -6,6 +6,10 @@ import org.hibernate.SessionFactory;
 import org.hibernate.boot.registry.StandardServiceRegistryBuilder;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.service.ServiceRegistry;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.plm.dao.tournament.BlindStructureDao;
   /**
    * Class containing singleton on session factory. It also contains some utility method for hibernate
    * @author Alexandre Lefèvre "Wodric"
@@ -16,6 +20,7 @@ public class HibernateUtil {
     private static SessionFactory sessionFactory;
     private static ServiceRegistry serviceRegistry;
   
+    private static Logger logger = LoggerFactory.getLogger(BlindStructureDao.class);
     /**
      * create the session factory for HibernateUtil class
      * @return the sesison factory created
@@ -31,7 +36,7 @@ public class HibernateUtil {
             return sessionFactory;
         } catch (Throwable ex) {
             // Make sure you log the exception, as it might be swallowed
-            System.err.println("Initial SessionFactory creation failed." + ex);
+        	logger.error("Initial SessionFactory creation failed." + ex);
             throw new ExceptionInInitializerError(ex);
         }
     }
@@ -63,7 +68,7 @@ public class HibernateUtil {
     
     /**
      * Get a session with auto flush mode from HibernateUtil session factory
-     * @return the session in auto flush mode
+     * @return the session in auto flush mode (default mode)
      */
     public static Session getAutoFlushModeSession(){
     	if(sessionFactory == null){
@@ -79,6 +84,16 @@ public class HibernateUtil {
     public static void shutdown() {
         // Close caches and connection pools
         getSessionFactory().close();
+    }
+    
+    /**
+     * set a session session factory
+     * very useful to test persistence stack
+     * This will be the session factory for all transaction be very careful!
+     * @param newSessionFactory add a new session factory. 
+     */
+    public static void setSessionFactory(SessionFactory newSessionFactory) {
+    	sessionFactory = newSessionFactory;
     }
   
 }

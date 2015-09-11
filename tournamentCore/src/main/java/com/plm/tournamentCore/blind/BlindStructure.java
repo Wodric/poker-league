@@ -6,7 +6,7 @@ import java.util.LinkedList;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-import com.plm.dao.tournament.service.BlindStructureDaoService;
+import com.plm.dao.tournament.BlindStructureDao;
 import com.plm.tournamentCore.chip.Chip;
 import com.plm.tournamentCore.chip.ChipsSet;
 
@@ -476,7 +476,7 @@ public class BlindStructure implements Serializable{
 	 * This method use DAO service to save the current blind structure
 	 */
 	public void saveBlindStructure(){
-		BlindStructureDaoService.createBlindStructure(this.getStructureAsJsonObject().toString());
+		new BlindStructureDao().persist(this.getStructureAsJsonObject().toString());
 	}
 
 }

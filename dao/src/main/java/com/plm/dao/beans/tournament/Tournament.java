@@ -97,24 +97,24 @@ public class Tournament implements Serializable {
 	 * number of chip in rebuy 
 	 */
 	private Integer rebuyChips;
-
+	
+	/**
+	 * default constructor
+	 */
 	public Tournament() {
 	}
 
-	public Tournament(int idTournament, BlindStructure blindStructure,
-			LegalFee legalFee) {
-		this.idTournament = idTournament;
+	/**
+	 * constructor with mentdatory element
+	 */
+	public Tournament(BlindStructure blindStructure) {
 		this.blindStructure = blindStructure;
-		this.legalFee = legalFee;
 	}
 
-	public Tournament(int idTournament, BlindStructure blindStructure,
-			LegalFee legalFee, String name, String description,
-			String variante, Integer maxPlayer, Byte isRebuy,
-			Byte isDoubleRebuyAuthorized, Byte isShootout, Byte isQualifier,
-			Byte isReentry, Integer buyIn, Integer rake, Integer startingChips,
-			Integer addOnChips, Integer rebuyChips) {
-		this.idTournament = idTournament;
+	public Tournament(BlindStructure blindStructure, LegalFee legalFee, String name, String description,
+			String variante, Integer maxPlayer, Byte isRebuy, Byte isDoubleRebuyAuthorized, Byte isShootout,
+			Byte isQualifier, Byte isReentry, Integer buyIn, Integer rake, Integer startingChips, Integer addOnChips,
+			Integer rebuyChips) {
 		this.blindStructure = blindStructure;
 		this.legalFee = legalFee;
 		this.name = name;
@@ -133,11 +133,11 @@ public class Tournament implements Serializable {
 		this.rebuyChips = rebuyChips;
 	}
 
-	public long getIdTournament() {
+	public Long getIdTournament() {
 		return this.idTournament;
 	}
 
-	public void setIdTournament(long idTournament) {
+	public void setIdTournament(Long idTournament) {
 		this.idTournament = idTournament;
 	}
 
