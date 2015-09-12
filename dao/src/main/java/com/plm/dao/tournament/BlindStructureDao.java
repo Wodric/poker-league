@@ -1,88 +1,29 @@
 package com.plm.dao.tournament;
 
-import org.hibernate.Session;
-import org.hibernate.Transaction;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.plm.dao.PokerLeagueManagerDao;
 import com.plm.dao.beans.tournament.BlindStructure;
-import com.plm.dao.util.HibernateUtil;
-
 /**
- * This class contains the service to access to Blind structure data
+ * Dao for blind structure table. You must call Dao operation from this class
  * @author Alexandre Lefèvre "Wodric"
+ *
  */
-public class BlindStructureDao implements PokerLeagueManagerDao<BlindStructure>{
+public class BlindStructureDao{
 	
-	private static Logger logger = LoggerFactory.getLogger(BlindStructureDao.class);
-
-	public BlindStructureDao(){
-	}
-	/**
-	 * THis methode save in database the pBlindStructureAsJson converted as blind structure
-	 * @param pBlindStructureAsJson JSon of structure
-	 */
+	private static final BlindStructureDaoImpl blindStructureDao = new BlindStructureDaoImpl();
+	
 	public void persist(String pBlindStructureAsJson){
-		this.persist(new BlindStructure(pBlindStructureAsJson));
+		blindStructureDao.persist(pBlindStructureAsJson);
 	}
 	
-	/**
-	 * THis method save in database the a blind structure
-	 * @param pBlindStructure the blindstructure to save. Must be the object of DAO
-	 */
-	@Override
 	public void persist(BlindStructure pBlindStructure) throws RuntimeException{
-		logger.debug("add perssistence to BlindStructure instance");
-        Transaction tcx = null;
-        Session session = HibernateUtil.getCommitFlushModeSession();
-    	try{
-            tcx = session.beginTransaction();
-            session.save(pBlindStructure);
-            tcx.commit();
-            logger.debug("add persistence successful");
-            session.close();
-    	}
-    	catch(RuntimeException e){
-			logger.error("add persistence to BlindStructure instance failed", e);
-    		tcx.rollback();
-    		session.close();
-    		throw e;
-    	}
+		blindStructureDao.persist(pBlindStructure);
 	}
 
-	@Override
-	public BlindStructure getById(long id) throws RuntimeException  {
-		logger.debug("getting BlindStructure instance with id: " + id);
-        Session session = HibernateUtil.getCommitFlushModeSession();
-    	try{
-			BlindStructure instance = (BlindStructure) session.get(BlindStructure.class.getName(), id);
-			logger.debug("get successful");
-			session.close();
-			return instance;
-		} catch (RuntimeException re) {
-			logger.error("get BlindStructure instance with id: " + id + " failed", re);
-			session.close();
-			throw re;
-		}
+	public BlindStructure getById(long pId) throws RuntimeException  {
+		return blindStructureDao.getById(pId);
 	}
 
-	@Override
-	public void delete(BlindStructure persistentInstance) throws RuntimeException{
-		logger.debug("deleting BlindStructure instance");
-        Transaction tcx = null;
-        Session session = HibernateUtil.getCommitFlushModeSession();
-		try {
-            tcx = session.beginTransaction();
-            session.delete(persistentInstance);
-            tcx.commit();
-            logger.debug("delete successful");
-            session.close();
-		} catch (RuntimeException re) {
-			logger.error("delete BlindStructure instance failed");
-			session.close();
-			throw re;
-		}		
+	public void delete(BlindStructure pPersistentInstance) throws RuntimeException{	
+		blindStructureDao.delete(pPersistentInstance);
 	}
 
 }

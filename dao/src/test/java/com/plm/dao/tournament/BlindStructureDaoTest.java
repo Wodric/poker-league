@@ -40,7 +40,7 @@ public class BlindStructureDaoTest extends DAOTest{
 		assertEquals(0, session.createQuery("from BlindStructure").list().size());
 		//add a blind structure in databse
 		BlindStructure structureToAdd = new BlindStructure("String to add");
-		new BlindStructureDao().persist(structureToAdd);
+		new BlindStructureDaoImpl().persist(structureToAdd);
 		// there is an element in database  and save the blind structure id
 		List<?> list = session.createQuery("from BlindStructure").list();
 		persistBlindStructureId = ((BlindStructure) list.get(0)).getIdBlindStructure();
@@ -53,8 +53,8 @@ public class BlindStructureDaoTest extends DAOTest{
 	// remove the object previously create
 	public void removeBlindStructureToDatabase(){
 		// get element in database and delete it
-		BlindStructure structureToRemove = new BlindStructureDao().getById(persistBlindStructureId);
-		new BlindStructureDao().delete(structureToRemove);
+		BlindStructure structureToRemove = new BlindStructureDaoImpl().getById(persistBlindStructureId);
+		new BlindStructureDaoImpl().delete(structureToRemove);
 		Session session = HibernateUtil.getCommitFlushModeSession();
 		assertEquals(0, session.createQuery("from BlindStructure").list().size());
 		session.close();

@@ -9,6 +9,7 @@ package com.plm.dao;
 public interface PokerLeagueManagerDao<T> {
 	
 	  /**
+	   * get persistant instance by Id
 	   * @param id it is search 
 	   * @return Null if no entity with {@code id} exists
 	   */

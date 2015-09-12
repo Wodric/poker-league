@@ -9,7 +9,7 @@ import org.hibernate.service.ServiceRegistry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.plm.dao.tournament.BlindStructureDao;
+import com.plm.dao.tournament.BlindStructureDaoImpl;
   /**
    * Class containing singleton on session factory. It also contains some utility method for hibernate
    * @author Alexandre Lefèvre "Wodric"
@@ -20,7 +20,7 @@ public class HibernateUtil {
     private static SessionFactory sessionFactory;
     private static ServiceRegistry serviceRegistry;
   
-    private static Logger logger = LoggerFactory.getLogger(BlindStructureDao.class);
+    private static Logger logger = LoggerFactory.getLogger(BlindStructureDaoImpl.class);
     /**
      * create the session factory for HibernateUtil class
      * @return the sesison factory created
