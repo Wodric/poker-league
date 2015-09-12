@@ -32,7 +32,7 @@ public class LegalFeeDaoTest extends DAOTest{
 	
 	@Test
 	// verify table empty then add object then delete in database
-	public void addAndRemoveBlindStructureToDatabase(){
+	public void addAndRemoveLegalFeeToDatabase(){
 		// verify table size
 		Session session = HibernateUtil.getCommitFlushModeSession();
 		assertEquals(0, session.createQuery("from LegalFee").list().size());
