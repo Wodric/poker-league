@@ -9,21 +9,21 @@ package com.plm.dao;
 public interface PokerLeagueManagerDao<T> {
 	
 	  /**
-	   * get persistant instance by Id
-	   * @param id it is search 
+	   * get persistent instance by Id
+	   * @param pId it is search 
 	   * @return Null if no entity with {@code id} exists
 	   */
-	  T getById(long id);
+	  T getById(long pId);
 	  
 	  /**
-	   * save the transient(non existing in persistance) instance 
-	   * @param transientInstance instance to save
+	   * save the transient(non existing in persistence) instance 
+	   * @param pTransientInstance instance to save
 	   */
-	  void persist(T transientInstance);
+	  void persist(T pTransientInstance);
 
 	  /**
-	   * Delete a persistant instance
-	   * @param persistentInstance instance to delete, it must be a persistance instance
+	   * Delete a persistent instance
+	   * @param pPersistentInstance instance to delete, it must be a persistence instance
 	   */
-	  void delete(T persistentInstance);
+	  void delete(T pPersistentInstance);
 }
