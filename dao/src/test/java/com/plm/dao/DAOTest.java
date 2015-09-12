@@ -9,6 +9,7 @@ import com.plm.dao.util.HibernateUtil;
 
 /**
  * PArent class to all DAO test. It permit to create in memory database only for test
+ * Must extend all DAO class to use hibernate-testing.cfg as configuration file
  * @author Alexandre Lefèvre "Wodric"
  *
  */

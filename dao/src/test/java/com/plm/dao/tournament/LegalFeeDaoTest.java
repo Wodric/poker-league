@@ -14,6 +14,9 @@ import com.plm.dao.DAOTest;
 import com.plm.dao.beans.tournament.LegalFee;
 import com.plm.dao.util.HibernateUtil;
 
+/**
+ * Test LegalFee DAO class
+ */
 public class LegalFeeDaoTest extends DAOTest{
 	
     @Test

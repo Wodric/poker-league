@@ -14,6 +14,9 @@ import com.plm.dao.DAOTest;
 import com.plm.dao.beans.tournament.BlindStructure;
 import com.plm.dao.util.HibernateUtil;
 
+/**
+ * Test BlindStructure DAO class
+ */
 public class BlindStructureDaoTest extends DAOTest{
 	
     @Test
