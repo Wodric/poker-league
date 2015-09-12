@@ -54,38 +54,38 @@ public class BlindStructureDaoImpl implements BlindStructureDaoInterface, PokerL
 	}
 
 	 /**
-	 * get blind structure persistant instance by Id
-	 * @param id  database id of blind structure search
+	 * get blind structure persistent instance by Id
+	 * @param pId  database id of blind structure search
 	 * @return Null if no entity with {@code id} exists
 	 */
 	@Override
-	public BlindStructure getById(long id) throws RuntimeException  {
-		logger.debug("getting BlindStructure instance with id: " + id);
+	public BlindStructure getById(long pId) throws RuntimeException  {
+		logger.debug("getting BlindStructure instance with id: " + pId);
         Session session = HibernateUtil.getCommitFlushModeSession();
     	try{
-			BlindStructure instance = (BlindStructure) session.get(BlindStructure.class.getName(), id);
+			BlindStructure instance = (BlindStructure) session.get(BlindStructure.class.getName(), pId);
 			logger.debug("get successful");
 			session.close();
 			return instance;
 		} catch (RuntimeException re) {
-			logger.error("get BlindStructure instance with id: " + id + " failed", re);
+			logger.error("get BlindStructure instance with id: " + pId + " failed", re);
 			session.close();
 			throw re;
 		}
 	}
 
 	/**
-	 * Delete a persistante instance of blind structure
-	 * @param blind structure instance to delete, it must be a persistance instance
+	 * Delete a persistent instance of blind structure
+	 * @param pPersistentInstance blind structure instance to delete, it must be a persistence instance
 	 */
 	@Override
-	public void delete(BlindStructure persistentInstance) throws RuntimeException{
+	public void delete(BlindStructure pPersistentInstance) throws RuntimeException{
 		logger.debug("deleting BlindStructure instance");
         Transaction tcx = null;
         Session session = HibernateUtil.getCommitFlushModeSession();
 		try {
             tcx = session.beginTransaction();
-            session.delete(persistentInstance);
+            session.delete(pPersistentInstance);
             tcx.commit();
             logger.debug("delete successful");
             session.close();

@@ -10,19 +10,19 @@ public class BlindStructureDao{
 	
 	private static final BlindStructureDaoImpl blindStructureDao = new BlindStructureDaoImpl();
 	
-	public void persist(String pBlindStructureAsJson){
+	public static void persist(String pBlindStructureAsJson){
 		blindStructureDao.persist(pBlindStructureAsJson);
 	}
 	
-	public void persist(BlindStructure pBlindStructure) throws RuntimeException{
+	public static void persist(BlindStructure pBlindStructure) throws RuntimeException{
 		blindStructureDao.persist(pBlindStructure);
 	}
 
-	public BlindStructure getById(long pId) throws RuntimeException  {
+	public static BlindStructure getById(long pId) throws RuntimeException  {
 		return blindStructureDao.getById(pId);
 	}
 
-	public void delete(BlindStructure pPersistentInstance) throws RuntimeException{	
+	public static void delete(BlindStructure pPersistentInstance) throws RuntimeException{	
 		blindStructureDao.delete(pPersistentInstance);
 	}
 
