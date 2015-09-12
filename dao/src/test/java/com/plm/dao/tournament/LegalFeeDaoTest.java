@@ -43,11 +43,11 @@ public class LegalFeeDaoTest extends DAOTest{
 		LegalFeeDao.persist(legalFeeAdd);
 		// there is an element in database  and save the blind structure id
 		List<?> list = session.createQuery("from LegalFee").list();
-		long persistBlindStructureId = ((LegalFee) list.get(0)).getFeeId();
+		long persistId = ((LegalFee) list.get(0)).getFeeId();
 		assertEquals(1, list.size());
 		// then delete
-		LegalFee structureToRemove = LegalFeeDao.getById(persistBlindStructureId);
-		LegalFeeDao.delete(structureToRemove);
+		LegalFee legalFeeToRemove = LegalFeeDao.getById(persistId);
+		LegalFeeDao.delete(legalFeeToRemove);
 		assertEquals(0, session.createQuery("from LegalFee").list().size());
 		session.close();
 	}

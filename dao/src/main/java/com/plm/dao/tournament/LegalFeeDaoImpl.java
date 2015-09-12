@@ -9,6 +9,11 @@ import com.plm.dao.PokerLeagueManagerDao;
 import com.plm.dao.beans.tournament.LegalFee;
 import com.plm.dao.util.HibernateUtil;
 
+/**
+ * This class contains the DAo implementation to access to LegalFee data.
+ * Developers mustn't call directly the implementation but class LegalFeeDao
+ * @author Alexandre Lefèvre "Wodric"
+ */
 public class LegalFeeDaoImpl implements LegalFeeDaoInterface, PokerLeagueManagerDao<LegalFee> {
 
 	private static Logger logger = LoggerFactory.getLogger(LegalFeeDaoImpl.class);
@@ -19,16 +24,16 @@ public class LegalFeeDaoImpl implements LegalFeeDaoInterface, PokerLeagueManager
 	 * @return Null if no entity with {@code id} exists
 	 */
 	@Override
-	public LegalFee getById(long id) {
-		logger.debug("getting LegalFee instance with id: " + id);
+	public LegalFee getById(long pId) {
+		logger.debug("getting LegalFee instance with id: " + pId);
         Session session = HibernateUtil.getCommitFlushModeSession();
     	try{
-    		LegalFee instance = (LegalFee) session.get(LegalFee.class.getName(), id);
+    		LegalFee instance = (LegalFee) session.get(LegalFee.class.getName(), pId);
 			logger.debug("get successful");
 			session.close();
 			return instance;
 		} catch (RuntimeException re) {
-			logger.error("get LegalFee instance with id: " + id + " failed", re);
+			logger.error("get LegalFee instance with id: " + pId + " failed", re);
 			session.close();
 			throw re;
 		}
@@ -60,7 +65,7 @@ public class LegalFeeDaoImpl implements LegalFeeDaoInterface, PokerLeagueManager
 	}
 
 	/**
-	 * Delete a persistente instance of legal fee
+	 * Delete a persistent instance of legal fee
 	 * @param pPersistentInstance legal fee instance to delete, it must be a persistence instance
 	 */
 	@Override
