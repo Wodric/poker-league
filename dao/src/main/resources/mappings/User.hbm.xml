@@ -32,12 +32,12 @@
         <property name="passwordModificationTime" type="timestamp">
             <column name="passwordModificationTime" length="19" />
         </property>
-        <one-to-one name="userInformation" class="UserInformation"></one-to-one>
+        <one-to-one name="userInformation" class="com.plm.dao.beans.user.UserInformation"></one-to-one>
         <set name="roles" table="userRoles" inverse="false" lazy="true" fetch="select">
             <key>
                 <column name="fk_userId" not-null="true" />
             </key>
-            <many-to-many entity-name="Role">
+            <many-to-many entity-name="com.plm.dao.beans.permission.Role">
                 <column name="fk_roleId" not-null="true" />
             </many-to-many>
         </set>

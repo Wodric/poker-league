@@ -4,7 +4,7 @@ import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.plm.dao.beans.user.permission.Role;
+import com.plm.dao.beans.permission.Role;
 
 /**
  * User mapping class see mappings/User.hbm.xml files in ressources for mapping

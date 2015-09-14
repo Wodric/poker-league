@@ -15,7 +15,7 @@
             <key>
                 <column name="fk_roleId" not-null="true" />
             </key>
-            <many-to-many entity-name="User">
+            <many-to-many entity-name="com.plm.dao.beans.user.User">
                 <column name="fk_userId" not-null="true" />
             </many-to-many>
         </set>
@@ -23,7 +23,7 @@
             <key>
                 <column name="fk_roleId" not-null="true" />
             </key>
-            <many-to-many entity-name="Permission">
+            <many-to-many entity-name="com.plm.dao.beans.permission.Permission">
                 <column name="fk_permissionId" not-null="true" />
             </many-to-many>
         </set>

@@ -27,10 +27,10 @@
 		<mapping resource="mappings/BlindStructure.hbm.xml"/>
 		<mapping resource="mappings/Tournament.hbm.xml"/>
 		<mapping resource="mappings/LegalFee.hbm.xml"/>
-<!-- 		<mapping resource="mappings/Permission.hbm.xml"/> -->
-<!-- 		<mapping resource="mappings/Role.hbm.xml"/> -->
-<!-- 		<mapping resource="mappings/User.hbm.xml"/> -->
-<!-- 		<mapping resource="mappings/UserInformation.hbm.xml"/> -->
+		<mapping resource="mappings/Permission.hbm.xml"/>
+		<mapping resource="mappings/Role.hbm.xml"/>
+		<mapping resource="mappings/User.hbm.xml"/>
+		<mapping resource="mappings/UserInformation.hbm.xml"/>
 	</session-factory>
 	
 
