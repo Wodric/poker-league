@@ -39,7 +39,7 @@ public class TournamentDaoTest extends DAOTest{
 		// verify table size
 		Session session = HibernateUtil.getCommitFlushModeSession();
 		assertEquals(0, session.createQuery("from Tournament").list().size());
-		//add a blind structure in databse
+		//add a blind structure in database
 		Tournament tournamentAdd = new Tournament();
 		BlindStructure structureToAdd = new BlindStructure("String to add");
 		BlindStructureDao.persist(structureToAdd);

@@ -17,7 +17,6 @@ public class DAOTest {
 	
 	@BeforeClass
 	public static void initHsqldb(){
-		System.out.println("I'm here !");
 	   	 Configuration configuration = new Configuration();
 	   	 configuration.configure("hibernate-testing.cfg.xml");
 	   	 ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(
