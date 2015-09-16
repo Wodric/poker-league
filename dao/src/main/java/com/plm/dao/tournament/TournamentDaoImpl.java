@@ -21,7 +21,7 @@ public class TournamentDaoImpl implements TournamentDaoInterface, PokerLeagueMan
 	
 	 /**
 	  * get tournament persistent instance by Id
-	  * @param pId  database id of tournament searched
+	  * @param pId  database id of tournament search
 	  * @return Null if no entity with {@code id} exists
 	  */
 	@Override
@@ -46,7 +46,7 @@ public class TournamentDaoImpl implements TournamentDaoInterface, PokerLeagueMan
 	 */
 	@Override
 	public void persist(Tournament pTransientInstance) {
-		logger.debug("add perssistence to tournament instance");
+		logger.debug("add perssistence to LegalFee instance");
         Transaction tcx = null;
         Session session = HibernateUtil.getCommitFlushModeSession();
     	try{
@@ -57,20 +57,22 @@ public class TournamentDaoImpl implements TournamentDaoInterface, PokerLeagueMan
             session.close();
     	}
     	catch(RuntimeException e){
-			logger.error("add persistence to tournament instance failed", e);
+			logger.error("add persistence to LegalFee instance failed", e);
     		tcx.rollback();
     		session.close();
     		throw e;
     	}
+		
+		
 	}
 
 	/**
-	 * Delete a persistent instance of tournament
-	 * @param pPersistentInstance tournament instance to delete, it must be a persistence instance
+	 * Delete a persistent instance of legal fee
+	 * @param pPersistentInstance legal fee instance to delete, it must be a persistence instance
 	 */
 	@Override
 	public void delete(Tournament pPersistentInstance) {
-		logger.debug("deleting tournament instance");
+		logger.debug("deleting LegalFee instance");
         Transaction tcx = null;
         Session session = HibernateUtil.getCommitFlushModeSession();
 		try {
@@ -80,7 +82,7 @@ public class TournamentDaoImpl implements TournamentDaoInterface, PokerLeagueMan
             logger.debug("delete successful");
             session.close();
 		} catch (RuntimeException re) {
-			logger.error("delete tournament instance failed");
+			logger.error("delete LegalFee instance failed");
 			session.close();
 			throw re;
 		}
