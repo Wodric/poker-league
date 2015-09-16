@@ -6,7 +6,7 @@
     <class name="com.plm.dao.beans.tournament.LegalFee" table="legalFee" optimistic-lock="version">
         <id name="feeId" type="long">
             <column name="feeId" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <property name="shortName" type="string">
             <column name="shortName" length="50" not-null="true" />

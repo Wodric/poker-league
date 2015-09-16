@@ -6,7 +6,7 @@
     <class name="com.plm.dao.beans.permission.Permission" table="permission" optimistic-lock="version">
         <id name="permissionId" type="long">
             <column name="permissionId" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <property name="permission" type="string">
             <column name="permission" length="45" />

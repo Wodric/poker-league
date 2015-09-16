@@ -6,7 +6,7 @@
     <class name="com.plm.dao.beans.permission.Role" table="role" optimistic-lock="version">
         <id name="roleId" type="long">
             <column name="roleId" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <property name="roleName" type="string">
             <column name="roleName" length="45" />

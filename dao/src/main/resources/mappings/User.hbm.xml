@@ -6,7 +6,7 @@
     <class name="com.plm.dao.beans.user.User" table="user" optimistic-lock="version">
         <id name="userId" type="long">
             <column name="userId" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <property name="username" type="string">
             <column name="username" length="32" not-null="true" />
