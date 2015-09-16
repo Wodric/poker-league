@@ -20,7 +20,7 @@ public class LegalFeeDaoImpl implements LegalFeeDaoInterface, PokerLeagueManager
 	
 	/**
 	 * get legal fee persistent instance by Id
-	 * @param pId  database id of legal fee search
+	 * @param pId  database id of legal fee searched
 	 * @return Null if no entity with {@code id} exists
 	 */
 	@Override

@@ -55,7 +55,7 @@ public class BlindStructureDaoImpl implements BlindStructureDaoInterface, PokerL
 
 	 /**
 	 * get blind structure persistent instance by Id
-	 * @param pId  database id of blind structure search
+	 * @param pId  database id of blind structure searched
 	 * @return Null if no entity with {@code id} exists
 	 */
 	@Override
