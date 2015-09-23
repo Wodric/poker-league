@@ -8,6 +8,7 @@ import com.plm.internationalization.ParametrizedResourceBundle;
 import com.plm.messages.constants.MessagesConstants;
 import com.plm.tournament.structures.blinds.beans.BlindStructureParameters;
 import com.plm.tournamentCore.blind.BlindConstants;
+import com.plm.vaadin.FieldConvertorUtils;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.ui.AbstractTextField;
 import com.vaadin.ui.CheckBox;
@@ -20,10 +21,6 @@ import com.vaadin.ui.TextField;
  */
 public class BlindStructureMainInformationPanel extends BasePanel{
 	
-	/**
-	 * The java space char
-	 */
-	public static final String JAVA_SPACE_CHAR = "\\p{javaSpaceChar}";
 	/**
 	 * Bean validator for structure parameters and variable
 	 */
@@ -182,8 +179,8 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 	 * @return return the integer value in max player field
 	 */
 	public int getMaxPlayerFieldValue(){
-		String valueWithoutSpace =  this.getMaxPlayerField().getValue().replaceAll(JAVA_SPACE_CHAR,"");
-		return Integer.parseInt(valueWithoutSpace);
+		return FieldConvertorUtils.convertNumericFieldToInt(
+					this.getMaxPlayerField().getValue());
 	}
 	
 	/**
@@ -200,8 +197,8 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 	 * @return return the integer value in level duration field
 	 */
 	public int getLevelDurationFieldValue(){
-		String valueWithoutSpace =  this.getLevelDurationField().getValue().replaceAll(JAVA_SPACE_CHAR,"");
-		return Integer.parseInt(valueWithoutSpace);
+		return FieldConvertorUtils.convertNumericFieldToInt(
+					this.getLevelDurationField().getValue());
 	}
 	
 	/**
@@ -218,8 +215,8 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 	 * @return return the integer value in tournament duration field
 	 */
 	public int getTournamentDurationFieldValue(){
-		String valueWithoutSpace =  this.getTournamentDurationField().getValue().replaceAll(JAVA_SPACE_CHAR,"");
-		return Integer.parseInt(valueWithoutSpace);
+		return FieldConvertorUtils.convertNumericFieldToInt(
+					this.getTournamentDurationField().getValue());
 	}
 	
 	/**

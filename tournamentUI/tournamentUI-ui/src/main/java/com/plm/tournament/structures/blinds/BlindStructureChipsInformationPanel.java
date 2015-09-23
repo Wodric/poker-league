@@ -11,6 +11,7 @@ import com.plm.messages.constants.MessagesConstants;
 import com.plm.tournament.structures.blinds.beans.BlindStructureParameters;
 import com.plm.tournamentCore.blind.BlindConstants;
 import com.plm.tournamentCore.chip.ChipsSet;
+import com.plm.vaadin.FieldConvertorUtils;
 import com.vaadin.data.fieldgroup.BeanFieldGroup;
 import com.vaadin.ui.AbstractTextField;
 import com.vaadin.ui.ComboBox;
@@ -159,8 +160,8 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 	 * @return value of small blind on field
 	 */
 	public int getMinimumSmallBlindFieldValue(){
-		String valueWithoutSpace =  this.getMinimumSmallBlindField().getValue().replaceAll("\\p{javaSpaceChar}","");
-		return Integer.valueOf(valueWithoutSpace).intValue();
+		return FieldConvertorUtils.convertNumericFieldToInt(
+					this.getMinimumSmallBlindField().getValue());
 	}
 	
 	/**
@@ -177,8 +178,8 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 	 * @return the value of the Initial stack field as interger 
 	 */
 	public int getInitialStackFieldValue(){
-		String valueWithoutSpace =  this.getInitialStackField().getValue().replaceAll("\\p{javaSpaceChar}","");
-		return  Integer.valueOf(valueWithoutSpace).intValue();
+		return  FieldConvertorUtils.convertNumericFieldToInt(
+					this.getInitialStackField().getValue());
 	}
 	
 	
