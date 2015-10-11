@@ -8,9 +8,9 @@
 
 	<properties>
 		<slf4j.version>1.7.12</slf4j.version>
-		<log4j.version>2.3</log4j.version>
+		<log4j.version>2.4</log4j.version>
 		<hibernate.version>4.3.10.Final</hibernate.version>
-		<stagemonitor.version>0.17.1</stagemonitor.version>
+		<stagemonitor.version>0.17.3</stagemonitor.version>
 		<shiro.version>1.2.4</shiro.version>
 	</properties>
 
@@ -37,6 +37,11 @@
 				<artifactId>slf4j-api</artifactId>
 				<version>${slf4j.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>jcl-over-slf4j</artifactId>
+				<version>${slf4j.version}</version>
+			</dependency>
 			<!-- Log4j API and Core implementation required for binding -->
 			<dependency>
 				<groupId>org.apache.logging.log4j</groupId>
@@ -59,11 +64,6 @@
 				<artifactId>hibernate-core</artifactId>
 				<version>${hibernate.version}</version>
 			</dependency>
-			<dependency>
-				<groupId>org.hibernate</groupId>
-				<artifactId>hibernate-c3p0</artifactId>
-				<version>${hibernate.version}</version>
-			</dependency>
 			<!-- Hibernate c3p0 connection pool -->
 			<dependency>
 				<groupId>org.hibernate</groupId>
@@ -74,7 +74,7 @@
 			<dependency>
 				<groupId>mysql</groupId>
 				<artifactId>mysql-connector-java</artifactId>
-				<version>5.1.35</version>
+				<version>5.1.36</version>
 			</dependency>
 			<dependency>
 				<groupId>org.json</groupId>
@@ -102,12 +102,6 @@
 				<version>${shiro.version}</version>
 			</dependency>
 			<!-- TEsting dependancy -->
-			<dependency>
-				<groupId>org.unitils</groupId>
-				<artifactId>unitils-orm</artifactId>
-				<version>3.4.2</version>
-				<scope>test</scope>
-			</dependency>
 			<dependency>
 				<groupId>org.mockito</groupId>
 				<artifactId>mockito-all</artifactId>
