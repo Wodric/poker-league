@@ -2,6 +2,7 @@ package com.plm;
 
 import java.util.Locale;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 
 import org.slf4j.Logger;
@@ -12,6 +13,7 @@ import com.plm.messages.constants.MessagesConstants;
 import com.plm.tournament.structures.blinds.BlindStructurePresenter;
 import com.plm.tournament.structures.blinds.BlindStructureViewImpl;
 import com.plm.tournamentCore.blind.BlindStructure;
+import com.plm.userManagement.UserManagementUtils;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.annotations.Widgetset;
@@ -31,7 +33,7 @@ public class MyUI extends UI {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	
+
 	private static Logger logger = LoggerFactory.getLogger(MyUI.class);
 	
     Navigator navigator;
@@ -40,9 +42,8 @@ public class MyUI extends UI {
     
 	@Override
     protected void init(VaadinRequest vaadinRequest) {
-	   
 	    logger.debug("Connection from " + vaadinRequest.getLocale().toLanguageTag() + " for user " + vaadinRequest.getRemoteUser());
-
+	    UserManagementUtils.initiateShiro();
 		userLocale = vaadinRequest.getLocale();
 		ParametrizedResourceBundle bundle = ParametrizedResourceBundle.
 				getParametrizedBundle(MessagesConstants.UI_MESSAGE_FILE_BASE_NAME, userLocale);
@@ -66,5 +67,6 @@ public class MyUI extends UI {
     @WebServlet(urlPatterns = "/*", name = "MyUIServlet", asyncSupported = true)
     @VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
     public static class MyUIServlet extends VaadinServlet {
+
     }
 }

@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.plm.tournamentCore.blind.BlindStructure;
+import com.plm.userManagement.UserManagementUtils;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Button.ClickEvent;
