@@ -476,7 +476,7 @@ public class BlindStructure implements Serializable{
 	 * This method use DAO service to save the current blind structure
 	 */
 	public void saveBlindStructure(){
-		new BlindStructureDao().persist(this.getStructureAsJsonObject().toString());
+		BlindStructureDao.persist(this.getStructureAsJsonObject().toString());
 	}
 
 }
