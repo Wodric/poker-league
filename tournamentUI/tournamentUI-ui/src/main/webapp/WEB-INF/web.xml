@@ -8,11 +8,10 @@
 		<param-value>true</param-value>
 	</context-param>
 
-
 	<!-- SHIRO WEB APPLICATION SETTINGS-->
 	<context-param>
 		<param-name>shiroConfigLocations</param-name>
-		<param-value>classpath:auth.ini</param-value>
+		<param-value>classpath:shiro.ini</param-value>
 	</context-param>
 
 	<!-- Shiro Environment Listener -->
@@ -29,4 +28,5 @@
 		<filter-name>ShiroFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+
 </web-app>

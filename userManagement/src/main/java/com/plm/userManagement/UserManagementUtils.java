@@ -1,8 +1,10 @@
 package com.plm.userManagement;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.config.IniSecurityManagerFactory;
 import org.apache.shiro.mgt.SecurityManager;
+import org.apache.shiro.subject.Subject;
 import org.apache.shiro.util.Factory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -25,17 +27,41 @@ public class UserManagementUtils {
 	 * Security manager
 	 */
     private final static SecurityManager securityManager = factory.getInstance();
+
+    /**
+     * True if shiro security manager is initialized
+     */
+	private static boolean SHIRO_INITILIZED = false;
     
-	
+	/**
+	 * initialize the shiro security manager
+	 */
 	public static void initiateShiro(){
-		try{
-			SecurityUtils.getSecurityManager();
-			// if there is an exception security manager is not initialize
-		}
-		catch(Exception e){
-			logger.info("init security manager");
+		if(!SHIRO_INITILIZED){
+			SHIRO_INITILIZED = true;
+			logger.info("create security manager");
 			SecurityUtils.setSecurityManager(securityManager);
 		}
+	}
+	
+	/**
+	 * Log user with username and password
+	 * @param pUsername User login for identification
+	 * @param pPassword password non encrypted and non hash password
+	 */
+	public static void login(String pUsername, String pPassword)
+	{
+		final UsernamePasswordToken token = new UsernamePasswordToken(pUsername, pPassword);
+		
+		// ”Remember Me” built-in, just do this:
+		token.setRememberMe(true);
+
+		// With most of Shiro, you'll always want to make sure you're working with the currently executing user,
+		// referred to as the subject
+		final Subject currentUser = SecurityUtils.getSubject();
+
+		// Authenticate
+		currentUser.login(token);
 	}
 
 }
