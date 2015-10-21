@@ -10,7 +10,7 @@ import com.vaadin.ui.Button.ClickEvent;
  */
 public interface BlindStructureView extends BaseView {
 	
-    public static final String BLIND_STRCUTURE_VIEW = "BLIND_STRCUTURE_VIEW";
+    public static final String NAME = "BLIND_STRUCTURE_VIEW";
     
     interface BlindStructureViewListener{
 		void buttonClick(ClickEvent pEvent);
