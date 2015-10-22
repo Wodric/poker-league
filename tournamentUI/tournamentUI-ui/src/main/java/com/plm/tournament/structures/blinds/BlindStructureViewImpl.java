@@ -43,7 +43,7 @@ public class BlindStructureViewImpl extends CustomComponent
 
 	@Override
     public void addListener(BlindStructureViewListener listener) {
-        listeners.add(listener);
+        this.listeners.add(listener);
     }
 
 	@Override
@@ -52,7 +52,7 @@ public class BlindStructureViewImpl extends CustomComponent
 	 * @parameter pEvent Click event to diffuse to presenter
 	 */
 	public void buttonClick(ClickEvent pEvent) {
-		for (BlindStructureViewListener listener: listeners){
+		for (BlindStructureViewListener listener: this.listeners){
             listener.buttonClick(pEvent);	
 		}
 	}
@@ -110,7 +110,7 @@ public class BlindStructureViewImpl extends CustomComponent
 
 	@Override
 	public void valueChange(ValueChangeEvent pEvent) {
-		for (BlindStructureViewListener listener: listeners){
+		for (BlindStructureViewListener listener: this.listeners){
             listener.valueChange(pEvent);
 		}
 	}

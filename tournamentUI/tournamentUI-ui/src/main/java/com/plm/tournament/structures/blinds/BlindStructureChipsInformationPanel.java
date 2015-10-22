@@ -66,7 +66,7 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 		super(CHIPS_INFORMATION_PANEL_CAPTION);
 		this.parentComponent = pParent;
 		
-		binder.setItemDataSource(this.createBeanWithDefaultValue());
+		this.binder.setItemDataSource(this.createBeanWithDefaultValue());
 
 		FormLayout content = new FormLayout();
 		content.addComponent(this.binder.buildAndBind
@@ -102,7 +102,7 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 	 */
 	private void setDefaultFieldBehavior(){
 
-		AbstractTextField smallBlind = (AbstractTextField) binder.getField
+		AbstractTextField smallBlind = (AbstractTextField) this.binder.getField
 				(BlindStructureParameters.PARAMETER_NAME_MINIMUM_SMALL_BLIND_VALUE);
 		smallBlind.setNullRepresentation(
 				String.valueOf(BlindConstants.DEFAULT_SMALL_BLIND_VALUE));
@@ -111,7 +111,7 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 						BlindConstants.MIN_SMALL_BLIND_VALUE,BlindConstants.MAX_SMALL_BLIND_VALUE));
 		smallBlind.addValueChangeListener(this.parentComponent);
 
-		AbstractTextField initialStack = (AbstractTextField) binder.getField
+		AbstractTextField initialStack = (AbstractTextField) this.binder.getField
 				(BlindStructureParameters.PARAMETER_NAME_INITIAL_STACK_SIZE);
 		initialStack.setNullRepresentation(
 				String.valueOf(BlindConstants.DEFAULT_INITIAL_STACK_SIZE));
@@ -151,7 +151,7 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 	 * @return the text field for small blind
 	 */
 	public TextField getMinimumSmallBlindField(){
-		return (TextField) binder.getField
+		return (TextField) this.binder.getField
 				(BlindStructureParameters.PARAMETER_NAME_MINIMUM_SMALL_BLIND_VALUE);
 	}
 	
@@ -169,7 +169,7 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 	 * @return the text field for initial stack 
 	 */
 	public TextField getInitialStackField(){
-		return (TextField) binder.getField
+		return (TextField) this.binder.getField
 				(BlindStructureParameters.PARAMETER_NAME_INITIAL_STACK_SIZE);
 	}
 	

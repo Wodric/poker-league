@@ -117,7 +117,7 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 	 */
 	private void setDefaultFieldBehavior(){
 
-		AbstractTextField maxPlayer = (AbstractTextField) binder.getField
+		AbstractTextField maxPlayer = (AbstractTextField) this.binder.getField
 				(BlindStructureParameters.PARAMETER_NAME_MAX_PLAYER_NUMBER);
 		maxPlayer.setNullRepresentation(
 				String.valueOf(BlindConstants.DEFAULT_NUMBER_PLAYER));
@@ -126,7 +126,7 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 				BlindConstants.MIN_NUMBER_PLAYER, BlindConstants.MAX_NUMBER_PLAYER));
 		maxPlayer.addValueChangeListener(this.parentComponent);
 
-		AbstractTextField levelDuration = (AbstractTextField) binder.getField
+		AbstractTextField levelDuration = (AbstractTextField) this.binder.getField
 				(BlindStructureParameters.PARAMETER_NAME_LEVEL_DURATION);
 		levelDuration.setNullRepresentation(
 				String.valueOf(BlindConstants.DEFAULT_LEVEL_DURATION));
@@ -135,7 +135,7 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 				BlindConstants.MIN_LEVEL_DURATION, BlindConstants.MAX_LEVEL_DURATION));
 		levelDuration.addValueChangeListener(this.parentComponent);
 		
-		AbstractTextField tournamentDuration = (AbstractTextField) binder.getField
+		AbstractTextField tournamentDuration = (AbstractTextField) this.binder.getField
 				(BlindStructureParameters.PARAMETER_NAME_TOURNAMENT_DURATION_EXPECTED);
 		tournamentDuration.setNullRepresentation(
 				String.valueOf(BlindConstants.DEFAULT_TOURNAMENT_DURATION));
@@ -144,7 +144,7 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 				BlindConstants.MIN_TOURNAMENT_DURATION, BlindConstants.MAX_TOURNAMENT_DURATION));
 		tournamentDuration.addValueChangeListener(this.parentComponent);
 		
-		CheckBox withAnte = (CheckBox) binder.getField
+		CheckBox withAnte = (CheckBox) this.binder.getField
 				(BlindStructureParameters.PARAMETER_NAME_WITH_ANTE);
 		withAnte.addValueChangeListener(this.parentComponent);
 	}
@@ -170,7 +170,7 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 	 * @return the text field for max player
 	 */
 	public TextField getMaxPlayerField(){
-		return (TextField) binder.getField
+		return (TextField) this.binder.getField
 				(BlindStructureParameters.PARAMETER_NAME_MAX_PLAYER_NUMBER);
 	}
 	
@@ -188,7 +188,7 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 	 * @return the text field for level duration
 	 */
 	public TextField getLevelDurationField(){
-		return (TextField) binder.getField
+		return (TextField) this.binder.getField
 				(BlindStructureParameters.PARAMETER_NAME_LEVEL_DURATION);
 	}
 	
@@ -206,7 +206,7 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 	 * @return the text field for tournament duration
 	 */
 	public TextField getTournamentDurationField(){
-		return (TextField) binder.getField
+		return (TextField) this.binder.getField
 				(BlindStructureParameters.PARAMETER_NAME_TOURNAMENT_DURATION_EXPECTED);
 	}
 	
@@ -224,7 +224,7 @@ public class BlindStructureMainInformationPanel extends BasePanel{
 	 * @return the checkbox for Allow ante / with ante 
 	 */
 	public CheckBox getAllowAnteField(){
-		return (CheckBox) binder.getField
+		return (CheckBox) this.binder.getField
 				(BlindStructureParameters.PARAMETER_NAME_WITH_ANTE);
 	}
 	
