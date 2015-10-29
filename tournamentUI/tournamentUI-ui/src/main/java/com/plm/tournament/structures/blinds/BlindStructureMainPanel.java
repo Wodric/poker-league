@@ -5,6 +5,7 @@ import com.plm.framework.ui.mvp.BasePanel;
 import com.plm.framework.ui.mvp.BaseView;
 import com.plm.internationalization.ParametrizedResourceBundle;
 import com.plm.messages.constants.MessagesConstants;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.HorizontalLayout;
 
 /**
@@ -86,7 +87,7 @@ public class BlindStructureMainPanel extends BasePanel {
         this.horizontalLayout.setExpandRatio(mainInformationPanel, BlindStructureMainInformationPanel.PANEL_WIDTH);
         this.horizontalLayout.setExpandRatio(chipsInformationPanel, BlindStructureChipsInformationPanel.PANEL_WIDTH);
         this.horizontalLayout.setExpandRatio(structurePreviewPanel, BlindStructurePreviewPanel.PANEL_WIDTH);
-		
+        this.horizontalLayout.setDefaultComponentAlignment(Alignment.MIDDLE_CENTER);
         this.setWidth(PANEL_WIDTH, Unit.PERCENTAGE);
 		this.setContent(this.horizontalLayout);
 	}

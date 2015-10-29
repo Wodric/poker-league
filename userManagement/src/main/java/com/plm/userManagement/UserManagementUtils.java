@@ -1,6 +1,7 @@
 package com.plm.userManagement;
 
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.config.IniSecurityManagerFactory;
 import org.apache.shiro.mgt.SecurityManager;
@@ -49,7 +50,7 @@ public class UserManagementUtils {
 	 * @param pUsername User login for identification
 	 * @param pPassword password non encrypted and non hash password
 	 */
-	public static void login(String pUsername, String pPassword)
+	public static void login(String pUsername, String pPassword) throws AuthenticationException
 	{
 		final UsernamePasswordToken token = new UsernamePasswordToken(pUsername, pPassword);
 		

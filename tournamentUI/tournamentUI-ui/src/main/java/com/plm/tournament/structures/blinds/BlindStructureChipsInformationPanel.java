@@ -18,6 +18,7 @@ import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.TextField;
 
+
 public class BlindStructureChipsInformationPanel extends BasePanel{
 	
 	/**

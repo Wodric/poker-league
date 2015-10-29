@@ -122,6 +122,53 @@ public class MessagesConstants {
 	 */
 	public static final String BLINDSTRUCTURE_PANEL_STRUCTURE_BTN_SAVE = "blindStructure.panel.structure.btn.save";
 	
+	/**
+	 * Constant to find label of login view
+	 */
+	public static final String LOGIN_TITLE = "login.title";
 	
+	/**
+	 * Constant to find the login field label
+	 */
+	public static final String LOGIN_FIELD_LOGIN = "login.field.login";
 	
+	/**
+	 * Constant to find the password field label
+	 */
+	public static final String LOGIN_FIELD_PASSWORD = "login.field.password";
+	
+	/**
+	 * Constant to find the forgot identifier button label
+	 */
+	public static final String LOGIN_BUTTON_FORGOT = "login.button.forgot";
+	
+	/**
+	 * Constant to find the login button label
+	 */
+	public static final String LOGIN_BUTTON_LOGIN = "login.button.login";
+	
+	/**
+	 * Constant to find Label which discribe what the possibility for non register user
+	 */
+	public static final String LOGIN_TITLE_NOACCOUNT = "login.title.noaccount";
+	
+	/**
+	 * Constant to find the cancel button label
+	 */
+	public static final String LOGIN_BUTTON_CANCEL = "login.button.cancel";
+	
+	/**
+	 * Constant to find the cancel sign on label
+	 */
+	public static final String LOGIN_BUTTON_SIGNON = "login.button.signon";
+	
+	/**
+	 * Constant to find the login error description label
+	 */
+	public static final String LOGIN_ERROR_DESCRIPTION = "login.error.description";
+	
+	/**
+	 * Constant to find the login error title label
+	 */
+	public static final String LOGIN_ERROR_TITLE = "login.error.title";
 }

@@ -2,7 +2,6 @@ package com.plm;
 
 import java.util.Locale;
 
-import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 
 import org.slf4j.Logger;
@@ -36,7 +35,7 @@ public class MyUI extends UI {
 
 	private static Logger logger = LoggerFactory.getLogger(MyUI.class);
 	
-    Navigator navigator;
+    private Navigator navigator;
     
     private static Locale userLocale; 
     
@@ -52,6 +51,7 @@ public class MyUI extends UI {
         
         BlindStructureViewImpl createStructureView = new BlindStructureViewImpl();
         BlindStructure structureModel = createStructureView.getStructureToDisplayFromModel();
+
         
         // Create a navigator to control the views
         navigator = new Navigator(this, this);
@@ -68,5 +68,17 @@ public class MyUI extends UI {
     @VaadinServletConfiguration(ui = MyUI.class, productionMode = false)
     public static class MyUIServlet extends VaadinServlet {
 
+    }
+    
+    public void navigateTo(String pViewName){
+    	getNavigator().navigateTo(pViewName);
+    }
+    
+    public Navigator getNavigator(){
+    	return this.navigator;
+    }
+    
+    public static MyUI getCurrent() {
+        return (MyUI) UI.getCurrent();
     }
 }

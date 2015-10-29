@@ -1,19 +1,17 @@
 package com.plm.tournament.structures.blinds;
 
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.plm.component.datagrid.BlindStructureGrid;
+import com.plm.tournament.login.LoginBox;
 import com.plm.tournamentCore.blind.BlindLevel;
 import com.plm.tournamentCore.blind.BlindStructure;
 import com.plm.tournamentCore.chip.ChipsSet;
-import com.plm.userManagement.UserManagementUtils;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.Notification;
 /**
  * The presenter in MVP is a middle-man that handles all user interaction logic, but in an implementation-independent way, 
  * so that it doesn't actually know anything about Vaadin. 
@@ -22,8 +20,8 @@ import com.vaadin.ui.Notification;
  */
 public class BlindStructurePresenter implements 
 	BlindStructureView.BlindStructureViewListener{
-	BlindStructure structure;
-	BlindStructureViewImpl structureView;
+	private BlindStructure structure;
+	private BlindStructureViewImpl structureView;
 
 	private static Logger logger = LoggerFactory.getLogger(BlindStructurePresenter.class);
 
@@ -37,7 +35,7 @@ public class BlindStructurePresenter implements
         this.structure = pStructure;
         this.structureView  = pStructureView;
         
-        structureView.addListener(this);
+        this.structureView.addListener(this);
         
     }
 
@@ -50,14 +48,13 @@ public class BlindStructurePresenter implements
 	public void buttonClick(ClickEvent pEvent) {
 		if(pEvent.getSource().equals(this.structureView.
 				getStructurePreviewPanel().getSaveStructureBtn())){
+
 			// will save the structure
 			Subject user = SecurityUtils.getSubject();
 			if(!user.isAuthenticated()){
 				logger.warn("user not authenticate");
-				Notification.show("Pas authentifié (testing string to remove!!!)");
-				UserManagementUtils.login("admin","admin");
-			    Session session = user.getSession();   
-			    session.setAttribute("login", "admin"); 
+				new LoginBox(this.structureView.
+						getStructurePreviewPanel().getSaveStructureBtn());
 			}
 			else{
 				logger.warn("user log : " + user.getSession().getAttribute("login"));
