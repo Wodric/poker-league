@@ -171,4 +171,59 @@ public class MessagesConstants {
 	 * Constant to find the login error title label
 	 */
 	public static final String LOGIN_ERROR_TITLE = "login.error.title";
+	
+	/**
+	 * Constant to find label of register view
+	 */
+	public static final String REGISTER_TITLE = "register.title";
+	
+	/**
+	 * Constant to find label of register first name field
+	 */
+	public static final String REGISTER_FIELD_FIRSTNAME = "register.field.firstname";
+	
+	/**
+	 * Constant to find label of register last name field
+	 */
+	public static final String REGISTER_FIELD_LASTNAME = "register.field.lastname";
+	
+	/**
+	 * Constant to find label of register last name field
+	 */
+	public static final String REGISTER_FIELD_EMAIL = "register.field.email";
+	
+	/**
+	 * Constant to find label of register password field
+	 */
+	public static final String REGISTER_FIELD_PASSWORD = "register.field.password";
+	
+	/**
+	 * Constant to find label of register password confirmed field
+	 */
+	public static final String REGISTER_FIELD_PASSWORD_CONFIRMED = "register.field.passwordConfirmed";
+	
+	/**
+	 * Constant to find label of register role field
+	 */
+	public static final String REGISTER_FIELD_ROLE = "register.field.role";
+	
+	/**
+	 * Constant to find label of register company field
+	 */
+	public static final String REGISTER_FIELD_COMPANY = "register.field.company";
+	
+	/**
+	 * Constant to find label of register phone number field
+	 */
+	public static final String REGISTER_FIELD_PHONE_NUMBER = "register.field.phoneNumber";
+	
+	/**
+	 * Constant to find the cancel button label
+	 */
+	public static final String REGISTER_BUTTON_CANCEL = "register.button.cancel";
+	
+	/**
+	 * Constant to find the sign on label
+	 */
+	public static final String REGISTER_BUTTON_SIGNON = "register.button.signon";
 }

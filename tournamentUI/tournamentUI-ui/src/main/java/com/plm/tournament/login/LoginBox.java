@@ -167,7 +167,7 @@ public class LoginBox extends Window {
         		click -> this.close());
         this.logOnButton = new Button(
         		bundle.getMessage(MessagesConstants.LOGIN_BUTTON_SIGNON),
-        		click -> Notification.show("Not implemented", Notification.Type.TRAY_NOTIFICATION));
+        		click -> new RegisterUserBox());
         buttonsLayout.addComponents(this.cancelLoginButton, this.logOnButton);
 
         buttonsLayout.setSpacing(true);
