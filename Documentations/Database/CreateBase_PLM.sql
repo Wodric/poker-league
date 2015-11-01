@@ -30,7 +30,7 @@ ENGINE=InnoDB DEFAULT CHARSET=utf8;
 -- -----------------------------------------------------
 -- Table `PokerLeagueManager`.`tournament`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `PokerLeagueManager`.`tournament` (
+CREATE TABLE IF NOT EXISTS `tournament` (
   `idTournament` BIGINT NOT NULL AUTO_INCREMENT,
   `name` VARCHAR(100) CHARACTER SET 'utf8' NULL,
   `description` TEXT NULL,
@@ -68,8 +68,8 @@ ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `PokerLeagueManager`.`user`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `PokerLeagueManager`.`user` (
-  `userId` BIGINT NOT NULL,
+CREATE TABLE IF NOT EXISTS `user` (
+  `userId` BIGINT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(32) CHARACTER SET 'utf8' NOT NULL,
   `email` VARCHAR(255) NOT NULL,
   `password` TEXT NOT NULL,
@@ -78,15 +78,18 @@ CREATE TABLE IF NOT EXISTS `PokerLeagueManager`.`user` (
   `verified` TINYINT(1) NULL DEFAULT 0,
   `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   `passwordModificationTime` TIMESTAMP NULL,
+  `firstname` VARCHAR(50) NULL,
+  `lastname` VARCHAR(50) NULL,
   PRIMARY KEY (`userId`))
 ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
-
 
 -- -----------------------------------------------------
 -- Table `PokerLeagueManager`.`userInformation`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `PokerLeagueManager`.`userInformation` (
+CREATE TABLE IF NOT EXISTS `userInformation` (
   `fk_userId` BIGINT NOT NULL,
+  `phone` VARCHAR(15) NULL,
+  `company` VARCHAR(50) NULL,
   PRIMARY KEY (`fk_userId`),
   CONSTRAINT `fk_userInformation_user1`
     FOREIGN KEY (`fk_userId`)
@@ -108,7 +111,7 @@ ENGINE = InnoDB DEFAULT CHARSET=utf8;
 -- -----------------------------------------------------
 -- Table `PokerLeagueManager`.`permission`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `PokerLeagueManager`.`permission` (
+CREATE TABLE IF NOT EXISTS `permission` (
   `permissionId` BIGINT NOT NULL,
   `permission` VARCHAR(45) NULL,
   PRIMARY KEY (`permissionId`))
@@ -138,7 +141,7 @@ ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 -- Table `PokerLeagueManager`.`rolePermissions`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `PokerLeagueManager`.`rolePermissions` (
+CREATE TABLE IF NOT EXISTS `rolePermissions` (
   `fk_roleId` BIGINT NOT NULL,
   `fk_permissionId` BIGINT NOT NULL,
   PRIMARY KEY (`fk_roleId`, `fk_permissionId`),
