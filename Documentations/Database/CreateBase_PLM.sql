@@ -70,16 +70,15 @@ ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `user` (
   `userId` BIGINT NOT NULL AUTO_INCREMENT,
-  `username` VARCHAR(32) CHARACTER SET 'utf8' NOT NULL,
   `email` VARCHAR(255) NOT NULL,
   `password` TEXT NOT NULL,
   `passwordSalt` TEXT NOT NULL,
+  `firstname` VARCHAR(50) NOT NULL,
+  `lastname` VARCHAR(50) NOT NULL,
   `active` TINYINT(1) NULL DEFAULT 0,
   `verified` TINYINT(1) NULL DEFAULT 0,
   `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   `passwordModificationTime` TIMESTAMP NULL,
-  `firstname` VARCHAR(50) NULL,
-  `lastname` VARCHAR(50) NULL,
   PRIMARY KEY (`userId`))
 ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
 

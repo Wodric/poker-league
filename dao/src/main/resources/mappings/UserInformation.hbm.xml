@@ -10,6 +10,12 @@
                 <param name="property">user</param>
             </generator>
         </id>
+        <property name="phone" type="string">
+            <column name="phone" length="15"/>
+        </property>
+        <property name="company" type="string">
+            <column name="company" length="50"/>
+        </property>
         <one-to-one name="user" class="com.plm.dao.beans.user.User" constrained="true"></one-to-one>
     </class>
 </hibernate-mapping>

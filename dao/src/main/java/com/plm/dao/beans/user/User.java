@@ -30,7 +30,12 @@ public class User implements java.io.Serializable {
 	/**
 	 * user display name
 	 */
-	private String username;
+	private String firstname;
+	
+	/**
+	 * user display name
+	 */
+	private String lastname;
 	
 	/**
 	 * the user contact email
@@ -82,16 +87,18 @@ public class User implements java.io.Serializable {
 	 * Constructor with mandatory parameter
 	 * @param userId User Identifier in database
 	 * @param userInformation The attached user information
-	 * @param username the string  user display name
+	 * @param firstname user first name name
+	 * @param lastname user last name name
 	 * @param email the user contact email
 	 * @param password the user password
 	 * @param passwordSalt the user salt for password 
 	 */
-	public User(long userId, UserInformation userInformation, String username, String email, String password,
+	public User(long userId, UserInformation userInformation, String firstname, String lastname, String email, String password,
 			String passwordSalt) {
 		this.userId = userId;
+		this.firstname = firstname;
+		this.lastname = lastname;
 		this.userInformation = userInformation;
-		this.username = username;
 		this.email = email;
 		this.password = password;
 		this.passwordSalt = passwordSalt;
@@ -101,7 +108,8 @@ public class User implements java.io.Serializable {
 	 * Constructor with all parameters
 	 * @param userId User Identifier in database
 	 * @param userInformation The attached user information
-	 * @param username user display name
+	 * @param firstname user first name name
+	 * @param lastname user last name name
 	 * @param email the user contact email
 	 * @param password the user password
 	 * @param passwordSalt the user salt for password 
@@ -111,12 +119,13 @@ public class User implements java.io.Serializable {
 	 * @param passwordModificationTime the user date password modified
 	 * @param roles List of role attached to user
 	 */
-	public User(long userId, UserInformation userInformation, String username, String email, String password,
+	public User(long userId, UserInformation userInformation, String firstname, String lastname, String email, String password,
 			String passwordSalt, Boolean active, Boolean verified, Date createTime, Date passwordModificationTime,
 			Set<Role> roles) {
 		this.userId = userId;
 		this.userInformation = userInformation;
-		this.username = username;
+		this.firstname = firstname;
+		this.lastname = lastname;
 		this.email = email;
 		this.password = password;
 		this.passwordSalt = passwordSalt;
@@ -147,12 +156,20 @@ public class User implements java.io.Serializable {
 		this.userInformation = userInformation;
 	}
 
-	public String getUsername() {
-		return this.username;
+	public String getFirstname() {
+		return this.firstname;
 	}
 
-	public void setUsername(String username) {
-		this.username = username;
+	public void setFirstname(String firstname) {
+		this.firstname = firstname;
+	}
+	
+	public String getLastname() {
+		return this.lastname;
+	}
+
+	public void setLastname(String lastname) {
+		this.lastname = lastname;
 	}
 
 	public String getEmail() {

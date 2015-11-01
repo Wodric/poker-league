@@ -41,7 +41,8 @@ public class UserInformationTest extends DAOTest {
 		UserInformation userInformationAdd = new UserInformation();
 		// create user linked to user information
 		User userAdd = new User();
-		userAdd.setUsername("test");
+		userAdd.setFirstname("test");
+		userAdd.setLastname("test");
 		userAdd.setPassword("test");
 		userAdd.setPasswordSalt("test");
 		userAdd.setEmail("test");

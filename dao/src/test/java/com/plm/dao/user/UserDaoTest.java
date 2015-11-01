@@ -38,7 +38,8 @@ public class UserDaoTest extends DAOTest{
 		assertEquals(0, session.createQuery("from User").list().size());
 		//add a blind structure in database
 		User userAdd = new User();
-		userAdd.setUsername("test");
+		userAdd.setFirstname("test");
+		userAdd.setLastname("test");
 		userAdd.setPassword("test");
 		userAdd.setPasswordSalt("test");
 		userAdd.setEmail("test");
