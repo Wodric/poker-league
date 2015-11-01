@@ -20,6 +20,16 @@ public class UserInformation implements java.io.Serializable {
 	 * user identifiy with @see {@link #fkUserId}
 	 */
 	private User user;
+	
+	/**
+	 * user phone with @see {@link #fkUserId}
+	 */
+	private String phone;
+	
+	/**
+	 * user company with @see {@link #fkUserId}
+	 */
+	private String company;
 
 	/**
 	 * Default constructor
@@ -53,6 +63,22 @@ public class UserInformation implements java.io.Serializable {
 
 	public void setUser(User user) {
 		this.user = user;
+	}
+	
+	public String getPhone() {
+		return phone;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public String getCompany() {
+		return company;
+	}
+
+	public void setCompany(String company) {
+		this.company = company;
 	}
 
 }

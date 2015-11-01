@@ -11,8 +11,8 @@ public class UserDao {
 	
 	private static final UserDaoImpl userDao = new UserDaoImpl();
 	
-	public static void persist(User pTournamentInstance) throws RuntimeException{
-		userDao.persist(pTournamentInstance);
+	public static void persist(User pTransientInstance) throws RuntimeException{
+		userDao.persist(pTransientInstance);
 	}
 
 	public static User getById(long pId) throws RuntimeException  {
