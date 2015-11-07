@@ -13,9 +13,42 @@ public class MessagesConstants {
 	 */
 	
 	/**
+	 * Profiles
+	 */
+	
+	/**
+	 * Constant to find the label of player profile
+	 */
+	public static final String PLAYER = "PLAYER";
+	
+	/**
+	 * Constant to find the label of association profile
+	 */
+	public static final String ASSOCIATION_CREATOR = "ASSOCIATION_CREATOR";
+	
+	/**
+	 * Constant to find the label of casino profile
+	 */
+	public static final String CASINO_CREATOR = "CASINO_CREATOR";
+	
+	/**
+	 * Constant to find the label of tournament director profile
+	 */
+	public static final String TOURNAMENT_DIRECTOR = "TOURNAMENT_DIRECTOR";
+	
+	/**
+	 * Constant to find the label of other professional profile
+	 */
+	public static final String OTHER_PROFESSIONAL = "OTHER_PROFESSIONAL";
+	/**
 	 * Constant to find the main page title on ui-messages files
 	 */
 	public static final String PAGE_MAIN_TITLE = "page.main.title";
+	
+	/**
+	 * Constant to find the message for non implemented feature
+	 */
+	public static final String GLOBAL_NOT_IMPLEMENTED = "global.not.implemented";
 	
 	/**
 	 * Constant to find the ante column header of blind structure grid
@@ -180,12 +213,12 @@ public class MessagesConstants {
 	/**
 	 * Constant to find label of register first name field
 	 */
-	public static final String REGISTER_FIELD_FIRSTNAME = "register.field.firstname";
+	public static final String REGISTER_FIELD_FIRSTNAME = "register.field.firstName";
 	
 	/**
 	 * Constant to find label of register last name field
 	 */
-	public static final String REGISTER_FIELD_LASTNAME = "register.field.lastname";
+	public static final String REGISTER_FIELD_LASTNAME = "register.field.lastName";
 	
 	/**
 	 * Constant to find label of register last name field
@@ -226,4 +259,34 @@ public class MessagesConstants {
 	 * Constant to find the sign on label
 	 */
 	public static final String REGISTER_BUTTON_SIGNON = "register.button.signon";
+	
+	/**
+	 * Constant to find the label display when a name has error on register login
+	 */
+	public static final String REGISTER_FIELD_NAME_ERROR_NOTVALID = "register.field.name.error.notValid";
+	
+	/**
+	 * Constant to find the label display when email are not correct
+	 */
+	public static final String REGISTER_FIELD_EMAIL_ERROR_NOTVALID = "register.field.email.error.notValid";
+	
+	/**
+	 * Constant to find the label display when password are not correct
+	 */
+	public static final String REGISTER_FIELD_PASSWORD_ERROR_NOTVALID = "register.field.password.error.notValid";
+	
+	/**
+	 * Constant to find the label display when both password field are not equals
+	 */
+	public static final String REGISTER_FIELD_PASSWORD_ERROR_NOTEQUALS = "register.field.password.error.notEquals";
+	
+	/**
+	 * Constant to find the label display when phone number are not correct
+	 */
+	public static final String REGISTER_FIELD_PHONENUMBER_ERROR_NOTVALID = "register.field.phoneNumber.error.notValid";
+	
+	/**
+	 * Constant to find the label display when role are not selected
+	 */
+	public static final String REGISTER_FIELD_ROLE_ERROR_NOTVALID = "register.field.role.error.notValid";
 }

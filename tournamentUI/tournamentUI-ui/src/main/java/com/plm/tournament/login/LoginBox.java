@@ -142,7 +142,8 @@ public class LoginBox extends Window {
     private Component addLoginButtons() {
         HorizontalLayout buttonsLayout = new HorizontalLayout();
         this.forgotButton = new Button(bundle.getMessage(MessagesConstants.LOGIN_BUTTON_FORGOT), 
-        		click -> Notification.show("Not implemented", Notification.Type.TRAY_NOTIFICATION));
+        		click -> Notification.show(bundle.getMessage(MessagesConstants.GLOBAL_NOT_IMPLEMENTED),
+        				Notification.Type.TRAY_NOTIFICATION));
 
 	    this.loginButton = new Button(bundle.getMessage(MessagesConstants.LOGIN_BUTTON_LOGIN), 
 	        		click -> this.login(getUsernameField().getValue(),
