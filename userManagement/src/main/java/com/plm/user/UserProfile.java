@@ -36,7 +36,7 @@ public enum UserProfile {
      * get the database id
      * @return the id
      */
-    long getId(){
+    public long getId(){
     	return id;
     }
     
@@ -53,4 +53,5 @@ public enum UserProfile {
     	allowedChoise.add(UserProfile.OTHER_PROFESSIONAL);    	
 		return allowedChoise;
     }
+
 };

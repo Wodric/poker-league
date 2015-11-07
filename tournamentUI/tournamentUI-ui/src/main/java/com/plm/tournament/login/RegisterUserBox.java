@@ -1,6 +1,12 @@
 package com.plm.tournament.login;
 
 import com.plm.MyUI;
+import com.plm.dao.beans.permission.Role;
+import com.plm.dao.beans.user.User;
+import com.plm.dao.beans.user.UserInformation;
+import com.plm.dao.permission.RoleDao;
+import com.plm.dao.user.UserDao;
+import com.plm.dao.user.UserInformationDao;
 import com.plm.internationalization.ParametrizedResourceBundle;
 import com.plm.messages.constants.MessagesConstants;
 import com.plm.strings.validator.EmailValidator;
@@ -8,6 +14,7 @@ import com.plm.strings.validator.NameValidator;
 import com.plm.strings.validator.PasswordValidator;
 import com.plm.strings.validator.PhoneValidator;
 import com.plm.user.UserProfile;
+import com.plm.userManagement.UserManagementUtils;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.server.UserError;
@@ -16,7 +23,6 @@ import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Notification;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
 import com.vaadin.ui.VerticalLayout;
@@ -97,11 +103,17 @@ public class RegisterUserBox extends Window {
 	
 	private static final boolean REQUIRED = true;
 	
+	/**
+	 * The origin button to reclick after 
+	 */
+	private Button originButton;
+	
     /**
      * Constructor - Create the registration user box
      */
-    public RegisterUserBox(){
+    public RegisterUserBox(Button pOriginButton){
     	// init the layout of element in windows
+    	this.originButton = pOriginButton;
     	VerticalLayout windowsLayout = new VerticalLayout();
     	windowsLayout.addComponent(this.addSignOnForm());
     	windowsLayout.addComponent(this.addRegisterButtons());
@@ -209,8 +221,7 @@ public class RegisterUserBox extends Window {
         		click -> this.close());
 
 	    this.registerButton = new Button(bundle.getMessage(MessagesConstants.REGISTER_BUTTON_SIGNON), 
-	    		click -> Notification.show(bundle.getMessage(MessagesConstants.GLOBAL_NOT_IMPLEMENTED),
-	    				Notification.Type.TRAY_NOTIFICATION));
+	    		click -> this.registerUser());
 
         buttonsLayout.addComponents(this.cancelButton, this.registerButton);
 
@@ -220,15 +231,22 @@ public class RegisterUserBox extends Window {
         return buttonsLayout;
     }
     
+    /**
+     * Validate name anmust be alphabetic
+     * Send UI error to user in case of error
+     * @param pNameField name filed to validate
+     */
     private void validateName(TextField pNameField){
     	if(!pNameField.getValue().equals("") && !NameValidator.validate(pNameField.getValue())){
     		pNameField.setComponentError(
     				new UserError(
     						bundle.getMessage(MessagesConstants.REGISTER_FIELD_NAME_ERROR_NOTVALID)));
+    		
     	}
     	else{
     		pNameField.setComponentError(null);
     	}
+		this.manageValidateButtonError();
     }
     
     /**
@@ -240,7 +258,8 @@ public class RegisterUserBox extends Window {
     	// verify password respect the password policy
     	if(! pPasswordField.getValue().equals("") && !PasswordValidator.validate(pPasswordField.getValue())){
     		pPasswordField.setComponentError(
-    				new UserError("")); 
+    				new UserError(bundle.getMessage(MessagesConstants.REGISTER_FIELD_PASSWORD_ERROR_NOTVALID))); 
+    		this.manageValidateButtonError();
     		// message in description focus user attention to field to make them read the description
     		return;
     	}
@@ -260,6 +279,7 @@ public class RegisterUserBox extends Window {
     		this.passwordField.setComponentError(null);
     		this.passwordConfirmedField.setComponentError(null);
     	}
+		this.manageValidateButtonError();
     }
     
     /**
@@ -274,6 +294,7 @@ public class RegisterUserBox extends Window {
     	else{
     		this.emailField.setComponentError(null);
     	}
+		this.manageValidateButtonError();
     }
     
     /**
@@ -288,6 +309,7 @@ public class RegisterUserBox extends Window {
     	else{
     		this.phoneNumberField.setComponentError(null);
     	}
+		this.manageValidateButtonError();
     }
     
     /**
@@ -314,12 +336,66 @@ public class RegisterUserBox extends Window {
     	else{
     		this.roleField.setComponentError(null);
     	}
+		this.manageValidateButtonError();
     }
     
+    /**
+     * Register a user for subscription, create usern role and it's information
+     */
     private void registerUser(){
     	// save user & user information
-    	
-    	// depending of role,  user role
+    	if(this.areFieldsValidate()){
+        	User registeredUser = new User( 
+        			this.firstNameField.getValue(), 
+        			this.lastNameField.getValue(), 
+        			this.emailField.getValue(), 
+        			this.passwordField.getValue(), 
+        			"");
+			Role roleSelected = RoleDao.getById(
+					 ((UserProfile) this.roleField.getValue()).getId());
+        	registeredUser.addRole(roleSelected);
+        	
+        	UserDao.persist(registeredUser);
+        	UserInformation informationUserRegistered = new UserInformation(registeredUser);
+        	UserInformationDao.persist(informationUserRegistered);
+        	
+        	// then login
+        	UserManagementUtils.login(this.emailField.getValue(), this.passwordField.getValue());
+        	this.originButton.click();
+        	this.close();
+    	}
+    	else{
+    		this.manageValidateButtonError();
+    	}
+    }
+    
+    /**
+     * Verfy if register user box fields are valid
+     * @return true of field are valid, false otherwise
+     */
+    private boolean areFieldsValidate(){
+    	return this.firstNameField.isValid() && this.firstNameField.getComponentError() == null &&
+    			this.lastNameField.isValid() && this.lastNameField.getComponentError() == null &&
+    			this.emailField.isValid() && this.emailField.getComponentError() == null && 
+    			this.passwordField.isValid() && this.passwordField.getComponentError() == null &&
+    			this.passwordConfirmedField.isValid() && this.passwordConfirmedField.getComponentError() == null &&
+    			this.roleField.isValid() && this.roleField.getComponentError() == null &&
+    			this.companyField.getComponentError() == null &&
+    			this.phoneNumberField.getComponentError() == null;
+    }
+    
+    /**
+     * Set the component error on validate creation button
+     */
+    private void manageValidateButtonError(){
+		if(!this.areFieldsValidate() && this.registerButton.getComponentError() == null){
+			this.registerButton.setComponentError(
+					new UserError(bundle.getMessage(
+							MessagesConstants.REGISTER_BUTTON_SIGNON_ERROR_NOTVALID)));
+		}
+		else if (this.areFieldsValidate()){
+			this.registerButton.setComponentError(null);
+		}
     }
     
 }

@@ -168,7 +168,7 @@ public class LoginBox extends Window {
         		click -> this.close());
         this.logOnButton = new Button(
         		bundle.getMessage(MessagesConstants.LOGIN_BUTTON_SIGNON),
-        		click -> new RegisterUserBox());
+        		click -> this.registerUser());
         buttonsLayout.addComponents(this.cancelLoginButton, this.logOnButton);
 
         buttonsLayout.setSpacing(true);
@@ -197,6 +197,14 @@ public class LoginBox extends Window {
     				new UserError(
     						bundle.getMessage(MessagesConstants.LOGIN_ERROR_TITLE)));
     	}
+    }
+    
+    /**
+     * register User
+     */
+    private void registerUser(){
+    	new RegisterUserBox(this.originButton);
+    	this.close();
     }
 
 	/**
