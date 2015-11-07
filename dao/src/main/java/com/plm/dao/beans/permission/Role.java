@@ -52,7 +52,7 @@ public class Role implements java.io.Serializable {
 
 	/**
 	 * Constructor with all parameters
-	 * @param roleId role Identifier in databass
+	 * @param roleId role Identifier in database
 	 * @param roleName role display name
 	 * @param users User the role is attach on
 	 * @param permissions the permission attach to this role
