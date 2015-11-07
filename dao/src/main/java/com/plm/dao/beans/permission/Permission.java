@@ -55,6 +55,16 @@ public class Permission implements java.io.Serializable {
 		this.roles = roles;
 	}
 	
+	/**
+	 * Constructor with all  parameter and without auto generated permissionId
+	 * @param permission value of the permission
+	 * @param roles  Roles this Permission is attach on
+	 */
+	public Permission(String permission, Set<Role> roles) {
+		this.permission = permission;
+		this.roles = roles;
+	}
+	
 	/***************
 	 * GETTERS & SETTERS
 	 ***************/
@@ -81,6 +91,24 @@ public class Permission implements java.io.Serializable {
 
 	public void setRoles(Set<Role> roles) {
 		this.roles = roles;
+	}
+	
+	/**
+	 * Added method
+	 */
+		
+	public void addRoles(Set<Role> roles) {
+		if(this.roles == null){
+			this.roles = new HashSet<Role>();
+		}
+		this.roles.addAll(roles);
+	}
+	
+	public void addRole(Role role) {
+		if(this.roles == null){
+			this.roles = new HashSet<Role>();
+		}
+		this.roles.add(role);
 	}
 
 }
