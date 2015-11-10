@@ -345,12 +345,13 @@ public class RegisterUserBox extends Window {
     private void registerUser(){
     	// save user & user information
     	if(this.areFieldsValidate()){
+    		String salt = UserManagementUtils.getRandomSalt();
         	User registeredUser = new User( 
         			this.firstNameField.getValue(), 
         			this.lastNameField.getValue(), 
         			this.emailField.getValue(), 
-        			this.passwordField.getValue(), 
-        			"");
+        			UserManagementUtils.getHashPassword(this.passwordField.getValue(),salt), 
+        			salt);
 			Role roleSelected = RoleDao.getById(
 					 ((UserProfile) this.roleField.getValue()).getId());
         	registeredUser.addRole(roleSelected);

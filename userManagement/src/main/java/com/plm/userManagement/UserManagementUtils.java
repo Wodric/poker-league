@@ -4,8 +4,12 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.config.IniSecurityManagerFactory;
+import org.apache.shiro.crypto.RandomNumberGenerator;
+import org.apache.shiro.crypto.SecureRandomNumberGenerator;
+import org.apache.shiro.crypto.hash.Sha512Hash;
 import org.apache.shiro.mgt.SecurityManager;
 import org.apache.shiro.subject.Subject;
+import org.apache.shiro.util.ByteSource;
 import org.apache.shiro.util.Factory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,7 +32,12 @@ public class UserManagementUtils {
 	 * Security manager
 	 */
     private final static SecurityManager securityManager = factory.getInstance();
-
+    
+    /**
+     * Number of iteration for password security
+     */
+    public final static int HASH_ITERATION = 50000;
+    
     /**
      * True if shiro security manager is initialized
      */
@@ -63,6 +72,30 @@ public class UserManagementUtils {
 
 		// Authenticate
 		currentUser.login(token);
+	}
+	
+	/**
+	 * Return a random salt in base 64
+	 * @return return a salt, each call return different salt
+	 */
+	public static String getRandomSalt(){
+        RandomNumberGenerator rng = new SecureRandomNumberGenerator();
+        ByteSource salt = rng.nextBytes();
+        return salt.toBase64();
+	}
+	
+	/**
+	 * Hash password with sha512 with 50000 iteration with salt
+	 * @param pPassword password to hash
+	 * @param pSalt salt used in password hash
+	 * @throws AuthenticationException
+	 */
+	public static String getHashPassword(String pPassword, String pSalt) throws AuthenticationException
+	{
+		System.out.println(pSalt);
+		System.out.println(pPassword);
+		Sha512Hash hash = new Sha512Hash(pPassword,pSalt,HASH_ITERATION);
+		return hash.toBase64();
 	}
 
 }
