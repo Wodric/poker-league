@@ -92,8 +92,6 @@ public class UserManagementUtils {
 	 */
 	public static String getHashPassword(String pPassword, String pSalt) throws AuthenticationException
 	{
-		System.out.println(pSalt);
-		System.out.println(pPassword);
 		Sha512Hash hash = new Sha512Hash(pPassword,pSalt,HASH_ITERATION);
 		return hash.toBase64();
 	}
