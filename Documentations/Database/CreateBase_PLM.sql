@@ -64,7 +64,6 @@ CREATE TABLE IF NOT EXISTS `tournament` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
 
-
 -- -----------------------------------------------------
 -- Table `PokerLeagueManager`.`user`
 -- -----------------------------------------------------
@@ -79,7 +78,8 @@ CREATE TABLE IF NOT EXISTS `user` (
   `verified` TINYINT(1) NULL DEFAULT 0,
   `create_time` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
   `passwordModificationTime` TIMESTAMP NULL,
-  PRIMARY KEY (`userId`))
+  PRIMARY KEY (`userId`),
+UNIQUE INDEX `unique_email` (`email` ASC))
 ENGINE = InnoDB DEFAULT CHARACTER SET = utf8;
 
 -- -----------------------------------------------------

@@ -271,6 +271,11 @@ public class MessagesConstants {
 	public static final String REGISTER_FIELD_EMAIL_ERROR_NOTVALID = "register.field.email.error.notValid";
 	
 	/**
+	 * Constant to find the label display when email are not unique
+	 */
+	public static final String REGISTER_FIELD_EMAIL_ERROR_NOTUNIQUE = "register.field.email.error.notUnique";
+	
+	/**
 	 * Constant to find the label display when password are not correct
 	 */
 	public static final String REGISTER_FIELD_PASSWORD_ERROR_NOTVALID = "register.field.password.error.notValid";

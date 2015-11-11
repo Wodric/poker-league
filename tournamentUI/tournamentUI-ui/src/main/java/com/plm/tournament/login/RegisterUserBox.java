@@ -108,6 +108,11 @@ public class RegisterUserBox extends Window {
 	 */
 	private Button originButton;
 	
+	/**
+	 * It indicate if the email value is unique in database and if it's valid
+	 */
+	private boolean uniqueValidatedEmail = false;
+	
     /**
      * Constructor - Create the registration user box
      */
@@ -292,7 +297,17 @@ public class RegisterUserBox extends Window {
     				new UserError(bundle.getMessage(MessagesConstants.REGISTER_FIELD_EMAIL_ERROR_NOTVALID)));
     	}
     	else{
-    		this.emailField.setComponentError(null);
+    		// validated format now verify email unicity
+    		if(UserDao.alreadyExistingEmail(this.emailField.getValue())){
+    			uniqueValidatedEmail = false;
+        		this.emailField.setComponentError(
+        				new UserError(bundle.getMessage(MessagesConstants.REGISTER_FIELD_EMAIL_ERROR_NOTUNIQUE)));
+    		}
+    		else{
+    			uniqueValidatedEmail = true;
+        		this.emailField.setComponentError(null);
+    		}
+
     	}
 		this.manageValidateButtonError();
     }
@@ -378,6 +393,7 @@ public class RegisterUserBox extends Window {
     	return this.firstNameField.isValid() && this.firstNameField.getComponentError() == null &&
     			this.lastNameField.isValid() && this.lastNameField.getComponentError() == null &&
     			this.emailField.isValid() && this.emailField.getComponentError() == null && 
+    			this.uniqueValidatedEmail &&
     			this.passwordField.isValid() && this.passwordField.getComponentError() == null &&
     			this.passwordConfirmedField.isValid() && this.passwordConfirmedField.getComponentError() == null &&
     			this.roleField.isValid() && this.roleField.getComponentError() == null &&

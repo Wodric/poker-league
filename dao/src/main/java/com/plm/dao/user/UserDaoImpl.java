@@ -1,5 +1,8 @@
 package com.plm.dao.user;
 
+import java.util.List;
+
+import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.slf4j.Logger;
@@ -17,6 +20,11 @@ import com.plm.dao.util.HibernateUtil;
 public class UserDaoImpl implements UserDaoInterface, PokerLeagueManagerDao<User>{
 	
 	private static Logger logger = LoggerFactory.getLogger(UserDaoImpl.class);
+	
+	/**
+	 * HQL request as string which must get the user from email
+	 */
+	private static final String HQL_SELECT_USER_FROM_EMAIL = "FROM User u WHERE u.email='?'";
 
 	 /**
 	  * get User persistent instance by Id
@@ -83,6 +91,39 @@ public class UserDaoImpl implements UserDaoInterface, PokerLeagueManagerDao<User
 			session.close();
 			throw re;
 		}
+	}
+	
+	/**
+	 * Get the user from email
+	 * @param pEmail the email it search
+	 */
+	public User getUserByEmail(String pEmail){
+		logger.debug("get user instance from email");
+        Session session = HibernateUtil.getCommitFlushModeSession();
+		try {
+    		Query query = session.createQuery(HQL_SELECT_USER_FROM_EMAIL.replace("?", pEmail));
+    		List<User> results = query.list();
+    		// email must be unique, must have only 1 result
+    		if(results != null && results.size() != 0){
+    			return results.get(0);
+    		}
+    		else{
+    			return null;
+    		}
+		} catch (RuntimeException re) {
+			logger.error("get user instance failed");
+			session.close();
+			throw re;
+		}
+	}
+	
+	/**
+	 * 
+	 * @param pEmail
+	 * @return
+	 */
+	public boolean alreadyExistingEmail(String pEmail){
+		return UserDao.getUserByEmail(pEmail) == null ? false : true;
 	}
 
 }

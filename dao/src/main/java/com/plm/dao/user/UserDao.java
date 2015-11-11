@@ -22,4 +22,13 @@ public class UserDao {
 	public static void delete(User pPersistentInstance) throws RuntimeException{	
 		userDao.delete(pPersistentInstance);
 	}
+	
+	public static User getUserByEmail(String email) throws RuntimeException{	
+		return userDao.getUserByEmail(email);
+	}
+	
+	public static boolean alreadyExistingEmail(String email) throws RuntimeException{	
+		return userDao.alreadyExistingEmail(email);
+	}
+	
 }
