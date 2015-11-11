@@ -118,9 +118,9 @@ public class UserDaoImpl implements UserDaoInterface, PokerLeagueManagerDao<User
 	}
 	
 	/**
-	 * 
-	 * @param pEmail
-	 * @return
+	 * Verify if user with this email already exist
+	 * @param pEmail mail to verify
+	 * @return true if mail already exist, faélse otherwise
 	 */
 	public boolean alreadyExistingEmail(String pEmail){
 		return UserDao.getUserByEmail(pEmail) == null ? false : true;
