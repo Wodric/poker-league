@@ -14,9 +14,11 @@ import com.vaadin.ui.Component;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 
@@ -35,7 +37,7 @@ public class LoginBox extends Window {
 	 * message bundle
 	 */
 	private static final ParametrizedResourceBundle bundle = ParametrizedResourceBundle.
-			getParametrizedBundle(MessagesConstants.UI_MESSAGE_FILE_BASE_NAME, MyUI.getUserLocale());
+			getParametrizedBundle(MessagesConstants.UI_MESSAGE_FILE_BASE_NAME, UI.getCurrent().getLocale());
 	
 	/**
 	 * Text field where user enter it's login
@@ -78,11 +80,25 @@ public class LoginBox extends Window {
     private Button originButton;
     
     /**
+     * The menu item which nee the login
+     */
+    private MenuItem originMenuItem;
+    
+    /**
      * Constructor - Create the box
      * @param pButton the button which need the login 
      */
     public LoginBox(Button pButton){
     	this.originButton = pButton;
+    	this.buildWindows();
+    }
+    
+    public LoginBox(MenuItem pOriginMenuItem){
+    	this.originMenuItem = pOriginMenuItem;
+    	this.buildWindows();
+    }
+	
+    private void buildWindows(){
     	// init the layout of ellement in windows
     	VerticalLayout windowsLayout = new VerticalLayout();
     	windowsLayout.setWidth(LOGIN_BOX_WIDTH_PX);
@@ -108,7 +124,6 @@ public class LoginBox extends Window {
         
         MyUI.getCurrent().addWindow(this);
     }
-	
     /**
      * set title for no account user part
      */
@@ -186,7 +201,12 @@ public class LoginBox extends Window {
     		UserManagementUtils.login(
 	        		getUsernameField().getValue(),
 	        		getPasswordField().getValue());
-    		this.originButton.click();
+        	if(this.originButton != null){
+            	this.originButton.click();
+        	}
+        	else if(this.originMenuItem != null){
+        		this.originMenuItem.getCommand().menuSelected(this.originMenuItem);
+        	}
         	this.close();
     	}
     	catch(AuthenticationException e){

@@ -3,7 +3,6 @@ package com.plm.tournament.structures.blinds;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.plm.MyUI;
 import com.plm.framework.ui.mvp.BasePanel;
 import com.plm.framework.ui.mvp.BaseView;
 import com.plm.internationalization.ParametrizedResourceBundle;
@@ -17,6 +16,7 @@ import com.vaadin.ui.AbstractTextField;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.UI;
 
 
 public class BlindStructureChipsInformationPanel extends BasePanel{
@@ -36,7 +36,7 @@ public class BlindStructureChipsInformationPanel extends BasePanel{
 	 * bundle for message
 	 */
 	private static final ParametrizedResourceBundle bundle = ParametrizedResourceBundle.
-			getParametrizedBundle(MessagesConstants.UI_MESSAGE_FILE_BASE_NAME, MyUI.getUserLocale());
+			getParametrizedBundle(MessagesConstants.UI_MESSAGE_FILE_BASE_NAME, UI.getCurrent().getLocale());
 	
 	/**
 	 * Constaint which defin the caption of panel

@@ -1,11 +1,11 @@
 package com.plm.tournament.login;
 
-import com.plm.MyUI;
 import com.plm.internationalization.ParametrizedResourceBundle;
 import com.plm.messages.constants.MessagesConstants;
 import com.vaadin.server.Page;
 import com.vaadin.shared.Position;
 import com.vaadin.ui.Notification;
+import com.vaadin.ui.UI;
 
 /**
  * Notification in case of login error
@@ -30,7 +30,7 @@ public class ErrorLoginNotification extends Notification {
 	public static final String NOTIFICATION_STYLE = "warn closable login-help";
 	
 	private static final ParametrizedResourceBundle bundle = ParametrizedResourceBundle.
-			getParametrizedBundle(MessagesConstants.UI_MESSAGE_FILE_BASE_NAME, MyUI.getUserLocale());
+			getParametrizedBundle(MessagesConstants.UI_MESSAGE_FILE_BASE_NAME, UI.getCurrent().getLocale());
 
 	public ErrorLoginNotification() {
 		super(

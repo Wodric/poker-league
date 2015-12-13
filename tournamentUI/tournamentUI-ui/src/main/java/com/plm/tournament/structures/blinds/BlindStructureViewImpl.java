@@ -3,13 +3,11 @@ package com.plm.tournament.structures.blinds;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.plm.framework.ui.mvp.BaseVerticalLayout;
 import com.plm.tournamentCore.blind.BlindStructure;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.navigator.ViewChangeListener.ViewChangeEvent;
 import com.vaadin.ui.Button.ClickEvent;
-import com.vaadin.ui.CustomComponent;
-import com.vaadin.ui.HorizontalLayout;
-import com.vaadin.ui.Layout;
 
 /**
  * View implementation of the Blind structure creation view. 
@@ -17,7 +15,7 @@ import com.vaadin.ui.Layout;
  * @author Alexandre Lefèvre "Wodric"
  *
  */
-public class BlindStructureViewImpl extends CustomComponent 
+public class BlindStructureViewImpl extends BaseVerticalLayout 
 	implements BlindStructureView,BlindStructureView.BlindStructureViewListener {
 
     /**
@@ -37,7 +35,6 @@ public class BlindStructureViewImpl extends CustomComponent
 	
 	public BlindStructureViewImpl() {
 		this.mainPanel = new BlindStructureMainPanel(this);
-		this.mainPanel.setSizeFull();
 	}
 
 	@Override
@@ -69,9 +66,7 @@ public class BlindStructureViewImpl extends CustomComponent
 	 * Method execute when application enter in this view
 	 */
 	public void enter(ViewChangeEvent event) {
-		this.mainPanel =  new BlindStructureMainPanel(this);
-		Layout layout = new HorizontalLayout(this.mainPanel);
-		this.setCompositionRoot(layout);		
+		this.addRootComponent(this.mainPanel);		
 	}
 	
 	/**

@@ -8,6 +8,30 @@ public class MessagesConstants {
 	
 	public static final String UI_MESSAGE_FILE_BASE_NAME = "ui-messages";
 	
+	/**
+	 * constants for system message
+	 */
+	
+	/**
+	 * Constant to find system caption for session expired
+	 */
+	public static final String SYSTEM_MESSAGES_SESSION_EXPIRED_CAPTION = "systemMessages.sessionExpired.caption";
+	
+	/**
+	 * Constant to find system message for session expired
+	 */
+	public static final String SYSTEM_MESSAGES_SESSION_EXPIRED_MESSAGE = "systemMessages.sessionExpired.message";
+	
+	/**
+	 * Constant to find system caption for communication error
+	 */
+	public static final String SYSTEM_MESSAGES_COMMUNICATION_ERROR_CAPTION = "systemMessages.communicationError.caption";
+	
+	/**
+	 * Constant to find system message for communication error
+	 */
+	public static final String SYSTEM_MESSAGES_COMMUNICATION_ERROR_MESSAGE = "systemMessages.communicationError.message";
+	
 	/*
 	 * file constant name 
 	 */

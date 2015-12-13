@@ -10,7 +10,14 @@ import com.vaadin.ui.Button.ClickEvent;
  */
 public interface BlindStructureView extends BaseView {
 	
+	/**
+	 * view name to switch on thanks to navigator
+	 */
     public static final String NAME = "BLIND_STRUCTURE_VIEW";
+	/**
+	 * Constant to find the label of blind structure for menu
+	 */
+    public static final String MENU_NAME = "menu.blindstructure.name";
     
     interface BlindStructureViewListener{
 		void buttonClick(ClickEvent pEvent);

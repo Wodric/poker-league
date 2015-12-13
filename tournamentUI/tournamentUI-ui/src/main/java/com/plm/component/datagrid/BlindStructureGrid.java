@@ -1,6 +1,5 @@
 package com.plm.component.datagrid;
 
-import com.plm.MyUI;
 import com.plm.internationalization.ParametrizedResourceBundle;
 import com.plm.messages.constants.MessagesConstants;
 import com.plm.tournamentCore.blind.BlindLevel;
@@ -8,10 +7,16 @@ import com.plm.tournamentCore.blind.BlindStructure;
 import com.plm.tournamentCore.chip.ChipsSet;
 import com.vaadin.data.util.BeanItemContainer;
 import com.vaadin.ui.Grid;
+import com.vaadin.ui.UI;
 
 public class BlindStructureGrid extends Grid {
+	
+	private ParametrizedResourceBundle bundle = ParametrizedResourceBundle.
+			getParametrizedBundle(MessagesConstants.UI_MESSAGE_FILE_BASE_NAME,UI.getCurrent().getLocale());
+	
+	
 	/**
-	 * seria number for serialisation
+	 * Generated serial number for serialisation
 	 */
 	private static final long serialVersionUID = 2488945157328981727L;
 	
@@ -91,14 +96,13 @@ public class BlindStructureGrid extends Grid {
 	 * Set the grid column header
 	 */
 	private void setColumnHeaderCaption(){
-		ParametrizedResourceBundle bundle = ParametrizedResourceBundle.
-				getParametrizedBundle(MessagesConstants.UI_MESSAGE_FILE_BASE_NAME, MyUI.getUserLocale());
+
 		this.getColumn(COLUMN_TIME_NAME).setHeaderCaption(
-				bundle.getMessage(MessagesConstants.BLINDSTRUCTURE_GRID_COLUMN_HEADER_DURATION));
+				this.bundle.getMessage(MessagesConstants.BLINDSTRUCTURE_GRID_COLUMN_HEADER_DURATION));
 		this.getColumn(COLUMN_SMALL_BLIND_NAME).setHeaderCaption(
-				bundle.getMessage(MessagesConstants.BLINDSTRUCTURE_GRID_COLUMN_HEADER_SMALLBLIND));
+				this.bundle.getMessage(MessagesConstants.BLINDSTRUCTURE_GRID_COLUMN_HEADER_SMALLBLIND));
 		this.getColumn(COLUMN_BIG_BLIND_NAME).setHeaderCaption(
-				bundle.getMessage(MessagesConstants.BLINDSTRUCTURE_GRID_COLUMN_HEADER_BIGBLIND));		
+				this.bundle.getMessage(MessagesConstants.BLINDSTRUCTURE_GRID_COLUMN_HEADER_BIGBLIND));		
 		if(this.structure.isAnte()){
 			this.getColumn(COLUM_ANTE_NAME).setHeaderCaption(MessagesConstants.BLINDSTRUCTURE_GRID_COLUMN_HEADER_ANTE);
 		}
@@ -108,11 +112,9 @@ public class BlindStructureGrid extends Grid {
 	 * Set the grid column ante header
 	 */
 	private void setAnteColumnHeaderCaption(){
-		ParametrizedResourceBundle bundle = ParametrizedResourceBundle.
-				getParametrizedBundle(MessagesConstants.UI_MESSAGE_FILE_BASE_NAME, MyUI.getUserLocale());	
 		if(this.structure.isAnte()){
 			this.getColumn(COLUM_ANTE_NAME).setHeaderCaption(
-					bundle.getMessage(MessagesConstants.BLINDSTRUCTURE_GRID_COLUMN_HEADER_ANTE));
+					this.bundle.getMessage(MessagesConstants.BLINDSTRUCTURE_GRID_COLUMN_HEADER_ANTE));
 		}
 	}
 

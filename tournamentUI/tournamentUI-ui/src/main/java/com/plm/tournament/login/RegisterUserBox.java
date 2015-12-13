@@ -23,8 +23,10 @@ import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
+import com.vaadin.ui.UI;
 import com.vaadin.ui.VerticalLayout;
 import com.vaadin.ui.Window;
 
@@ -43,7 +45,7 @@ public class RegisterUserBox extends Window {
 	 * message bundle
 	 */
 	private static final ParametrizedResourceBundle bundle = ParametrizedResourceBundle.
-			getParametrizedBundle(MessagesConstants.UI_MESSAGE_FILE_BASE_NAME, MyUI.getUserLocale());
+			getParametrizedBundle(MessagesConstants.UI_MESSAGE_FILE_BASE_NAME, UI.getCurrent().getLocale());
 	
     /**
      * Size in pixel of login box width
@@ -108,6 +110,12 @@ public class RegisterUserBox extends Window {
 	 */
 	private Button originButton;
 	
+    
+    /**
+     * The menu item which nee the login
+     */
+    private MenuItem originMenuItem;
+	
 	/**
 	 * It indicate if the email value is unique in database and if it's valid
 	 */
@@ -119,6 +127,27 @@ public class RegisterUserBox extends Window {
     public RegisterUserBox(Button pOriginButton){
     	// init the layout of element in windows
     	this.originButton = pOriginButton;
+    	this.buildWindows();
+        
+        MyUI.getCurrent().addWindow(this);
+    }
+    
+    /**
+     * Constructor - Create the registration user box
+     * @param pMenuItem origin of registration menu
+     */
+    public RegisterUserBox(MenuItem pMenuItem){
+    	// init the layout of element in windows
+    	this.originMenuItem = pMenuItem;
+    	this.buildWindows();
+        
+        MyUI.getCurrent().addWindow(this);
+    }
+    
+    /**
+     *  registration windows configuration
+     */
+    private void buildWindows(){
     	VerticalLayout windowsLayout = new VerticalLayout();
     	windowsLayout.addComponent(this.addSignOnForm());
     	windowsLayout.addComponent(this.addRegisterButtons());
@@ -135,8 +164,6 @@ public class RegisterUserBox extends Window {
         this.setClosable(false);
         this.setResizable(false);
         this.center();
-        
-        MyUI.getCurrent().addWindow(this);
     }
     
 	/**
@@ -377,7 +404,12 @@ public class RegisterUserBox extends Window {
         	
         	// then login
         	UserManagementUtils.login(this.emailField.getValue(), this.passwordField.getValue());
-        	this.originButton.click();
+        	if(this.originButton != null){
+            	this.originButton.click();
+        	}
+        	else if(this.originMenuItem != null){
+        		this.originMenuItem.getCommand().menuSelected(this.originMenuItem);
+        	}
         	this.close();
     	}
     	else{
