@@ -18,11 +18,13 @@ import com.plm.userManagement.UserManagementUtils;
 import com.vaadin.data.Property.ValueChangeEvent;
 import com.vaadin.event.ShortcutAction;
 import com.vaadin.server.UserError;
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.ComboBox;
 import com.vaadin.ui.Component;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
+import com.vaadin.ui.Layout;
 import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.PasswordField;
 import com.vaadin.ui.TextField;
@@ -148,19 +150,36 @@ public class RegisterUserBox extends Window {
      *  registration windows configuration
      */
     private void buildWindows(){
+    	VerticalLayout windowsLayout = this.createAndConfigureMainLayout();
+    	// init windows
+    	this.configureWindows(windowsLayout);
+    }
+    
+    /**
+     * Create the layout, add element to it and configure the layout
+     * @return the layout build
+     */
+    private VerticalLayout createAndConfigureMainLayout(){
     	VerticalLayout windowsLayout = new VerticalLayout();
     	windowsLayout.addComponent(this.addSignOnForm());
-    	windowsLayout.addComponent(this.addRegisterButtons());
+    	Component registerButton = this.addRegisterButtons();
+    	windowsLayout.addComponent(registerButton);
     	windowsLayout.setWidth(LOGIN_BOX_WIDTH_PX);
     	windowsLayout.setSpacing(true);
     	windowsLayout.setMargin(true);
-    	
-    	
-    	// init windows
-        this.setContent(windowsLayout);
+    	windowsLayout.setComponentAlignment(registerButton,Alignment.BOTTOM_RIGHT);
+    	return windowsLayout;
+    }
+    
+    /**
+     * Configure the windows, add the layoutToSet in windows
+     * @param layoutToSet the layout to set at windows
+     */
+    private void configureWindows(Layout layoutToSet){
+        this.setContent(layoutToSet);
         this.setCaption(bundle.getMessage(MessagesConstants.REGISTER_TITLE));
-        this.setWidth(windowsLayout.getWidth(), windowsLayout.getWidthUnits());
-        this.setHeight(windowsLayout.getHeight(),windowsLayout.getHeightUnits());
+        this.setWidth(layoutToSet.getWidth(), layoutToSet.getWidthUnits());
+        this.setHeight(layoutToSet.getHeight(),layoutToSet.getHeightUnits());
         this.setClosable(false);
         this.setResizable(false);
         this.center();

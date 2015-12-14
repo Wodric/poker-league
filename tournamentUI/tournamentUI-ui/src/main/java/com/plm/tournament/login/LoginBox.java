@@ -14,6 +14,7 @@ import com.vaadin.ui.Component;
 import com.vaadin.ui.FormLayout;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Layout;
 import com.vaadin.ui.MenuBar.MenuItem;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.PasswordField;
@@ -100,30 +101,53 @@ public class LoginBox extends Window {
 	
     private void buildWindows(){
     	// init the layout of ellement in windows
+    	VerticalLayout windowsLayout = this.createAndConfigureMainLayout();
+    	
+    	// init windows
+        this.configureWindows(windowsLayout);
+        
+        MyUI.getCurrent().addWindow(this);
+    }
+    
+    /**
+     * Create the layout, add element to it and configure the layout
+     * @return the layout build
+     */
+    private VerticalLayout createAndConfigureMainLayout(){
     	VerticalLayout windowsLayout = new VerticalLayout();
+    	
     	windowsLayout.setWidth(LOGIN_BOX_WIDTH_PX);
     	windowsLayout.setSpacing(true);
     	windowsLayout.setMargin(true);
     	windowsLayout.addComponent(this.addLoginForm());
+    	
+    	// login button
     	Component loginButton = this.addLoginButtons();
     	windowsLayout.addComponent(loginButton);
     	windowsLayout.setComponentAlignment(loginButton,Alignment.BOTTOM_RIGHT);
     	windowsLayout.addComponent(this.addNoAccountCaption());
+    	
+    	// no account button
     	Component noAccountButton = this.addNoAccountButtons();
     	windowsLayout.addComponent(noAccountButton);
     	windowsLayout.setComponentAlignment(noAccountButton,Alignment.BOTTOM_RIGHT);
-    	
-    	// init windows
-        this.setContent(windowsLayout);
+    	return windowsLayout;
+    }
+    
+    /**
+     * Configure the windows, add the layoutToSet in windows
+     * @param layoutToSet the layout to set at windows
+     */
+    private void configureWindows(Layout layoutToSet){
+        this.setContent(layoutToSet);
         this.setCaption(bundle.getMessage(MessagesConstants.LOGIN_TITLE));
-        this.setWidth(windowsLayout.getWidth(), windowsLayout.getWidthUnits());
-        this.setHeight(windowsLayout.getHeight(),windowsLayout.getHeightUnits());
+        this.setWidth(layoutToSet.getWidth(), layoutToSet.getWidthUnits());
+        this.setHeight(layoutToSet.getHeight(),layoutToSet.getHeightUnits());
         this.setClosable(false);
         this.setResizable(false);
         this.center();
-        
-        MyUI.getCurrent().addWindow(this);
     }
+    
     /**
      * set title for no account user part
      */
